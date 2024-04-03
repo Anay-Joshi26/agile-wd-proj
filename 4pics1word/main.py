@@ -10,7 +10,7 @@ def hello_world():
 
 @app.route("/challenges")
 def challenges_page():
-    return render_template("challenges.html")
+    return render_template("challenge-board.html")
 
 @app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):
