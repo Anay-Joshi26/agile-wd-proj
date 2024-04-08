@@ -1,7 +1,15 @@
 from flask import Flask, url_for, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
+# Create instance of Database
+from models import db
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 PORT = 5000
 

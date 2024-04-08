@@ -1,12 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
-from main import app
 
-db = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-
-db.create_all()
+db = SQLAlchemy()
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
@@ -15,7 +11,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String, nullable = False, unique = True)
 
 class Game(db.Model):
-    gameId = db.column(db.Integer, primary_key = True)
+    gameId = db.Column(db.Integer, primary_key = True)
     answer = db.Column(db.String, nullable = False)
     clue1 = db.Column(db.String, nullable = False)
     clue2 = db.Column(db.String, nullable = False)
