@@ -1,10 +1,13 @@
 from flask import Flask, url_for, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from wtforms.validators import ValidationError
+from flask_bcrypt import Bcrypt
 
-from authentication import register_new_user
+from authentication import register_new_user, login_new_user, validate_username
 
 # Create instance of Database
-from models import db
+from models import db, User
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -14,27 +17,61 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+bcrypt = Bcrypt(app)
+
 PORT = 5000
+
+# Logging in
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 # Web page routing
 @app.route("/")
 def hello_world():
     return render_template("index.html")
 
+@app.route('/dashboard', methods=['GET', 'POST'])
+@login_required
+def dashboard():
+    return render_template("dashboard.html")
+
 @app.route("/login", methods=['POST', 'GET'])
 def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user_check = validate_username(username) 
+        if user_check:
+            login_new_user(username.strip(),password, bcrypt)
+            return redirect(url_for('dashboard'))
+    
     return render_template("login.html")
 
 @app.route("/register", methods=['POST', 'GET'])
 def register():
-
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        register_new_user(username, password)
-        return render_template("login.html")
+        confirmPassword = request.form.get('confirmPassword')
+        user_check = validate_username(username)
+        if password != confirmPassword:
+            return redirect(url_for('register'))
+        elif user_check is None:
+            register_new_user(username, password, bcrypt)
+            return redirect(url_for('login'))
 
     return render_template("register.html")
+
+@app.route("/logout", methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route("/challenges")
 def challenges_page():
