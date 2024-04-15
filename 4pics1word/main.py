@@ -8,6 +8,11 @@ PORT = 5000
 def hello_world():
     return render_template("index.html")
 
+@app.route("/challenges/create-game", methods=['POST', 'GET'])
+def create_game():
+    return render_template("create_game.html")
+
+
 # @app.route("/login", methods=['POST', 'GET'])
 # def login():
 #     return render_template("login.html")
