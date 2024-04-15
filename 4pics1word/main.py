@@ -32,7 +32,7 @@ def load_user(user_id):
 
 # Web page routing
 @app.route("/")
-def hello_world():
+def index():
     return render_template("index.html")
 
 @app.route('/dashboard', methods=['GET', 'POST'])
@@ -50,7 +50,7 @@ def login():
             login_new_user(username.strip(),password, bcrypt)
             return redirect(url_for('dashboard'))
     
-    return render_template("login.html")
+    return redirect(url_for('index'))
 
 @app.route("/register", methods=['POST', 'GET'])
 def register():
@@ -60,12 +60,12 @@ def register():
         confirmPassword = request.form.get('confirmPassword')
         user_check = validate_username(username)
         if password != confirmPassword:
-            return redirect(url_for('register'))
+            return redirect(url_for('index'))
         elif user_check is None:
             register_new_user(username, password, bcrypt)
-            return redirect(url_for('login'))
+            return redirect(url_for('index'))
 
-    return render_template("register.html")
+    return redirect(url_for('index'))
 
 @app.route("/logout", methods=['GET', 'POST'])
 @login_required
