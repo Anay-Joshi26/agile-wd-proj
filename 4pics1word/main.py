@@ -4,7 +4,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 from wtforms.validators import ValidationError
 from flask_bcrypt import Bcrypt
 
-from authentication import register_new_user, login_new_user, validate_username
+from auth import register_new_user, login_new_user, validate_username
 
 # Create instance of Database
 from models import db, User
