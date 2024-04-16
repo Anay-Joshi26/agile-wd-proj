@@ -33,14 +33,14 @@
                       </svg>
                 </button>
                 <div class="wrapper">
-                    <form action="">
+                    <form action="/login" method="POST">
                         <h1>Login</h1>
                         <div class="username-container input-box">
-                            <input type="text" id = 'username-input' placeholder="Username" class = 'form-control' required>
+                            <input type="text" id = 'username-input' placeholder="Username" class = 'form-control' name="username" required>
                             <i class="bi bi-person-fill"></i>
                         </div>
                         <div class="password-container input-box">
-                            <input type="password" id = 'password-input' placeholder="Password" class = 'form-control' required>
+                            <input type="password" id = 'password-input' placeholder="Password" class = 'form-control' name="password" required>
                             <i class="bi bi-key-fill"></i>
                             <div class = 'invalid-feedback'>Invalid Password</div>
                         </div>
@@ -70,19 +70,19 @@
                       </svg>
                 </button>
                 <div class="wrapper">
-                    <form action="">
+                    <form action="/register" method="POST">
                         <h1>Register</h1>
                         <div class="input-box">
-                            <input type="text" placeholder="Username" 
+                            <input type="text" placeholder="Username" name="username"
                             required>
                             <i class="bi bi-person-fill"></i>
                         </div>
                         <div class="input-box">
-                            <input type="password" placeholder="Password" required>
+                            <input type="password" placeholder="Password" name="password" required>
                             <i class="bi bi-key-fill"></i>
                         </div>
                         <div class="input-box">
-                            <input type="password" placeholder="Confirm Password" required>
+                            <input type="password" placeholder="Confirm Password" name="confirmPassword" required>
                             <i class="bi bi-key-fill"></i>
                         </div>
             
