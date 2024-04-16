@@ -43,11 +43,11 @@ def dashboard():
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('username')
+        username = request.form.get('username').strip()
         password = request.form.get('password')
         user_check = validate_username(username) 
         if user_check:
-            login_new_user(username.strip(),password, bcrypt)
+            login_new_user(username,password, bcrypt)
             return redirect(url_for('dashboard'))
     
     return redirect(url_for('index'))
@@ -55,7 +55,7 @@ def login():
 @app.route("/register", methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
-        username = request.form.get('username')
+        username = request.form.get('username').strip()
         password = request.form.get('password')
         confirmPassword = request.form.get('confirmPassword')
         user_check = validate_username(username)
