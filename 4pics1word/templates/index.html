@@ -8,6 +8,15 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/styles.css')}}">
 
+    <style>
+        .form-control.is-valid, .was-validated .form-control:valid {
+            background-image: none;
+        }
+        .form-control.is-invalid, .was-validated .form-control:invalid {
+            background-image: none;
+        }
+    </style>
+
     <title>Document</title>
 </head>
 <body>
@@ -33,16 +42,17 @@
                       </svg>
                 </button>
                 <div class="wrapper">
-                    <form action="">
+                    <form id = 'login-form' novalidate class = 'needs-validation'>
                         <h1>Login</h1>
                         <div class="username-container input-box">
-                            <input type="text" id = 'username-input' placeholder="Username" class = 'form-control' required>
+                            <input type="text" id = 'username-login' placeholder="Username" class = 'form-control' name="username" required>
                             <i class="bi bi-person-fill"></i>
+                            <div id = 'login-username-error' class = 'invalid-feedback'>Required field</div>
                         </div>
                         <div class="password-container input-box">
-                            <input type="password" id = 'password-input' placeholder="Password" class = 'form-control' required>
+                            <input type="password" id = 'password-login' placeholder="Password" class = 'form-control' name="password" required>
                             <i class="bi bi-key-fill"></i>
-                            <div class = 'invalid-feedback'>Invalid Password</div>
+                            <div id = 'login-password-error' class = 'invalid-feedback'>Required field</div>
                         </div>
             
                         <button type="submit" class="btn">Login</button>
@@ -70,20 +80,23 @@
                       </svg>
                 </button>
                 <div class="wrapper">
-                    <form action="">
+                    <form id = 'register-form' novalidate class = 'needs-validation'>
                         <h1>Register</h1>
                         <div class="input-box">
-                            <input type="text" placeholder="Username" 
+                            <input type="text" id = 'username-register' class = 'form-control' placeholder="Username" name="username"
                             required>
                             <i class="bi bi-person-fill"></i>
+                            <div id = 'register-username-error' class = 'invalid-feedback'>Required field</div>
                         </div>
                         <div class="input-box">
-                            <input type="password" placeholder="Password" required>
+                            <input type="password" id = 'password-register' class = 'form-control' placeholder="Password" name="password" required>
                             <i class="bi bi-key-fill"></i>
+                            <div id = 'register-password-error' class = 'invalid-feedback'>Required field</div>
                         </div>
                         <div class="input-box">
-                            <input type="password" placeholder="Confirm Password" required>
+                            <input type="password" id = 'password-confirm-register' class = 'form-control' placeholder="Confirm Password" name="confirmPassword" required>
                             <i class="bi bi-key-fill"></i>
+                            <div id = 'register-password-confirm-error' class = 'invalid-feedback'>Required field</div>
                         </div>
             
                         
@@ -99,6 +112,147 @@
         </div>
         </div>
     </div>
+
+    <script defer>
+
+        function isValidUsername(username) {
+            /^[A-Za-z0-9_]+$/.test(username)
+        }
+
+        function makeInvalid(elem_feedback, input_elem, msg) {
+            elem_feedback.innerHTML = msg
+            input_elem.classList.add('is-invalid')
+            // elem_feedback.style.display = 'block'
+
+        }
+
+        function removeIsInvalidClass(elem) {
+
+            document.querySelectorAll('.invalid-feedback').forEach((e) => {e.innerHTML = 'Required field'})
+
+            console.log(elem)
+
+            elem.classList.remove('was-validated')
+            
+            let children = elem.querySelectorAll('*');
+
+            for (let child of children) {
+                child.classList.remove('is-invalid');
+            }
+        }
+
+        let forms = document.querySelectorAll('.needs-validation') 
+
+        for (let form of forms) {
+            form.addEventListener('submit', async function(event) {
+
+                removeIsInvalidClass(event.target)
+                
+
+                let is_login = false;
+                
+                if (this.id === 'login-form') {
+                    is_login = true
+                }
+
+                if (!form.checkValidity()) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                event.preventDefault();
+
+                let formData = new FormData(this); 
+                console.log(formData)
+
+            try {   
+                let action = '/login'
+
+                if (!is_login) {
+                    action = '/register'
+
+                }
+                console.log(action)
+                const response = await fetch(action, { method: "POST", body: formData});
+
+                const data = await response.json(); // Parse response JSON
+
+                console.log("hahaha")
+
+                if (data['success'] == true) {
+                    console.log("success!!")
+
+                    if (is_login) window.location.href = '/dashboard';
+                    else window.location.href = '/';
+                    return
+                }
+                else {
+                    console.log('AHAHAH')
+
+                    if (data.hasOwnProperty('regex-error')){
+                        msg = data['msg']
+                        if (data['regex-error'] === 'username') {
+                            console.log("here")
+                            if (is_login){
+                                makeInvalid(document.getElementById('login-username-error'), document.getElementById('username-login'), msg)
+                                
+                            }
+                            else {
+                                makeInvalid(document.getElementById('register-username-error'),document.getElementById('username-register'), msg)
+                            }
+                        }
+                        else {
+                            if (is_login) {
+                                makeInvalid(document.getElementById('login-password-error'), document.getElementById('password-login'),msg)
+                            }
+                            else {
+                                makeInvalid(document.getElementById('register-password-error'), document.getElementById('passowrd-register'),msg)
+                            }
+                        }
+                        return
+                        
+                    }
+
+                    if (data.hasOwnProperty('user-exists')) {
+                        msg = data['msg']
+
+                        console.log(msg)
+                        if (data['user-exists']) {
+                            makeInvalid(document.getElementById('register-username-error'), document.getElementById('username-register'),msg)
+
+                        }
+                        else makeInvalid(document.getElementById('login-username-error'), document.getElementById('username-login'),msg)
+
+                        return 
+                    }
+                    else if (data.hasOwnProperty('incorrect-password')) {
+                        msg = data['msg']
+                        makeInvalid(document.getElementById('login-password-error'), document.getElementById('password-login'),msg)
+                        return
+                    }
+
+                    
+                    if (data.hasOwnProperty('non-matching-passwords')) {
+                        msg = data['msg']
+                        makeInvalid(document.getElementById('register-password-confirm-error'), document.getElementById('password-confirm-register'), msg)
+
+                    }
+
+                    // if (data.hasOwnProperty('redirect')) window.location.href = data.redirect;
+
+                }
+
+            } catch (error) {
+                console.error('Some network error occured', error);
+            }
+
+            })
+        }
+
+    </script>
 
 
     
