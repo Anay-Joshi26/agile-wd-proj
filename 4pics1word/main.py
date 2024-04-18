@@ -78,6 +78,7 @@ def challenges_page():
     return render_template("challenge-board.html")
 
 @app.route("/challenge/<int:challenge_id>")
+@login_required
 def challenge_page(challenge_id):
     return f"Challenge {challenge_id}"
 # hello
