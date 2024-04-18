@@ -1,10 +1,10 @@
-from flask import Flask, url_for, render_template, request, redirect
+from flask import Flask, url_for, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from wtforms.validators import ValidationError
 from flask_bcrypt import Bcrypt
 
-from auth import register_new_user, login_new_user, validate_username
+from auth import register_new_user, login_new_user, validate_username, isValidUsername, isValidPassword
 
 # Create instance of Database
 from models import db, User
@@ -35,22 +35,68 @@ def load_user(user_id):
 def index():
     return render_template("index.html")
 
+@app.route("/challenges/create-game", methods=['POST', 'GET'])
+def create_game():
+    return render_template("create_game.html")
+
+
+# @app.route("/login", methods=['POST', 'GET'])
+# def login():
+#     return render_template("login.html")
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
     return render_template("dashboard.html")
 
-@app.route("/login", methods=['POST', 'GET'])
+# @app.route("/login", methods=['POST', 'GET'])
+# def login():
+#     if request.method == 'POST':
+#         username = request.form.get('username').strip()
+#         password = request.form.get('password')
+#         is_valid_username = isValidUsername(username)
+#         if not is_valid_username:
+#             jsonify({'username-error': True})
+#         is_valid_password = isValidPassword(username)
+#         if not is_valid_password:
+#             jsonify({'password-error': True})
+#         user_check = validate_username(username) 
+#         if user_check:
+#             login_new_user(username,password, bcrypt)
+#             return redirect(url_for('dashboard'))
+    
+#     return redirect(url_for('index'))
+
+@app.route("/login", methods=['POST'])
 def login():
     if request.method == 'POST':
         username = request.form.get('username').strip()
         password = request.form.get('password')
+
+        print(username, password)
+
+        is_valid_username = isValidUsername(username)
+        if not is_valid_username:
+            return jsonify({'success': False, 'regex-error':'username', 'msg': 'Invalid Username'})  
+        
+        print("checkk")
+        is_valid_password = isValidPassword(username)
+        if not is_valid_password:
+            return jsonify({'success': False, 'regex-error':'password', 'msg':'Invalid Password'})  
+        
         user_check = validate_username(username) 
-        if user_check:
-            login_new_user(username,password, bcrypt)
-            return redirect(url_for('dashboard'))
-    
-    return redirect(url_for('index'))
+
+        print(user_check)
+
+        if not user_check:
+            return jsonify({'success': False, 'user-exists': False, 'msg': 'Username does not exist'})
+        
+        password_matches_username = login_new_user(username, password, bcrypt)
+
+        if password_matches_username:
+            return jsonify({'success': True})  
+        
+        return jsonify({'success': False, 'incorrect-password': True ,'msg': 'Incorrect password for username'})
+
 
 @app.route("/register", methods=['POST', 'GET'])
 def register():
@@ -58,12 +104,30 @@ def register():
         username = request.form.get('username').strip()
         password = request.form.get('password')
         confirmPassword = request.form.get('confirmPassword')
-        user_check = validate_username(username)
+
+        is_valid_username = isValidUsername(username)
+        if not is_valid_username:
+            return jsonify({'success': False, 'regex-error':'username', 'msg': 'Invalid Username'})  
+        
+        is_valid_password = isValidPassword(username)
+        if not is_valid_password:
+            return jsonify({'success': False, 'regex-error':'password', 'msg':'Invalid Password'})  
+
         if password != confirmPassword:
-            return redirect(url_for('index'))
-        elif user_check is None:
+            return jsonify({'success': False, 'non-matching-passwords': True, 'msg': 'Passwords do not match'})
+        
+
+        user_check = validate_username(username)
+
+        print(user_check, "heyoo")
+
+
+        
+        if user_check is None:
             register_new_user(username, password, bcrypt)
-            return redirect(url_for('index'))
+            return jsonify({'success': True}) 
+        else:
+            return jsonify({'success': False, 'user-exists': True, 'msg': 'That username already exists'})
 
     return redirect(url_for('index'))
 
@@ -71,7 +135,7 @@ def register():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 @app.route("/challenges")
 def challenges_page():
