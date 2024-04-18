@@ -3,6 +3,7 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 import re
 
+
 from models import db, User
 
 def validate_username(username):
@@ -21,7 +22,6 @@ def login_new_user(username, password, bcrypt):
             print(user.username)
             login_user(user)
             return True
-    
     return False
     
 def isValidUsername(username):
@@ -29,9 +29,5 @@ def isValidUsername(username):
 
 def isValidPassword(password):
     return re.match(r'^.+$', password)
-
-
-    
-
 
     
