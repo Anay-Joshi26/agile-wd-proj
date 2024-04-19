@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +19,51 @@
         .form-control.is-invalid, .was-validated .form-control:invalid {
             background-image: none;
         }
+
+        /* Styling for trending/popular cards */
+
+                    .card {
+                        height: 300px;
+                    }
+
+                    .card-img-top {
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                    .card-img-overlay {
+                        background-color: rgba(0,0,0,0.5);
+                        color: white;
+                        display:flex;
+                        flex-direction: column;
+                        justify-content: end;
+                        height: 100%;
+                    }
+                    
+                    /* Challnge board styling*/
+                    .challenge {
+                        padding: 10px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        margin-bottom: 10px;
+                    }
+
+                    .challenge h2 {
+                        margin-top: 0;
+                    }
+
+                    .challenge p:last-child {
+                        font-style: italic;
+                        color: #888;
+                    }
+
+                    .card-body {
+                        &:hover {
+                            background-color: #f1f1f1;
+                        }
+                    }
     </style>
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -135,6 +179,73 @@
                 </div>
             </div>
         </div>
+        </div>
+    </div>
+
+    <!-- Trending Cards -->
+    <div class="container mt-4">
+        <h3>Trending Posts</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg" class="card-img-top" alt="UWA Lecturers">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Can you guess this X word challenge?</h5>
+                        <p class="card-poster">Posted by User</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIG2.lQsvubxxkb50Tpn7rZXN?w=1024&h=1024&rs=1&pid=ImgDetMain" class="card-img-top" alt="UWA Lecturers">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Can you guess this X word challenge?</h5>
+                        <p class="card-poster">Posted by User</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIG2.lQsvubxxkb50Tpn7rZXN?w=1024&h=1024&rs=1&pid=ImgDetMain" class="card-img-top" alt="UWA Lecturers">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Can you guess this X word challenge?</h5>
+                        <p class="card-poster">Posted by User</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIG2.lQsvubxxkb50Tpn7rZXN?w=1024&h=1024&rs=1&pid=ImgDetMain" class="card-img-top" alt="UWA Lecturers">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Can you guess this X word challenge?</h5>
+                        <p class="card-poster">Posted by User</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <h1>Challenge Board</h1>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text"><small class="text-muted">Posted by: user</small></p>
+                        <h5 class="card-title">Challenge Title</h5>
+                        <p class="card-text">Challenge Description</p>
+                        <div class="d-flex gap-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">0 Likes</button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">0 Shares</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script>
