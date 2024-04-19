@@ -1,0 +1,77 @@
+body {
+    background: rgb(176,92,241);
+    background: radial-gradient(circle, rgba(176,92,241,1) 0%, rgba(114,26,250,1) 100%);
+    width: 100%;
+    height: 100%;
+}
+
+label svg {
+    cursor: pointer;
+    padding: 10px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
+#word-input{   
+    font-family: monospace;
+    font-size: 36px;
+    letter-spacing: 13px;
+    display: inline-block;
+}
+
+#word-input::after {
+    content: '';
+    height: 3px; /* Adjust line thickness as needed */
+    background-color: black; /* Adjust line color as needed */
+}
+
+#underline-container {
+    border-bottom: 3px solid black; /* Underline effect */
+}
+
+.images-content {
+    margin-top: 90px;
+}
+
+.image-cell {
+    width: 180px;
+    height: 180px;
+    background-color: #333;
+    padding: 0;
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+    position: relative;
+}
+
+.change-img-icon {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    cursor: pointer;
+}
+
+.images-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    color: white
+}
