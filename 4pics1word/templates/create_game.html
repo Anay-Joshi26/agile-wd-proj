@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4pics1word | Create Game</title>
-    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script defer src="{{ url_for('static', filename='js/upload-game.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/create-game.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -15,12 +17,12 @@
 
 
 
-    <div class = 'images-content container'>
+    <form enctype="multipart/form-data" class = 'images-content container' action = '/api/upload-game'>
 
         <h1 class = 'text'>
             Create your game
         </h1>
-        <input style = 'width: 80%;' placeholder = 'Game title' required value = 'Medium Difficulty: Car Brands' type="text">
+        <input style = 'width: 80%;' name = 'game-title' placeholder = 'Game title' required value = 'Medium Difficulty: Car Brands' type="text">
 
         <div>
             <div class="row">
@@ -34,7 +36,7 @@
                     </svg>
                     <div>Upload Image</div>
                 </label>
-                <input required type="file" class="upload-input" id = 'image-input1' style = 'display: none;'accept="image/*">
+                <input required type="file" name = 'image1' class="upload-input" id = 'image-input1' style = 'display: none;'accept="image/*">
               </div>
               <div class="col-6 image-cell" id = 'img2'>
                 <svg class = 'change-img-icon' id = 'img-change2' width=38px height=38px style="display: none;" version="1.1" viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">
@@ -46,7 +48,7 @@
                     </svg>
                     <div>Upload Image</div>
                 </label>
-                <input required type="file" class="upload-input" id = 'image-input2' accept="image/*">
+                <input required type="file" name = 'image2' class="upload-input" id = 'image-input2' accept="image/*">
               </div>
             </div>
             <div class="row">
@@ -66,7 +68,7 @@
                     </svg>
                     <div>Upload Image</div>
                 </label>
-                <input required type="file" class="upload-input" id = 'image-input3' accept="image/*">
+                <input required type="file" name = 'image3' class="upload-input" id = 'image-input3' accept="image/*">
               </div>
               <div class="col-6 image-cell" id = 'img4'>
                 <svg class = 'change-img-icon' id = 'img-change4' width=38px height=38px style="display: none;" version="1.1" viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">
@@ -79,7 +81,7 @@
                     </svg>
                     <div>Upload Image</div>
                 </label>
-                <input required type="file" class="upload-input" id = 'image-input4' accept="image/*">
+                <input required type="file" name = 'image4' class="upload-input" id = 'image-input4' accept="image/*">
               </div>
             </div>
           </div>
@@ -88,7 +90,7 @@
             <div class = 'word-enter-title text' style = 'text-align: center;'>
                 Enter a word or phrase which links the above images
             </div>
-            <input required id="word-input" placeholder = 'Word/Phrase' class = 'text' type="text" style = 'text-align: center; border: none; margin: 20px; outline: none; background-color: transparent;'>
+            <input name = 'answer' required id="word-input" placeholder = 'Word/Phrase' class = 'text' type="text" style = 'text-align: center; border: none; margin: 20px; outline: none; background-color: transparent;'>
             <!-- <div id="underline-container"></div> -->
             <script defer>
                 const isUpperCase = (string) => /^[A-Z]*$/.test(string)
@@ -132,14 +134,14 @@
             <div class = 'row text' >
                 Add a hint your players (you may choose to add none)
             </div>
-            <input style = 'width: 100%;' value = 'Consider the company of the cars in the image' type="text">
+            <input name = 'hint' style = 'width: 100%;' value = 'Consider the company of the cars in the image' type="text">
         </div>
 
 
-        <div>
-            <button class="btn btn-primary" id="submit-btn">Submit</button>
-        </div>
-    </div>
+        
+        <button id = 'submit-upload-game' type = 'submit' class="btn btn-primary" id="submit-btn">Submit</button>
+        
+    </form>
     
 </body>
 </html>

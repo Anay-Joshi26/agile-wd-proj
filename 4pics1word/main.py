@@ -5,6 +5,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 from wtforms.validators import ValidationError
 from flask_bcrypt import Bcrypt
 from auth import register_new_user, login_new_user, validate_username, isValidUsername, isValidPassword
+from api import api
 
 
 # Create instance of Database
@@ -19,6 +20,8 @@ with app.app_context():
     db.create_all()
 
 bcrypt = Bcrypt(app)
+
+app.register_blueprint(api)
 
 PORT = 5000
 
@@ -38,6 +41,7 @@ def index():
 
 
 @app.route("/challenges/create-game", methods=['POST', 'GET'])
+@login_required
 def create_game():
     return render_template("create_game.html")
 
