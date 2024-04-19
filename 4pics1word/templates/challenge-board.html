@@ -134,9 +134,6 @@
                 <style>
                     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-                    body {
-                        background-color: #f1f1f1;
-                    }
                     .modal-body {
                         padding: 0;
                     }
@@ -271,6 +268,25 @@
                         margin-top: 20px;
                     }
 
+                    /* Styling for trending/popular cards */
+
+                    .card {
+                        height: 300px;
+                    }
+
+                    .card-img-top {
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                    .card-img-overlay {
+                        background-color: rgba(0,0,0,0.5);
+                        color: white;
+                        display:flex;
+                        flex-direction: column;
+                        justify-content: end;
+                        height: 100%;
+                    }
+                    
                     /* Challnge board styling*/
                     .challenge {
                         padding: 10px;
@@ -293,12 +309,57 @@
                             background-color: #f1f1f1;
                         }
                     }
-                    
                 </style>
 
             </div>
         </div>
     </nav>
+
+    <!-- Trending Cards -->
+    <div class="container mt-4">
+        <h3>Trending Posts</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg" class="card-img-top" alt="UWA Lecturers">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Can you guess this X word challenge?</h5>
+                        <p class="card-poster">Posted by User</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIG2.lQsvubxxkb50Tpn7rZXN?w=1024&h=1024&rs=1&pid=ImgDetMain" class="card-img-top" alt="UWA Lecturers">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Can you guess this X word challenge?</h5>
+                        <p class="card-poster">Posted by User</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIG2.lQsvubxxkb50Tpn7rZXN?w=1024&h=1024&rs=1&pid=ImgDetMain" class="card-img-top" alt="UWA Lecturers">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Can you guess this X word challenge?</h5>
+                        <p class="card-poster">Posted by User</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIG2.lQsvubxxkb50Tpn7rZXN?w=1024&h=1024&rs=1&pid=ImgDetMain" class="card-img-top" alt="UWA Lecturers">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Can you guess this X word challenge?</h5>
+                        <p class="card-poster">Posted by User</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>CHALLENGE BOARD</h1>
+
     <div class="container">
         <h1>Challenge Board</h1>
         <div class="row">
