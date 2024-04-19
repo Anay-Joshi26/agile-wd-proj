@@ -8,6 +8,11 @@
 }
 
 
+.heading {
+    font-size: 42px;
+    font-weight: 600;
+}
+
 .modal-body {
     padding: 0;
 }
