@@ -17,13 +17,19 @@
 
 
 
-    <form enctype="multipart/form-data" class = 'images-content container' action = '/api/upload-game'>
+    <form enctype="multipart/form-data" class = 'images-content container' action = '/api/upload-game' novalidate>
 
         <h1 class = 'text'>
             Create your game
         </h1>
-        <input style = 'width: 80%;' name = 'game-title' placeholder = 'Game title' required type="text">
+        <div>
+            <input class = 'form-control' style = 'width: 80%;' id = 'game-title-input' name = 'game-title' placeholder = 'Game title' required type="text" maxlength="75">
+            <div class = 'invalid-feedback errors'>Enter a valid game title</div>
+            <div id = 'game-title-error' class = 'errors' style = 'color: red; text-align: center; display: none;'></div>
+        </div>
 
+        <div id = 'images-error' class = 'errors' style = 'color: red; text-align: center; display: none;'></div>
+            
         <div>
             <div class="row">
                 <div class="col-6 image-cell" id = 'img1'>
@@ -36,7 +42,7 @@
                     </svg>
                     <div>Upload Image</div>
                 </label>
-                <input required type="file" name = 'image1' class="upload-input" id = 'image-input1' style = 'display: none;'accept="image/*">
+                <input required type="file" name = 'image1' class="upload-input form-control" id = 'image-input1' style = 'display: none;'accept="image/*">
               </div>
               <div class="col-6 image-cell" id = 'img2'>
                 <svg class = 'change-img-icon' id = 'img-change2' width=38px height=38px style="display: none;" version="1.1" viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">
@@ -90,7 +96,8 @@
             <div class = 'word-enter-title text' style = 'text-align: center;'>
                 Enter a word or phrase which links the above images
             </div>
-            <input name = 'answer' required id="word-input" placeholder = 'Word/Phrase' class = 'text' type="text" style = 'text-align: center; border: none; margin: 20px; outline: none; background-color: transparent;'>
+            <div id = 'answer-error' class = 'errors' style = 'color: red; text-align: center; display: none;'></div>
+            <input required name = 'answer' maxlength="24" id="word-input" placeholder = 'Word/Phrase' class = 'text' type="text" style = 'text-align: center; border: none; margin: 20px; outline: none; background-color: transparent;'>
             <!-- <div id="underline-container"></div> -->
             <script defer>
                 const isUpperCase = (string) => /^[A-Z]*$/.test(string)
@@ -105,9 +112,9 @@
 
                 function isValidPhrase(str) {
                     // Reference: chatGPT generated regex => "write a regex that matches when contains only letters or numbers, 
-                    //                                        does not start with a space and is less than 18 characters long. 
+                    //                                        does not start with a space and is less or equal to 24 characters long. 
                     //                                        It must also not allow double spaces"
-                    return /^(?!.*\s\s)(?!^\s)[a-zA-Z0-9\s]{1,17}$/.test(str);
+                    return /^(?!.*\s\s)(?!^\s)[a-zA-Z0-9\s]{1,24}$/.test(str);
                 }
 
 
@@ -134,11 +141,12 @@
             <div class = 'row text' >
                 Add a hint your players (you may choose to add none)
             </div>
+            <div id = 'hint-error' class = 'errors' style = 'color: red; text-align: center; display: none;'></div>
             <input type="text" name = 'hint' style = 'width: 100%;' placeholder="Type hint here">
         </div>
 
 
-        
+        <div id = 'fill-in-error' class = 'errors' style = 'color: red; text-align: center; display: none;'>Fill in all required fields</div>
         <button id = 'submit-upload-game' type = 'submit' class="btn btn-primary" id="submit-btn">Submit</button>
         
     </form>

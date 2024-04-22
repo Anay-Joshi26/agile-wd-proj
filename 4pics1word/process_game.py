@@ -2,11 +2,19 @@ from werkzeug.utils import secure_filename
 import os
 from models import db, User, Game
 from flask_login import current_user
+import re
 
 UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), 'uploads'))
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
+
+def isValidGameTitleOrHint(game_title):
+    return len(game_title) <= 75 and len(game_title) > 0
+
+def isValidAnswer(answer):
+    return re.match(r"^(?!.*\s\s)(?!^\s)[a-zA-Z0-9\s]{1,24}$", answer)
+
 
 
 def processGame(game_title, files, answer, hint):
@@ -49,6 +57,7 @@ def processGame(game_title, files, answer, hint):
         db.session.commit()
 
         print("The game id is", new_game.gameId)
+        print(f"The hint is |{new_game.hint}|")
 
     except Exception as e:
         print(e)

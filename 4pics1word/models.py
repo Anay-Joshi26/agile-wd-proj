@@ -12,7 +12,7 @@ class Game(db.Model):
     gameId = db.Column(db.Integer, primary_key = True)
     game_title = db.Column(db.String, nullable = False)
     answer = db.Column(db.String, nullable = False)
-    hint = db.Column(db.String, nullable = False)
+    hint = db.Column(db.String, nullable = True)
     image1 = db.Column(db.String, nullable = False)
     image2 = db.Column(db.String, nullable = False)
     image3 = db.Column(db.String, nullable = False)
