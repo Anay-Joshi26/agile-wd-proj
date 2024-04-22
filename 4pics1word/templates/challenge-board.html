@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,5 +9,27 @@
     
 
     <h1>CHALLENGE BOARD</h1>
+</body>
+</html> -->
+
+<html>
+<head>
+  <title>Input Boxes for Letters</title>
+  <style>
+    .letter-input {
+      width: 30px; /* Adjust as needed for the size of each input box */
+      margin: 5px; /* Optional: Adds spacing between input boxes */
+      text-align: center; /* Centers the text horizontally */
+    }
+  </style>
+</head>
+<body>
+  <h1>Enter Letters:</h1>
+  <div>
+    {% for i in "duck duck goose" %}
+    <input type="text" class="letter-input" maxlength="1">
+    {% endfor %}
+    <!-- Add more input boxes as needed for the desired size of letters -->
+  </div>
 </body>
 </html>

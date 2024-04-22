@@ -11,6 +11,46 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/game_attempt.css') }}">
 </head>
+
+<style>
+    .flex-container{
+        display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      /* width: 800px; */
+    }
+
+    .input-container {
+      position: relative;
+      width: 100%;
+      text-align: center; /* Center the child elements horizontally */
+    }
+
+    .letter-input {
+        text-align: center; 
+        border: 3px solid white; 
+        width: 65px; 
+        height: 75px; 
+        padding: 10px; 
+        margin: 5px; 
+        outline: none; 
+        background-color: transparent;
+        font-size: 30px;
+        color: white;
+
+        flex-basis: 50px;
+    }
+
+    .spacer {
+        width: 30px; 
+        height: 20px; 
+        display: block; 
+        text-align: center;
+    }
+
+</style>
+
 <body>
     <div class = 'images-content container'>
 
@@ -36,18 +76,32 @@
               </div>
             </div>
           </div>
-
-        <div class = 'word-enter-section'>
-            <div class = 'word-enter-title text' style = 'text-align: center;'>
-                Enter a word or phrase which links the above images
-            </div>
-            <input id="word-input" class = 'text' type="text" style = 'text-align: center; border: none; margin: 20px; outline: none; background-color: transparent;'>
+        
+        <div class = 'word-enter-title text' style = 'text-align: center;'>
+            Take a Guess
+        </div>
+        
+        <div class = 'flex-container'>
+            {% set answer = "this is a testssssss" %}
+            {% set words = answer.split(" ") %}
+            {% set counts = namespace() %}
+            {% set counts.letters = 0 %}
+            
+            {% for word in words %}
+                <div class="word-container">
+                    {% for letter in word %}
+                        <input id="input{{ counts.letters }}" class="letter-input" type="text" maxlength="1" oninput="nextInput(this, 'input{{ counts.letters + 1 }}')" onkeydown="previousInput(event, 'input{{ counts.letters }}', 'input{{ counts.letters - 1 }}')">
+                        {% set counts.letters = counts.letters + 1 %}
+                    {% endfor %}
+                </div>
+                
+                <div class="spacer"></div>
+            {% endfor %}
             <!-- <div id="underline-container"></div> -->
         </div>
 
-
         <div>
-            <button onclick = "incrementCounter()" class="btn btn-primary" id="make-guess">Guess</button>
+            <button onclick = "incrementCounter(); makeGuess()" class="btn btn-primary" id="make-guess">Guess</button>
         </div>
     </div>
     
