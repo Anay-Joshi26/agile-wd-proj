@@ -115,7 +115,7 @@ def logout():
 
 @app.route("/challenges")
 def challenges_page():
-    return render_template("challenge-board.html")
+    return render_template("challenge-board.html", current_user=current_user)
 
 @app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):

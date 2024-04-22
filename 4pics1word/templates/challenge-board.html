@@ -67,36 +67,47 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="{{url_for('index')}}">4Pics1Word</a>
-        
-        
-        <div class="search-box" >
+    
+    
+        <div class="search-box">
             <form class="d-flex">
                 <input class="form-control me-2" type="text" name="search" id="srch" placeholder="Search">
                 <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
             </form>
         </div>
-        <button class="navbar-toggler" style="margin-left:5vw; margin-right:5vw"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" style="margin-left:5vw; margin-right:5vw" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" style="margin-left: 2vw;">
-          
-          <ul class="navbar-nav ml-auto nav-fill w-100">
-            <li class="nav-item">
-                <a class="nav-link"  href="#">Create Challenge <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link"  href="#">Challanges <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item" id="login">
-                <a class="nav-link"  data-bs-toggle="modal" data-bs-target="#loginModal" href="#">Login <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="modal" data-bs-target="#registerModal" href="#">Register <span class="sr-only">(current)</span></a>
-              </li>
-          </ul>
+    
+            <ul class="navbar-nav ml-auto nav-fill w-100">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Create Challenge <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Challanges <span class="sr-only">(current)</span></a>
+                </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ current_user.username }}
+                        </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item" id="login">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#registerModal" href="#">Register</a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
-        
-      </nav>
+    
+    </nav>
 
       <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
