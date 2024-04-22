@@ -156,7 +156,7 @@ def challenges_page():
 @app.route("/challenge/<int:challenge_id>")
 @login_required
 def challenge_page(challenge_id):
-    return render_template("challenge.html")
+    return render_template("challenge.html", answer = 'THIS IS AWESOME')
 
 @app.route("/get_image/<int:challenge_id>/<int:image_id>")
 @login_required
@@ -173,6 +173,12 @@ def get_image(challenge_id, image_id):
         image = BytesIO(base64.b64decode(game.image4))
 
     return send_file(image, mimetype='image/jpeg')
+
+@app.route("/<int:challenge_id>/answer")
+@login_required
+def api():
+    data = {'message': 'THIS IS AWESOME'}
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True, port = PORT)

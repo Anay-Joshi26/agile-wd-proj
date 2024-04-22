@@ -18,13 +18,13 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      /* width: 800px; */
+      width: 40vw;
     }
 
     .input-container {
       position: relative;
       width: 100%;
-      text-align: center; /* Center the child elements horizontally */
+      text-align: center;
     }
 
     .letter-input {
@@ -38,8 +38,6 @@
         background-color: transparent;
         font-size: 30px;
         color: white;
-
-        flex-basis: 50px;
     }
 
     .spacer {
@@ -49,9 +47,36 @@
         text-align: center;
     }
 
+    .incorrect-input {
+        text-align: center; 
+        border: 3px solid red; 
+        width: 65px; 
+        height: 75px; 
+        padding: 10px; 
+        margin: 5px; 
+        outline: none; 
+        background-color: transparent;
+        font-size: 30px;
+        color: white;
+    }
+
+    .correct-input {
+        text-align: center; 
+        border: 4px solid lawngreen; 
+        width: 65px; 
+        height: 75px; 
+        padding: 10px; 
+        margin: 5px; 
+        outline: none; 
+        background-color: transparent;
+        font-size: 30px;
+        color: white;
+    }
+
 </style>
 
 <body>
+
     <div class = 'images-content container'>
 
         <h2 class = 'text'>
@@ -82,7 +107,6 @@
         </div>
         
         <div class = 'flex-container'>
-            {% set answer = "this is a testssssss" %}
             {% set words = answer.split(" ") %}
             {% set counts = namespace() %}
             {% set counts.letters = 0 %}
@@ -90,7 +114,7 @@
             {% for word in words %}
                 <div class="word-container">
                     {% for letter in word %}
-                        <input id="input{{ counts.letters }}" class="letter-input" type="text" maxlength="1" oninput="nextInput(this, 'input{{ counts.letters + 1 }}')" onkeydown="previousInput(event, 'input{{ counts.letters }}', 'input{{ counts.letters - 1 }}')">
+                        <input id="input{{ counts.letters }}" class="letter-input" type="text" maxlength="1" oninput="nextInput('input{{ counts.letters }}', 'input{{ counts.letters + 1 }}')" onkeydown="previousInput(event, 'input{{ counts.letters }}', 'input{{ counts.letters - 1 }}')">
                         {% set counts.letters = counts.letters + 1 %}
                     {% endfor %}
                 </div>
@@ -101,7 +125,7 @@
         </div>
 
         <div>
-            <button onclick = "incrementCounter(); makeGuess()" class="btn btn-primary" id="make-guess">Guess</button>
+            <button onclick = "makeGuess()" class="btn btn-primary" id="make-guess">Guess</button>
         </div>
     </div>
     
