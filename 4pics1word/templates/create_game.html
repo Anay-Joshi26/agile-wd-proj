@@ -22,7 +22,7 @@
         <h1 class = 'text'>
             Create your game
         </h1>
-        <input style = 'width: 80%;' name = 'game-title' placeholder = 'Game title' required value = 'Medium Difficulty: Car Brands' type="text">
+        <input style = 'width: 80%;' name = 'game-title' placeholder = 'Game title' required type="text">
 
         <div>
             <div class="row">
@@ -97,11 +97,11 @@
                 const isLowerCase = (string) => /^[a-z]*$/.test(string)
 
                 const inputField = document.getElementById("word-input");
-                inputField.focus();
+                // inputField.focus();
         
-                inputField.addEventListener("blur", () => {
-                    inputField.focus();
-                });
+                // inputField.addEventListener("blur", () => {
+                //     inputField.focus();
+                // });
 
                 function isValidPhrase(str) {
                     // Reference: chatGPT generated regex => "write a regex that matches when contains only letters or numbers, 
@@ -134,7 +134,7 @@
             <div class = 'row text' >
                 Add a hint your players (you may choose to add none)
             </div>
-            <input name = 'hint' style = 'width: 100%;' value = 'Consider the company of the cars in the image' type="text">
+            <input type="text" name = 'hint' style = 'width: 100%;' placeholder="Type hint here">
         </div>
 
 
