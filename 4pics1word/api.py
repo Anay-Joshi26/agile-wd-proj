@@ -40,7 +40,7 @@ def uploadGame():
                 return jsonify({"success": False, "image-error":True, "msg": f"Image {i} is missing or empty"})
             
         if len(set(filenames)) != len(filenames):
-            return jsonify({"success": False, "image-error": True, "msg": "Duplicate images detected"}) 
+            return jsonify({"success": False, "image-error": True, "msg": "Duplicate filenames detected, ensure that all filenames are unique"}) 
         
         outcome = processGame(game_title, request.files, answer, hint)
 
