@@ -39,6 +39,8 @@ function imageUpload(imgSrc, imageId) {
 }
 
 function imageClear(imageId) {
+    input = document.getElementById(`image-input${imageId}`);
+    input.value = '';
     console.log(imageId);
     const imgPrev = document.getElementById(`img${imageId}`);
     imgPrev.style.backgroundImage = '';
