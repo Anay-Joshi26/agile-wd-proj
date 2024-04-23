@@ -24,9 +24,12 @@ def processGame(game_title, files, answer, hint):
 
     try:
 
+        all_file_objects = []
+
         for i in range(1, 5):
             file_key = 'image' + str(i)
             file = files[file_key]
+            all_file_objects.append(file)
             filename = secure_filename(file.filename)
             file_names.append(filename)
 
@@ -40,14 +43,14 @@ def processGame(game_title, files, answer, hint):
         db.session.add(new_game)
         db.session.commit()
 
-        for name in file_names:
+        for i,name in enumerate(file_names):
             path  = os.path.join(UPLOAD_FOLDER, "game-" + str(new_game.gameId), name)
 
             if not os.path.exists(os.path.dirname(path)):
                 os.makedirs(os.path.dirname(path))
 
-            file.seek(0)
-            file.save(path)
+            all_file_objects[i].seek(0)
+            all_file_objects[i].save(path)
 
         new_game.image1 = buildPath(new_game.gameId, file_names[0])
         new_game.image2 = buildPath(new_game.gameId, file_names[1])
