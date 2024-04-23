@@ -1,7 +1,12 @@
 from flask import render_template, jsonify, request, Blueprint, flash, redirect, url_for
-from process_game import processGame, isValidGameTitleOrHint, isValidAnswer
+from process_game import processGame, isValidGameTitleOrHint, isValidAnswer, UPLOAD_FOLDER
+from flask import send_from_directory
 
 api = Blueprint("api", __name__)
+
+@api.route('/uploads/<path:filename>')
+def uploaded_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 
 @api.route("/api/upload-game", methods=["POST", "GET"])
