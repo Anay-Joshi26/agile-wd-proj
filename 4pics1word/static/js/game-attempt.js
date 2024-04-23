@@ -56,34 +56,47 @@ function makeGuess() {
         if (word_count != words.length){
             guess += ' '; 
         }
-
         word_count ++;
     });
 
     console.log('Input values:', words);
     console.log('Guess:', guess);
 
-    fetch('/api/data')
-    .then(response => response.json())
-    .then(data => {
-        const answer = data.message;
-        let match = (answer.trim() == guess.trim());
-        console.log(match);
-        console.log(guess.toString().valueOf());
-        console.log(answer.toString().valueOf());
-        if (match){
-            console.log(match);
-            notify_correct();
-        }
-        else if(answer.trim().length == guess.trim().length){
-            notify_incorrect();
-            incrementCounter();
-            setTimeout(() =>{
-                restore_inputs();
-            }, 2000);
-        }
-    })
+    // fetch('/api/data')
+    // .then(response => response.json())
+    // .then(data => {
+    //     const answer = data.message;
+    //     let match = (answer.trim() == guess.trim());
+    //     console.log(match);
+    //     console.log(guess.toString().valueOf());
+    //     console.log(answer.toString().valueOf());
+    //     if (match){
+    //         console.log(match);
+    //         notify_correct();
+    //     }
+    //     else if(answer.trim().length == guess.trim().length){
+    //         notify_incorrect();
+    //         incrementCounter();
+    //         setTimeout(() =>{
+    //             restore_inputs();
+    //         }, 2000);
+    //     }
+    // })
 
+    let match = (answer.trim() == guess.trim());
+
+    if (match){
+        console.log(match);
+        notify_correct();
+    }
+    else if(answer.trim().length == guess.trim().length){
+        notify_incorrect();
+        incrementCounter();
+        setTimeout(() =>{
+            restore_inputs();
+        }, 2000);
+
+    }
 }
 
 function notify_incorrect(){

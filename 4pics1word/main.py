@@ -1,5 +1,5 @@
 
-from flask import Flask, url_for, render_template, request, redirect, jsonify
+from flask import Flask, url_for, render_template, request, redirect, jsonify, session
 from flask import Flask, url_for, render_template, request, redirect, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
@@ -144,7 +144,9 @@ def challenges_page():
 @app.route("/challenge/<int:challenge_id>")
 @login_required
 def challenge_page(challenge_id):
-    return render_template("challenge.html", answer = 'THIS IS AWESOME')
+    game = Game.query.filter_by(gameId=challenge_id).first()
+    print(game.image1)
+    return render_template("challenge.html", answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4)
 
 @app.route("/get_image/<int:challenge_id>/<int:image_id>")
 @login_required
@@ -164,7 +166,7 @@ def get_image(challenge_id, image_id):
 
 @app.route("/<int:challenge_id>/answer")
 @login_required
-def api():
+def get_answer():
     data = {'message': 'THIS IS AWESOME'}
     return jsonify(data)
 
