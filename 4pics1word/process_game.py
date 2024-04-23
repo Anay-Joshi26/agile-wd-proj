@@ -15,6 +15,8 @@ def isValidGameTitleOrHint(game_title):
 def isValidAnswer(answer):
     return re.match(r"^(?!.*\s\s)(?!^\s)[a-zA-Z0-9\s]{1,24}$", answer)
 
+def buildPath(game_id, filename):
+    return f"/uploads/game-{game_id}/{filename}"
 
 
 def processGame(game_title, files, answer, hint):
@@ -22,9 +24,12 @@ def processGame(game_title, files, answer, hint):
 
     try:
 
+        all_file_objects = []
+
         for i in range(1, 5):
             file_key = 'image' + str(i)
             file = files[file_key]
+            all_file_objects.append(file)
             filename = secure_filename(file.filename)
             file_names.append(filename)
 
@@ -38,21 +43,19 @@ def processGame(game_title, files, answer, hint):
         db.session.add(new_game)
         db.session.commit()
 
-        saved_file_locations = []
-
-        for name in file_names:
+        for i,name in enumerate(file_names):
             path  = os.path.join(UPLOAD_FOLDER, "game-" + str(new_game.gameId), name)
 
             if not os.path.exists(os.path.dirname(path)):
                 os.makedirs(os.path.dirname(path))
 
-            file.save(path)
-            saved_file_locations.append(path)
+            all_file_objects[i].seek(0)
+            all_file_objects[i].save(path)
 
-        new_game.image1 = saved_file_locations[0]
-        new_game.image2 = saved_file_locations[1]
-        new_game.image3 = saved_file_locations[2]
-        new_game.image4 = saved_file_locations[3]
+        new_game.image1 = buildPath(new_game.gameId, file_names[0])
+        new_game.image2 = buildPath(new_game.gameId, file_names[1])
+        new_game.image3 = buildPath(new_game.gameId, file_names[2])
+        new_game.image4 = buildPath(new_game.gameId, file_names[3])
 
         db.session.commit()
 
