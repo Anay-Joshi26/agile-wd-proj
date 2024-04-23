@@ -1,13 +1,9 @@
 
-from flask import Flask, url_for, render_template, request, redirect, jsonify, session
-from flask import Flask, url_for, render_template, request, redirect, jsonify, send_file
+from flask import Flask, url_for, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from wtforms.validators import ValidationError
 from flask_bcrypt import Bcrypt
-from io import BytesIO
-import base64
-
 from auth import register_new_user, login_new_user, validate_username, isValidUsername, isValidPassword
 from api import api
 from process_game import UPLOAD_FOLDER
@@ -44,19 +40,9 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# def encode_image(image_path):
-#     with open(image_path, 'rb') as f:
-#         image_binary = f.read()
-#         encoded_image = base64.b64encode(image_binary)
-#     return encoded_image
-
 # Web page routing
 @app.route("/")
 def index():
-    # encode = encode_image("duck.png")
-    # game = Game(answer = "duck", clue1 = "goose", clue2 = "circle", clue3 = "chase", image1 = encode, image2 = encode, image3 = encode, image4 = encode)
-    # db.session.add(game)
-    # db.session.commit()
     return render_template("index.html")
 
 
@@ -136,39 +122,17 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
 @app.route("/challenges")
+@login_required
 def challenges_page():
     return render_template("challenge-board.html")
 
 @app.route("/challenge/<int:challenge_id>")
 @login_required
 def challenge_page(challenge_id):
-    game = Game.query.filter_by(gameId=challenge_id).first()
-    print(game.image1)
+    game = Game.query.filter_by(gameId = challenge_id).first()
     return render_template("challenge.html", answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4)
-
-@app.route("/get_image/<int:challenge_id>/<int:image_id>")
-@login_required
-def get_image(challenge_id, image_id):
-    game = Game.query.filter_by(gameId=challenge_id).first()
-
-    if image_id == 1:
-        image = BytesIO(base64.b64decode(game.image1))
-    elif image_id == 2:
-        image = BytesIO(base64.b64decode(game.image2))
-    elif image_id == 3:
-        image = BytesIO(base64.b64decode(game.image3))
-    elif image_id == 4:
-        image = BytesIO(base64.b64decode(game.image4))
-
-    return send_file(image, mimetype='image/jpeg')
-
-@app.route("/<int:challenge_id>/answer")
-@login_required
-def get_answer():
-    data = {'message': 'THIS IS AWESOME'}
-    return jsonify(data)
+# hello
 
 if __name__ == '__main__':
     app.run(debug=True, port = PORT)
