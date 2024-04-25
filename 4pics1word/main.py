@@ -131,8 +131,13 @@ def challenges_page():
 @login_required
 def challenge_page(challenge_id):
     game = Game.query.filter_by(gameId = challenge_id).first()
-    return render_template("challenge.html", answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4)
-# hello
+    return render_template("detailed-challenge.html", game=game)
+
+@app.route("/challenge/play/<int:challenge_id>")
+@login_required
+def challenge_play(challenge_id):
+    game = Game.query.filter_by(gameId = challenge_id).first()
+    return render_template("challenge.html", game=game)
 
 if __name__ == '__main__':
     app.run(debug=True, port = PORT)

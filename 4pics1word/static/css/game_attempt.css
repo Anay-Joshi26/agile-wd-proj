@@ -1,8 +1,6 @@
 body {
     background: rgb(176,92,241);
     background: radial-gradient(circle, rgba(176,92,241,1) 0%, rgba(114,26,250,1) 100%);
-    width: 100%;
-    height: 100%;
 }
 
 label svg {
@@ -36,18 +34,12 @@ input[type="file"] {
 }
 
 .image-cell {
-    width: 180px;
-    height: 180px;
-    background-color: #333;
-    padding: 0;
-    border-radius: 10px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 8px;
-    position: relative;
+    /* width: 180px;
+    height: 180px; */
+    aspect-ratio: 1; /* Ensure the aspect ratio of each cell is 1:1 */
+    min-width: 180px;
+    max-width: 200px;
+    padding: 8px;
 }
 
 .change-img-icon {
@@ -76,6 +68,8 @@ label {
 }
 
 .image-cell img {
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
 }

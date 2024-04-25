@@ -87,18 +87,18 @@
         <div>
             <div class="row">
               <div class="col-6 image-cell" id = 'img1'>
-                <img src="{{ image1 }}" alt="Duck">
+                <img src="{{ game.image1 }}" alt="image1">
               </div>
               <div class="col-6 image-cell" id = 'img2'>
-                <img src="{{ image2 }}" alt="Duck">
+                <img src="{{ game.image2 }}" alt="image2">
               </div>
             </div>
             <div class="row">
               <div class="col-6 image-cell" id = 'img3'>
-                <img src="{{ image3 }}" alt="Duck">
+                <img src="{{ game.image3 }}" alt="image3">
               </div>
               <div class="col-6 image-cell" id = 'img4'>
-                <img src="{{ image4 }}" alt="Duck">
+                <img src="{{ game.image4 }}" alt="image4">
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@
         </div>
         
         <div class = 'flex-container'>
-            {% set words = answer.split(" ") %}
+            {% set words = game.answer.split(" ") %}
             {% set counts = namespace() %}
             {% set counts.letters = 0 %}
             
