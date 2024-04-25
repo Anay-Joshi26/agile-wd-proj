@@ -86,3 +86,31 @@ i{
         color: var(--bs-nav-link-color)!important;
     }
 }
+.dropdown-menu{
+    text-align: center!important;
+    border: none!important;
+    box-shadow: none;
+    background-color: white!important;
+}
+
+.dropdown-menu:hover{
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: purple;
+
+}
+
+.dropdown-menu a{
+    font-size: 15px!important;
+    background-color: #fff;
+    color: var(--bs-nav-link-color);
+}
+
+.dropdown-menu a:hover{
+    background-color: #fff;
+}
+
+.dropdown-menu show{
+    right: 2vw !important;
+}
