@@ -4,6 +4,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 import re
 
 
+
 from models import db, User
 
 def validate_username(username):

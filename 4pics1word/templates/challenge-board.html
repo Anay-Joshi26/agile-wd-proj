@@ -227,62 +227,36 @@
 
     <!-- Challenge Board -->
     <div class="container mt-4 col-md-10 challenge-board">
-        <div class="col-md-12 mt-2 mb-4 card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="card-title">Challenge Title</h3>
-                        <p class="card-text"><small class="text-muted">Posted by: user</small></p>
+        <div class="container mt-4">
+            {% for game in games %}
+                <div class="col-md-12 mb-4 card">
+                    <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3">
-                                <img src="https://th.bing.com/th/id/OIG2.kAM76N3zv6KJ4sHKHNeX?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="img-fluid" alt="Image 1">
+                            <div class="col-md-12">
+                                <h3 class="card-title">{{ game.game_title }}</h3>
+                                <p class="card-text"><small class="text-muted">Posted by: {{ game.creator.username }}</small></p>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="{{ game.image1 }}" class="img-fluid" alt="Image 1">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="{{ game.image2 }}" class="img-fluid" alt="Image 2">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="{{ game.image3 }}" class="img-fluid" alt="Image 3">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="{{ game.image4 }}" class="img-fluid" alt="Image 4">
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">0 Likes</button>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <img src="https://th.bing.com/th/id/OIG4..bmL9kK4Y8Eia8wscYkm?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="img-fluid" alt="Image 2">
-                            </div>
-                            <div class="col-md-3">
-                                <img src="https://th.bing.com/th/id/OIG2.JlguCKuxIwpAyn85zNU5?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="img-fluid" alt="Image 3">
-                            </div>
-                            <div class="col-md-3">
-                                <img src="https://th.bing.com/th/id/OIG3.Qki63p2XR0ADHBtUrUp4?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="img-fluid" alt="Image 4">
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">0 Likes</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">0 Shares</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Example second card-->
-        <div class="col-md-12 mb-4 card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="card-title">Challenge Title</h3>
-                        <p class="card-text"><small class="text-muted">Posted by: user</small></p>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="https://th.bing.com/th/id/OIG2.kAM76N3zv6KJ4sHKHNeX?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="img-fluid" alt="Image 1">
-                            </div>
-                            <div class="col-md-3">
-                                <img src="https://th.bing.com/th/id/OIG4..bmL9kK4Y8Eia8wscYkm?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="img-fluid" alt="Image 2">
-                            </div>
-                            <div class="col-md-3">
-                                <img src="https://th.bing.com/th/id/OIG2.JlguCKuxIwpAyn85zNU5?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="img-fluid" alt="Image 3">
-                            </div>
-                            <div class="col-md-3">
-                                <img src="https://th.bing.com/th/id/OIG3.Qki63p2XR0ADHBtUrUp4?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="img-fluid" alt="Image 4">
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">0 Likes</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">0 Shares</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     

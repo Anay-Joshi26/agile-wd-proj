@@ -10,11 +10,14 @@ class User(db.Model, UserMixin):
 
 class Game(db.Model):
     gameId = db.Column(db.Integer, primary_key = True)
+    game_title = db.Column(db.String, nullable = False)
     answer = db.Column(db.String, nullable = False)
-    clue1 = db.Column(db.String, nullable = False)
-    clue2 = db.Column(db.String, nullable = False)
-    clue3 = db.Column(db.String, nullable = False)
-    image1 = db.Column(db.LargeBinary, nullable = False)
-    image2 = db.Column(db.LargeBinary, nullable = False)
-    image3 = db.Column(db.LargeBinary, nullable = False)
-    image4 = db.Column(db.LargeBinary, nullable = False)
+    hint = db.Column(db.String, nullable = True)
+    image1 = db.Column(db.String, nullable = False)
+    image2 = db.Column(db.String, nullable = False)
+    image3 = db.Column(db.String, nullable = False)
+    image4 = db.Column(db.String, nullable = False)
+    creator_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # the backref tag allows to access all the games created by a user
+    # it may be useful for future features such as for a user profile
+    creator = db.relationship('User', backref='created_games') 
