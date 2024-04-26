@@ -1,21 +1,6 @@
 body {
-    background-image: linear-gradient(140deg, rgba(204, 42, 229, 0.4), rgba(190, 118, 212, 0.4), rgba(18, 8, 203, 0.4));
-    animation: gradient 5s infinite;
-    background-size: 400% 400%;
-}
+    background-image: radial-gradient( circle farthest-corner at 14.2% 27.5%,  rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90% );
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
 }
 
 /* Styling for trending/popular cards */
@@ -87,6 +72,16 @@ body {
 .challenge-board img {
     border-radius: 10px;
     margin-bottom: 25px;
+}
+
+.d-md-none.d-flex.flex-row.flex-nowrap.overflow-auto {
+    overflow: auto;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.d-md-none.d-flex.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, Opera */
 }
 
 @media (max-width: 768px) {

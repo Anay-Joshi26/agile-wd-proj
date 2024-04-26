@@ -10,7 +10,7 @@ from process_game import UPLOAD_FOLDER
 
 
 # Create instance of Database
-from models import db, User
+from models import db, User, Game
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -125,7 +125,8 @@ def logout():
 
 @app.route("/challenges")
 def challenges_page():
-    return render_template("challenge-board.html", current_user=current_user)
+    games = Game.query.all()
+    return render_template("challenge-board.html", current_user=current_user, games=games)
 
 @app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):
