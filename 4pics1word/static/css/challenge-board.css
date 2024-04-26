@@ -69,9 +69,23 @@ body {
     background-color: #f2f1f1;
 }
 
-.challenge-board img {
+.challenge-board .image-wrapper-box {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
     border-radius: 10px;
     margin-bottom: 25px;
+}
+
+.challenge-board .image-wrapper-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .d-md-none.d-flex.flex-row.flex-nowrap.overflow-auto {
