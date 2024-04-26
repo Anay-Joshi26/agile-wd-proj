@@ -114,3 +114,11 @@ i{
 .dropdown-menu show{
     right: 2vw !important;
 }
+
+.nav-link[aria-current="page"]{
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: purple;
+    
+}
