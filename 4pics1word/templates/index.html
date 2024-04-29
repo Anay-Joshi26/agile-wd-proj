@@ -115,6 +115,37 @@
         </div>
         </div>
     </div>
+    <!-- if user tries to enter the /challenges/create-game without signing in login modal would show instead of an error page-->
+    <script>
+        window.onload = function(){
+            var loginmodal = "{{login_modal}}";
+            if(loginmodal){
+                $('#loginmodal').modal('show');
+            }
+        };
+
+        $(document).ready(function() {
+            // Trigger search box resize on focus/blur
+            $('.search-box input').focus(function() {
+                $(this).parent().parent().css('width', '40vw');
+            }).blur(function() {
+                $(this).parent().parent().css('width', '36vw');
+            });
+    
+            // Set 'aria-current' attribute for active nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.href === window.location.href) {
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+    
+            // New code: Check for 'login' query parameter and show modal if it's true
+            var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('login') === 'true') {
+                $('#loginModal').modal('show');
+            }
+        });
+    </script>
     
 </body>
 </html>

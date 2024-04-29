@@ -1,5 +1,5 @@
 
-from flask import Flask, url_for, render_template, request, redirect, jsonify
+from flask import Flask, url_for, render_template, request, redirect, jsonify, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from wtforms.validators import ValidationError
@@ -34,7 +34,7 @@ PORT = 5000
 # Logging in
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "login"
+login_manager.login_view = "index"
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -43,13 +43,19 @@ def load_user(user_id):
 # Web page routing
 @app.route("/")
 def index():
-    return render_template("index.html")
+    login_modal = request.args.get('login')
+    return render_template("index.html", login_modal = login_modal)
 
 
 @app.route("/challenges/create-game", methods=['POST', 'GET'])
 @login_required
 def create_game():
     return render_template("create_game.html")
+
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    flash('You need to be logged in to access this page.')
+    return redirect('/?login=true')
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
