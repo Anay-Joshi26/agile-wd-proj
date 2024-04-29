@@ -44,7 +44,7 @@ def load_user(user_id):
 @app.route("/")
 def index():
     login_modal = request.args.get('login')
-    return render_template("index.html", login_modal = login_modal)
+    return render_template("index.html", login_modal = login_modal, is_index = True)
 
 
 @app.route("/challenges/create-game", methods=['POST', 'GET'])
