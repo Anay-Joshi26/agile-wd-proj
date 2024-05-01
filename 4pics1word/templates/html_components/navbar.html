@@ -12,15 +12,18 @@
     <button class="navbar-toggler" style="margin-left:5vw; margin-right:5vw" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    {% if is_index %}
+    <div class="collapse navbar-collapse justify-content-end index-page" id="navbarSupportedContent" style="margin-left: 2vw;">
+    {% else %}
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" style="margin-left: 2vw;">
-
+    {%endif%}
         <ul class="navbar-nav ml-auto nav-fill w-100">
             {% if current_user.is_authenticated %} <!-- user can only create a game if they are signed in otherwise, login modal is displayed-->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('create_game') }}">Create Challenge <span class="sr-only">(current)</span></a>
+                <a class="nav-link {{ 'aria-current=page' if request.endpoint == 'create_game' else '' }}" href="{{ url_for('create_game') }}">Create Challenge <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ url_for('challenges_page') }}">Challanges <span class="sr-only">(current)</span></a>
+                <a class="nav-link {{ 'aria-current=page' if request.endpoint == 'challenges_page' else '' }}" href="{{ url_for('challenges_page') }}">Challanges <span class="sr-only">(current)</span></a>
             </li>
             {% else %}
             <li class="nav-item">
@@ -28,7 +31,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ url_for('challenges_page') }}">Challanges <span class="sr-only">(current)</span></a>
+                <a class="nav-link {{ 'aria-current=page' if request.endpoint == 'challenges_page' else '' }}"  href="{{ url_for('challenges_page') }}">Challanges <span class="sr-only">(current)</span></a>
             </li>
 
             {% endif %}
