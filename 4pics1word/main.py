@@ -39,7 +39,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
     if FAKE_DATA and not User.query.first():
-        generate_all_games(10)
+        generate_all_games()
 
     
 # Logging in

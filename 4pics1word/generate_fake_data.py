@@ -59,8 +59,6 @@ def generate_four_images(topic, game_id):
     print(topic)
     url = f'https://source.unsplash.com/random?{topic}'
 
-    print(url)
-
     image_paths = []
     for i in range(1,5):
         response = requests.get(url)
@@ -74,7 +72,7 @@ def generate_four_images(topic, game_id):
 
 
 def generate_game(topic, id):
-    game_title = generate_lorem_title(6)
+    game_title = generate_lorem_title(7)
     answer = topic
     images = generate_four_images(topic, id)
     return game_title, answer, images
@@ -92,15 +90,39 @@ def generate_users(num_users):
 
         
 
-def generate_all_games(num_games):
+def generate_all_games():
     users = generate_users(20)
-    for i in range(1, num_games+1):
-        game_title, answer, images = generate_game(random.choice(topics),i)
-        new_game = Game(game_title=game_title, answer=answer, image1=images[0], image2=images[1], image3=images[2], image4=images[3],\
-                        creator = random.choice(users))
+
+    DUMMY_DATA = os.path.abspath(os.path.join(os.path.dirname(__file__), 'dummy_data_images.txt'))
+
+    data = None
+
+    with open(DUMMY_DATA, 'r') as f:
+        data = f.read().split('\n')
+
+    num_games = len(data)
+
+    for i in range(0, num_games, 5):
+
+        answer = data[i]
+
+        print(answer)
+
+        game_title = generate_lorem_title(7)
+    
+        new_game = Game(
+            game_title=game_title,
+            answer=answer,
+            image1=data[i+1],
+            image2=data[i+2],
+            image3=data[i+3],
+            image4=data[i+4],
+            creator=random.choice(users)
+        )
         
         db.session.add(new_game)
         db.session.commit()
+
 
 
 
