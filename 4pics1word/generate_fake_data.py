@@ -51,11 +51,12 @@ def download_image(image_url, file_dir):
         with open(file_dir, "wb") as fp:
             fp.write(response.content)
 
-        print("Image downloaded successfully.")
+        #print("Image downloaded successfully.")
     else:
         print(f"Failed to download the image. Status code: {response.status_code}")
 
 def generate_four_images(topic, game_id):
+    print(topic)
     url = f'https://source.unsplash.com/random?{topic}'
 
     print(url)
