@@ -123,7 +123,6 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route("/challenges")
-@login_required
 def challenges_page():
     return render_template("challenge-board.html")
 
