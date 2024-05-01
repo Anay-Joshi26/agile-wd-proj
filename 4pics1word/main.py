@@ -7,10 +7,11 @@ from flask_bcrypt import Bcrypt
 from auth import register_new_user, login_new_user, validate_username, isValidUsername, isValidPassword
 from api import api
 from process_game import UPLOAD_FOLDER
+from game_attempt import record_attempt
 
 
 # Create instance of Database
-from models import db, User, Game
+from models import db, User, Game, Attempt
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -131,8 +132,39 @@ def challenges_page():
 @login_required
 def challenge_page(challenge_id):
     game = Game.query.filter_by(gameId = challenge_id).first()
-    return render_template("challenge.html", answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4)
+
+    if game == None:
+        return redirect(url_for('challenges_page'))
+    
+    message = ""
+
+    if current_user.id == game.creator_id:
+        message = "This is your game. You can play however your guesses will not be recorded."
+
+    recent_attempt = Attempt.query.filter_by(game_id = challenge_id, player_id = current_user.id).order_by(Attempt.attempt_id.desc()).first()
+    attempt_count = 0
+
+    if recent_attempt:
+        attempt_count = recent_attempt.attempts
+        if recent_attempt.correct:
+            if message == "":
+                message = "You have already played this game. You can play again however your guesses will not be recorded."
+            attempt_count = 0
+
+    return render_template("challenge.html", hint = game.hint, attempt_count = (attempt_count + 1), answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4, challenge_id = challenge_id, message = message)
 # hello
+
+@app.route("/guess", methods=["GET", "POST"])
+@login_required
+def make_guess():
+    data = request.json
+    game = Game.query.filter_by(gameId = data.get('challenge_id')).first()
+    print(game.creator.username, game.creator.id)  
+    record_attempt(data.get('guess'), data.get('attempts'), data.get('correct'), game)
+
+    if data.get('correct'):
+        print(data)
+    return jsonify("WOOOO")
 
 if __name__ == '__main__':
     app.run(debug=True, port = PORT)
