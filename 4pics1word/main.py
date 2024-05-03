@@ -1,3 +1,9 @@
+import os
+import sys
+
+file_dir = os.path.dirname(__file__)
+sys.path.append(file_dir)
+
 
 from flask import Flask, url_for, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -8,6 +14,7 @@ from auth import register_new_user, login_new_user, validate_username, isValidUs
 from api import api
 from process_game import UPLOAD_FOLDER
 from generate_fake_data import generate_all_games
+from flask_migrate import Migrate
 
 
 # Create instance of Database
@@ -16,6 +23,8 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'your_secret_key_here'
+
+migrate = Migrate(app, db)
 
 # db.init_app(app)
 
