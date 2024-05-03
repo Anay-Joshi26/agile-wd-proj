@@ -85,6 +85,9 @@ i{
         /* color: #b5b5b5!important;  */
         color: var(--bs-nav-link-color)!important;
     }
+    .index-page{
+        margin-left: 2vw!important;
+    }
 }
 .dropdown-menu{
     text-align: center!important;
@@ -125,4 +128,10 @@ i{
 
 .index-page {
     margin-left: 2vw !important;
+}
+
+@media (min-width:992px){
+    .index-page{
+        margin-left: 40vw!important;
+    }
 }
