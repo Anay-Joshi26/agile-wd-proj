@@ -148,7 +148,7 @@ def challenge_page(challenge_id):
         attempt_count = recent_attempt.attempts
         if recent_attempt.correct:
             if message == "":
-                message = "You have already played this game. You can play again however your guesses will not be recorded."
+                message = "You have already played this game. You can play again however your guesses will not be recorded."  
             attempt_count = 0
 
     return render_template("challenge.html", hint = game.hint, attempt_count = (attempt_count + 1), answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4, challenge_id = challenge_id, message = message)

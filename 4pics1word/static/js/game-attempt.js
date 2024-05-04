@@ -1,3 +1,9 @@
+$(document).ready(function() {
+    if(message === ""){
+        $('#alert').hide();
+    }
+})
+
 var attemptDisplay = document.getElementById('attempt-counter')
 
 attemptDisplay.textContent = attempt;
@@ -5,13 +11,13 @@ attemptDisplay.textContent = attempt;
 const toggleButton = document.getElementById('hintButton');
 const hiddenText = document.getElementById('hintText');
 
-    toggleButton.addEventListener('click', () => {
-      if (hiddenText.style.display === 'none') {
-        hiddenText.style.display = 'block';
-      } else {
-        hiddenText.style.display = 'none';
-      }
-    });
+toggleButton.addEventListener('click', () => {
+if (hiddenText.style.display === 'none') {
+    hiddenText.style.display = 'block';
+} else {
+    hiddenText.style.display = 'none';
+}
+});
 
 function isValidPhrase(str) {
     // Reference: chatGPT generated regex => "write a regex that matches when contains only letters or numbers, 
@@ -84,6 +90,7 @@ function makeGuess() {
         }
     }
     else if(answer.length == guess.length){
+        console.log("WE HERE");
         notify_incorrect();
         if (message === ""){
             sendData(guess, attempt, match, challenge_id)
