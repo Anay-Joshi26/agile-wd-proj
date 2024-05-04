@@ -1,0 +1,6 @@
+.full-page-intro {
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+}
