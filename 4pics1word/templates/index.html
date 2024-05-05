@@ -21,8 +21,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-
-
     <style>
         .form-control.is-valid,
         .was-validated .form-control:valid {
@@ -54,16 +52,16 @@
     </div>
 
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 mb-5 text-center">
-        <div class="container">
+        <div class="container guess-phrase-section">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6" data-aos="fade-up">
                     <h1 class="display-3 fw-bold fs-1">Guess the phrase!</h1>
-                    <h2 class="fw-normal text-muted mb-3">Analyze four images and guess the phrase that links the images
+                    <h2 class="lead fs-4">Analyze four images and guess the phrase that links the images
                         together. Challenge friends to guess your phrases or try and beat other peoples challenges! Are
                         you up for the challenge?</h2>
                 </div>
                 <div class="col-md-6" data-aos="fade-up" data-aos-offset="-50">
-                    <img src="https://source.unsplash.com/random/500x300/?game" alt="4Pics1Word Game" class="img-fluid">
+                    <img src="{{url_for('static', filename = 'assets/nature-1.jpg')}}" alt="4Pics1Word Game" class="img-fluid" style="max-width: 100%;">
                 </div>
             </div>
         </div>
@@ -74,20 +72,20 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="col-6" data-aos="fade-down-right" data-aos-offset="300" data-aos-duration="1500">
-                            <img src="https://source.unsplash.com/random/300x200/?game" alt="Game Image 1"
+                        <div class="col-6 how-to-image" data-aos="fade-down-right" data-aos-offset="300" data-aos-duration="1500">
+                            <img src="{{url_for('static', filename = 'assets/nature-1.jpg')}}" alt="Game Image 1"
                                 class="img-fluid">
                         </div>
-                        <div class="col-6" data-aos="fade-down-left" data-aos-offset="350" data-aos-duration="1500">
-                            <img src="https://source.unsplash.com/random/300x200/?puzzle" alt="Game Image 2"
+                        <div class="col-6 how-to-image" data-aos="fade-down-left" data-aos-offset="350" data-aos-duration="1500">
+                            <img src="{{url_for('static', filename = 'assets/nature-2.jpg')}}" alt="Game Image 2"
                                 class="img-fluid">
                         </div>
-                        <div class="col-6" data-aos="fade-up-right" data-aos-offset="200" data-aos-duration="1500">
-                            <img src="https://source.unsplash.com/random/300x200/?strategy" alt="Game Image 3"
+                        <div class="col-6 how-to-image" data-aos="fade-up-right" data-aos-offset="200" data-aos-duration="1500">
+                            <img src="{{url_for('static', filename = 'assets/nature-3.jpg')}}" alt="Game Image 3"
                                 class="img-fluid">
                         </div>
-                        <div class="col-6" data-aos="fade-up-left" data-aos-offset="100" data-aos-duration="1500">
-                            <img src="https://source.unsplash.com/random/300x200/?boardgame" alt="Game Image 4"
+                        <div class="col-6 how-to-image" data-aos="fade-up-left" data-aos-offset="100" data-aos-duration="1500">
+                            <img src="{{url_for('static', filename = 'assets/nature-4.jpg')}}" alt="Game Image 4"
                                 class="img-fluid">
                         </div>
                     </div>
@@ -109,8 +107,8 @@
                     <h2 class="lead fs-4">Visit the challenges page in the navigation bar to find
                         trending posts as well as all the challenges users have posted!</h2>
                 </div>
-                <div class="col-md-6" data-aos="fade-left" data-aos-offset="300" data-aos-duration="1500">
-                    <img src="https://source.unsplash.com/random/500x300/?car" alt="4Pics1Word Game" class="img-fluid">
+                <div class="col-md-6">
+                    <img src="{{url_for('static', filename = 'assets/challenges-current.gif')}}" alt="4Pics1Word Game" class="img-fluid" style="min-height: 100%;">
                 </div>
             </div>
         </div>

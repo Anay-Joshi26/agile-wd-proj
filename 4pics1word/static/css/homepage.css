@@ -1,4 +1,3 @@
-/* Styling for the full-page intro section */
 .full-page-intro {
     height: 100vh;
     align-items: center;
@@ -18,16 +17,41 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2; /* Lower than text and buttons but fills the section */
+    z-index: 2;
 }
 
 img {
     border-radius: 20px;
+    overflow: hidden;
 }
 
-/* Styling for how-to-play section */
+.guess-phrase-section img {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+}
+
 .how-to-play {
     background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
     border-radius: 20px;
     color: white;
+}
+
+.how-to-image {
+    width: 100%;
+    padding-top: 0;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.how-to-image img {
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
