@@ -1,6 +1,33 @@
+/* Styling for the full-page intro section */
 .full-page-intro {
     height: 100vh;
     align-items: center;
     justify-content: center;
     background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    color: white;
+    font-size: xx-large;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 1;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Lower than text and buttons but fills the section */
+}
+
+img {
+    border-radius: 20px;
+}
+
+/* Styling for how-to-play section */
+.how-to-play {
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    border-radius: 20px;
+    color: white;
 }
