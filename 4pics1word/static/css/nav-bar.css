@@ -1,0 +1,137 @@
+#login a{
+    border-radius: 20px;
+    background-color: purple;
+    color: #fff!important;
+    font-size: 15px!important;
+}
+
+
+.nav-link{
+    color: #b5b5b5; 
+    font-size: 15px!important;
+    
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: purple;
+   
+}
+
+nav{
+    background-color: white!important;
+}
+
+.navbar-brand {
+    margin-left: 4vw;
+} 
+
+
+i{
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.search-box form{
+    position: relative; 
+}
+
+.search-box{
+    width: 36vw;
+    position: sticky;
+    margin-left: 4vw;
+    overflow: visible;
+    transition: width 0.3s ease;
+}
+
+
+
+.search-box input{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: #E9E9E9;
+    border-radius: 30px;
+    color: grey;
+    font-size: 16px;
+    text-align: center;
+    
+}
+
+
+
+.search-box button
+{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 9px;
+    transform: scale(0.9);
+    background: purple;
+}
+ 
+  @media (max-width: 992px) 
+{
+    #login a {
+        background-color: transparent!important; 
+        /* color: #b5b5b5!important;  */
+        color: var(--bs-nav-link-color)!important;
+    }
+    .index-page{
+        margin-left: 2vw!important;
+    }
+}
+.dropdown-menu{
+    text-align: center!important;
+    border: none!important;
+    box-shadow: none;
+    background-color: white!important;
+}
+
+.dropdown-menu:hover{
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: purple;
+
+}
+
+.dropdown-menu a{
+    font-size: 15px!important;
+    background-color: #fff;
+    color: var(--bs-nav-link-color);
+}
+
+.dropdown-menu a:hover{
+    background-color: #fff;
+}
+
+.dropdown-menu show{
+    right: 2vw !important;
+}
+
+.nav-link[aria-current="page"]{
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: purple;
+    
+}
+
+.index-page {
+    margin-left: 2vw !important;
+}
+
+@media (min-width:992px){
+    .index-page{
+        margin-left: 40vw!important;
+    }
+}

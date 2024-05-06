@@ -3,3 +3,6 @@ flask_sqlalchemy
 flask_login
 wtforms
 flask_bcrypt
+Faker
+requests
+flask_migrate
