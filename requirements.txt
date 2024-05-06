@@ -5,3 +5,4 @@ wtforms
 flask_bcrypt
 Faker
 requests
+flask_migrate
