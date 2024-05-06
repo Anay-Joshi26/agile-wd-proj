@@ -21,3 +21,15 @@ class Game(db.Model):
     # the backref tag allows to access all the games created by a user
     # it may be useful for future features such as for a user profile
     creator = db.relationship('User', backref='created_games') 
+    number_of_upvotes = db.Column(db.Integer, nullable = False)
+    date_created = db.Column(db.DateTime, nullable = False)
+
+class GamePerformance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    # the person who played the game
+    user = db.relationship('User')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # the game that was played
+    game = db.relationship('Game', backref='game_performances')
+    game_id = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
+    attempts = db.Column(db.Integer, nullable=False)
