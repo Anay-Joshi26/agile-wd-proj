@@ -20,6 +20,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="{{ url_for('static', filename='js/particles.js') }}"></script>
 
     <style>
         .form-control.is-valid,
@@ -45,7 +46,7 @@
         <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
         <div class="row justify-content-center align-items-center" style="height: 100%;">
             <div class="col-md-6">
-                <h1 class="display-3 intro-title fw-bold">4Pics1Word</h1>
+                <h1 class="display-3 intro-title fw-bold">SnapCipher</h1>
                 <h3 class="fw-normal mb-3">Prove Your Puzzle Solving Skills</h3>
             </div>
         </div>
@@ -61,7 +62,8 @@
                         you up for the challenge?</h2>
                 </div>
                 <div class="col-md-6" data-aos="fade-up" data-aos-offset="-50">
-                    <img src="{{url_for('static', filename = 'assets/nature-1.jpg')}}" alt="4Pics1Word Game" class="img-fluid" style="max-width: 100%;">
+                    <img src="{{url_for('static', filename = 'assets/nature-1.jpg')}}" alt="Nature image"
+                        class="img-fluid" style="max-width: 100%;">
                 </div>
             </div>
         </div>
@@ -72,19 +74,23 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="col-6 how-to-image" data-aos="fade-down-right" data-aos-offset="300" data-aos-duration="1500">
+                        <div class="col-6 how-to-image" data-aos="fade-down-right" data-aos-offset="300"
+                            data-aos-duration="1500">
                             <img src="{{url_for('static', filename = 'assets/nature-1.jpg')}}" alt="Game Image 1"
                                 class="img-fluid">
                         </div>
-                        <div class="col-6 how-to-image" data-aos="fade-down-left" data-aos-offset="350" data-aos-duration="1500">
+                        <div class="col-6 how-to-image" data-aos="fade-down-left" data-aos-offset="350"
+                            data-aos-duration="1500">
                             <img src="{{url_for('static', filename = 'assets/nature-2.jpg')}}" alt="Game Image 2"
                                 class="img-fluid">
                         </div>
-                        <div class="col-6 how-to-image" data-aos="fade-up-right" data-aos-offset="200" data-aos-duration="1500">
+                        <div class="col-6 how-to-image" data-aos="fade-up-right" data-aos-offset="200"
+                            data-aos-duration="1500">
                             <img src="{{url_for('static', filename = 'assets/nature-3.jpg')}}" alt="Game Image 3"
                                 class="img-fluid">
                         </div>
-                        <div class="col-6 how-to-image" data-aos="fade-up-left" data-aos-offset="100" data-aos-duration="1500">
+                        <div class="col-6 how-to-image" data-aos="fade-up-left" data-aos-offset="100"
+                            data-aos-duration="1500">
                             <img src="{{url_for('static', filename = 'assets/nature-4.jpg')}}" alt="Game Image 4"
                                 class="img-fluid">
                         </div>
@@ -92,7 +98,8 @@
                 </div>
                 <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
                     <h1 class="display-3 fw-bold fs-1">How to Play</h1>
-                    <h2 class="lead fs-4">Login. Create a game. Choose a title, upload your 4 pictures and choose a word that
+                    <h2 class="lead fs-4">Login. Create a game. Choose a title, upload your 4 pictures and choose a word
+                        that
                         relates them all together and give everyone a hint to guess the phrase to your challenge.</h2>
                 </div>
             </div>
@@ -108,7 +115,8 @@
                         trending posts as well as all the challenges users have posted!</h2>
                 </div>
                 <div class="col-md-6">
-                    <img src="{{url_for('static', filename = 'assets/challenges-current.gif')}}" alt="4Pics1Word Game" class="img-fluid" style="min-height: 100%;">
+                    <img src="{{url_for('static', filename = 'assets/challenges-current.gif')}}"
+                        alt="Challenge page gif" class="img-fluid" style="min-height: 100%;">
                 </div>
             </div>
         </div>
@@ -116,7 +124,7 @@
 
     <footer class="text-center bg-light py-3">
         <div class="container">
-            <p class="mb-0">2024 4Pics1Word. Pretty sure rights are not reserved.</p>
+            <p class="mb-0">2024 SnapCipher. Pretty sure rights are not reserved.</p>
         </div>
     </footer>
 
@@ -165,117 +173,6 @@
 
     <script>
         AOS.init();
-    </script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 237,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#ffffff"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        },
-                        "polygon": {
-                            "nb_sides": 5
-                        },
-                        "image": {
-                            "src": "img/github.svg",
-                            "width": 100,
-                            "height": 100
-                        }
-                    },
-                    "opacity": {
-                        "value": 1,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": false,
-                            "speed": 4,
-                            "size_min": 0.3,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": false
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 1,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": false,
-                            "rotateX": 600,
-                            "rotateY": 600
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "bubble"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "repulse"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 400,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "bubble": {
-                            "distance": 250,
-                            "size": 0,
-                            "duration": 2,
-                            "opacity": 0,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 400,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-        });
     </script>
 </body>
 
