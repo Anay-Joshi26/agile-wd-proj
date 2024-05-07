@@ -154,7 +154,6 @@ def challenges_page():
     return render_template("challenge-board.html", current_user=current_user, games=games)
 
 @app.route("/challenge/<int:challenge_id>")
-@login_required
 def challenge_page(challenge_id):
     game = Game.query.filter_by(gameId = challenge_id).first()
     return render_template("detailed-challenge.html", game=game)
