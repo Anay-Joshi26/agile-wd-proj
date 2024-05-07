@@ -1,11 +1,22 @@
 from flask import redirect, url_for, render_template
 from wtforms.validators import InputRequired, Length, ValidationError
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 import re
 
 
 
 from models import db, User
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[InputRequired()])
+    password = PasswordField('Password', validators=[InputRequired()])
+
+class RegisterForm(FlaskForm):
+    username = StringField('Username', validators=[InputRequired()])
+    password = PasswordField('Password', validators=[InputRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[InputRequired()])
 
 def validate_username(username):
     return User.query.filter_by(username=username).first()

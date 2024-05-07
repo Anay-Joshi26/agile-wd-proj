@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from wtforms.validators import ValidationError
 from flask_bcrypt import Bcrypt
-from auth import register_new_user, login_new_user, validate_username, isValidUsername, isValidPassword
+from auth import register_new_user, login_new_user, validate_username, isValidUsername, isValidPassword, LoginForm, RegisterForm
 from api import api
 from process_game import UPLOAD_FOLDER
 from game_attempt import record_attempt
@@ -65,7 +65,9 @@ def load_user(user_id):
 @app.route("/")
 def index():
     login_modal = request.args.get('login')
-    return render_template("index.html", login_modal = login_modal, is_index = True)
+    loginform = LoginForm()
+    registerform = RegisterForm()
+    return render_template("index.html", login_modal = login_modal, is_index = True, loginform = loginform, registerform = registerform)
 
 
 @app.route("/challenges/create-game", methods=['POST', 'GET'])
@@ -86,9 +88,10 @@ def dashboard():
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
-    if request.method == 'POST':
-        username = request.form.get('username').strip()
-        password = request.form.get('password')
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data.strip()
+        password = form.password.data
 
         is_valid_username = isValidUsername(username)
         if not is_valid_username:
@@ -115,13 +118,17 @@ def login():
 
 @app.route("/register", methods=['POST', 'GET'])
 def register():
-    if request.method == 'POST':
-        username = request.form.get('username').strip()
-        password = request.form.get('password')
-        confirmPassword = request.form.get('confirmPassword')
+    form = RegisterForm()
+    if form.validate_on_submit():
+        username = form.username.data.strip()
+        password = form.password.data
+        confirmPassword = form.confirm_password.data
+        
+        print(username, password, confirmPassword)
 
         is_valid_username = isValidUsername(username)
         if not is_valid_username:
+            print(username, password, confirmPassword)
             return jsonify({'success': False, 'regex-error':'username', 'msg': 'Invalid Username'})  
         
         is_valid_password = isValidPassword(username)
@@ -131,7 +138,6 @@ def register():
         if password != confirmPassword:
             return jsonify({'success': False, 'non-matching-passwords': True, 'msg': 'Passwords do not match'})
         
-
         user_check = validate_username(username)
 
         
@@ -153,7 +159,9 @@ def logout():
 @login_required
 def challenges_page():
     games = Game.query.all()
-    return render_template("challenge-board.html", current_user=current_user, games=games)
+    loginform = LoginForm()
+    registerform = RegisterForm()
+    return render_template("challenge-board.html", current_user=current_user, games=games, loginform = loginform, registerform = registerform)
 
 @app.route("/challenge/<int:challenge_id>")
 @login_required
