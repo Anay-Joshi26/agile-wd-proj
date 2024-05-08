@@ -68,8 +68,21 @@ def upvote(game_id):
     
     game.number_of_upvotes += 1
     db.session.commit()
+    
+    return jsonify({"success": True, "msg": "Upvoted successfully"})
 
-    print("Upvoted")
+@api.route("/api/downvote/<int:game_id>", methods=["POST", "GET"])
+def downvote(game_id):
+    if not current_user.is_authenticated:
+        print("User is not authenticated")
+        return jsonify({"success": False, "msg": "You need to be logged in to upvote"})
+    
+    game = Game.query.filter_by(gameId=game_id).first()
+    if game is None:
+        return jsonify({"success": False, "msg": "Game not found"})
+    
+    game.number_of_upvotes -= 1
+    db.session.commit()
     
     return jsonify({"success": True, "msg": "Upvoted successfully"})
 
