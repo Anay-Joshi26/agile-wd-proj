@@ -11,6 +11,12 @@
     z-index: 1;
 }
 
+/* Increase line height for the description texts */
+.lead {
+    line-height: 1.8;
+}
+
+/* Set up for particles.js */
 #particles-js {
     position: absolute;
     top: 0;
@@ -34,6 +40,7 @@ img {
     object-position: center;
 }
 
+/* How to play section styling */
 .how-to-play {
     background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
     border-radius: 20px;
@@ -55,3 +62,30 @@ img {
     object-fit: cover;
     object-position: center;
 }
+
+/* Challenge board explore section styling */
+.challenge-board-video video {
+    border-radius: 20px;
+}
+
+/* Adds padding to the text descriptions to add space between text and images on larger displays */
+@media (min-width: 768px) {
+    .how-to-play-text {
+        padding-left: 80px !important;
+    }
+
+    .guess-phrase-text {
+        padding-right: 60px !important;
+    }
+
+    .explore-challenges-text {
+        padding-right: 80px !important;
+    }
+}
+
+/* On smaller displays add margin between tops of containers to space them out more */
+@media (max-width: 768px) {
+    .container {
+      margin-top: 20px;
+    }
+  }
