@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/styles.css')}}">
     <script defer src = "{{url_for('static', filename = 'js/login-validation.js')}}"></script>
-    <title>Document</title>
+    <script defer src = "{{url_for('static', filename = 'js/upvote.js')}}"></script>
+    <title>Challenges | Explore Other SnapCipher games </title>
     <style>
         .form-control.is-valid, .was-validated .form-control:valid {
             background-image: none;
@@ -137,7 +138,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex gap-2">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">0 Likes</button>
+                                    <button data-fetch-url="/api/upvote/{{game.gameId}}" type="button" class="btn btn-sm btn-outline-secondary upvote-button">{{game.number_of_upvotes}} Upvotes</button>
                                 </div>
                             </div>
                         </div>
