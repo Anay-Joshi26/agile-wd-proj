@@ -162,7 +162,7 @@ def search_suggestions():
     query = request.args.get('q', '').strip()
     if query:
         results = search_database(query)
-        return jsonify([{'title': game.game_title} for game in results])
+        return jsonify([{'title': game.game_title, 'id': game.gameId} for game in results])
     return jsonify([])
 
 @app.route("/challenge/<int:challenge_id>")
