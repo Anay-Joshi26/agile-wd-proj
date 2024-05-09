@@ -22,6 +22,10 @@ class Game(db.Model):
     # the backref tag allows to access all the games created by a user
     # it may be useful for future features such as for a user profile
     creator = db.relationship('User', backref='created_games') 
+    number_of_upvotes = db.Column(db.Integer, nullable = False, default=0) # default value is 0 for when it is first created
+    # the time will automatically be set to the current time when a game is created
+    date_created = db.Column(db.DateTime, nullable = False, default=datetime.now)
+
 
 class Attempt(db.Model):
     attempt_id = db.Column(db.Integer, primary_key=True)
@@ -32,11 +36,7 @@ class Attempt(db.Model):
     player_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     game = db.relationship('Game', backref='played_games')
     player = db.relationship('User', backref='player')
-
-
-    number_of_upvotes = db.Column(db.Integer, nullable = False, default=0) # default value is 0 for when it is first created
-    # the time will automatically be set to the current time when a game is created
-    date_created = db.Column(db.DateTime, nullable = False, default=datetime.now)
+    
 
 class GamePerformance(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,3 +47,4 @@ class GamePerformance(db.Model):
     game = db.relationship('Game', backref='game_performances')
     game_id = db.Column(db.Integer, db.ForeignKey('game.gameId'), nullable=False)
     attempts = db.Column(db.Integer, nullable=False)
+
