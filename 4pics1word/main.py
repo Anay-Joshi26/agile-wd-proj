@@ -156,37 +156,40 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route("/challenges")
-@login_required
 def challenges_page():
     games = Game.query.all()
     loginform = LoginForm()
     registerform = RegisterForm()
     return render_template("challenge-board.html", current_user=current_user, games=games, loginform = loginform, registerform = registerform)
 
-@app.route("/challenge/<int:challenge_id>")
-@login_required
+@app.route("/challenge/play/<int:challenge_id>")
 def challenge_page(challenge_id):
+    loginform = LoginForm()
+    registerform = RegisterForm()
     game = Game.query.filter_by(gameId = challenge_id).first()
 
     if game == None:
         return redirect(url_for('challenges_page'))
     
     message = ""
-
-    if current_user.id == game.creator_id:
-        message = "This is your game. You can play however your guesses will not be recorded."
-
-    recent_attempt = Attempt.query.filter_by(game_id = challenge_id, player_id = current_user.id).order_by(Attempt.attempt_id.desc()).first()
     attempt_count = 0
 
-    if recent_attempt:
-        attempt_count = recent_attempt.attempts
-        if recent_attempt.correct:
-            if message == "":
-                message = "You have already played this game. You can play again however your guesses will not be recorded."  
-            attempt_count = 0
+    if current_user.is_authenticated:
+        if current_user.id == game.creator_id:
+            message = "This is your game. You can play however your guesses will not be recorded."
 
-    return render_template("challenge.html", hint = game.hint, attempt_count = (attempt_count + 1), answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4, challenge_id = challenge_id, message = message)
+        recent_attempt = Attempt.query.filter_by(game_id = challenge_id, player_id = current_user.id).order_by(Attempt.attempt_id.desc()).first()
+        attempt_count = 0
+
+        if recent_attempt:
+            attempt_count = recent_attempt.attempts
+            if recent_attempt.correct:
+                if message == "":
+                    message = "You have already played this game. You can play again however your guesses will not be recorded."  
+                attempt_count = 0
+    
+
+    return render_template("challenge.html", hint = game.hint, attempt_count = (attempt_count + 1), answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4, challenge_id = challenge_id, message = message, loginform = loginform, registerform = registerform)
 # hello
 
 @app.route("/guess", methods=["GET", "POST"])
