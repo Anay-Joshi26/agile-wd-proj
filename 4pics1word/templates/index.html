@@ -1,76 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/nav-bar.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/homepage.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script defer src = "{{url_for('static', filename = 'js/login-validation.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src="{{url_for('static', filename = 'js/login-validation.js')}}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="{{ url_for('static', filename='js/particles.js') }}"></script>
 
     <style>
-        .form-control.is-valid, .was-validated .form-control:valid {
+        .form-control.is-valid,
+        .was-validated .form-control:valid {
             background-image: none;
         }
-        .form-control.is-invalid, .was-validated .form-control:invalid {
+
+        .form-control.is-invalid,
+        .was-validated .form-control:invalid {
             background-image: none;
         }
     </style>
 
-    <title>Document</title>
+    <title>SnapCiphers | Create and Solve Picture Puzzles</title>
 </head>
+
 <body>
     {% include "/html_components/navbar.html" %}
-    
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-        Login
-    </button> -->
 
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
-        Register
-    </button> -->
-    
     {% include "/html_components/auth_modal.html" %}
+
+    <div class="container-fluid full-page-intro text-center">
+        <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+        <div class="row justify-content-center align-items-center" style="height: 100%;">
+            <div class="col-md-6">
+                <h1 class="display-3 intro-title fw-bold">SnapCipher</h1>
+                <h3 class="fw-normal mb-3">Prove Your Puzzle Solving Skills</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 mb-5 text-center">
+        <div class="container guess-phrase-section">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 guess-phrase-text" data-aos="fade-up">
+                    <h1 class="display-3 fw-bold fs-2">Guess the phrase!</h1>
+                    <h2 class="lead fs-5">Analyze four images and guess the phrase that links the images
+                        together. Challenge friends to guess your phrases or try and beat other peoples challenges! Are
+                        you up for the challenge?</h2>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-offset="-50">
+                    <img src="{{url_for('static', filename = 'assets/nature-1.jpg')}}" alt="Nature image"
+                        class="img-fluid" style="max-width: 100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-10 offset-md-1 how-to-play overflow-hidden p-5 text-center">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-6 how-to-image" data-aos="fade-down-right" data-aos-offset="300"
+                            data-aos-duration="1500">
+                            <img src="{{url_for('static', filename = 'assets/nature-1.jpg')}}" alt="Game Image 1"
+                                class="img-fluid">
+                        </div>
+                        <div class="col-6 how-to-image" data-aos="fade-down-left" data-aos-offset="350"
+                            data-aos-duration="1500">
+                            <img src="{{url_for('static', filename = 'assets/nature-2.jpg')}}" alt="Game Image 2"
+                                class="img-fluid">
+                        </div>
+                        <div class="col-6 how-to-image" data-aos="fade-up-right" data-aos-offset="200"
+                            data-aos-duration="1500">
+                            <img src="{{url_for('static', filename = 'assets/nature-3.jpg')}}" alt="Game Image 3"
+                                class="img-fluid">
+                        </div>
+                        <div class="col-6 how-to-image" data-aos="fade-up-left" data-aos-offset="100"
+                            data-aos-duration="1500">
+                            <img src="{{url_for('static', filename = 'assets/nature-4.jpg')}}" alt="Game Image 4"
+                                class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 how-to-play-text" data-aos="fade-right" data-aos-delay="300">
+                    <h1 class="display-3 fw-bold fs-2">How to Play</h1>
+                    <h2 class="lead fs-5">Login. Create a game. Choose a title, upload your 4 pictures and choose a word that relates them all together and give everyone a hint to guess the phrase to your challenge.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-relative explore-challenges-section overflow-hidden p-3 p-md-5 m-md-3 mb-5 text-center">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 explore-challenges-text" data-aos="fade-up" data-aos-offset="100" data-aos-duration="1500">
+                    <h1 class="display-3 fw-bold fs-2">Explore Challenges!</h1>
+                    <h2 class="lead fs-5">Visit the challenges page in the navigation bar to find trending posts as well as all the challenges users have posted!</h2>
+                </div>
+                <div class="col-md-6 challenge-board-video" data-aos="fade-up" data-aos-offset="100" data-aos-duration="1500">
+                    <video width = 100% height =100% autoplay muted loop>
+                        <source src="{{url_for('static', filename = 'assets/challenge-board-tutorial-current.mp4')}}" type="video/mp4">
+                        Your browser does not support video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center bg-light py-3">
+        <div class="container">
+            <p class="mb-0">2024 SnapCipher. Pretty sure rights are not reserved.</p>
+        </div>
+    </footer>
+
     <script>
-        window.onload = function(){
+        window.onload = function () {
             var loginmodal = "{{login_modal}}";
-            if(loginmodal){
+            if (loginmodal) {
                 $('#loginmodal').modal('show');
             }
         };
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Trigger search box resize on focus/blur
-            $('.search-box input').focus(function() {
+            $('.search-box input').focus(function () {
                 $(this).parent().parent().css('width', '40vw');
-            }).blur(function() {
+            }).blur(function () {
                 $(this).parent().parent().css('width', '36vw');
             });
-    
-        //Set 'aria-current' attribute for active nav links
-        document.addEventListener("DOMContentLoaded",function(){
-            const currentLocation = location.href
-            console.log(currentLocation)
-            const menu = document.querySelectorAll('a.nav-link')
-            const length = menu.length
-            
-            for(let i =0; i < length; i++){
-                if(menu[i].href === currentLocation){
-                    menu[i].classList.add("active")
-                    menu[i].setAttribute('aria-current','page')
+
+            //Set 'aria-current' attribute for active nav links
+            document.addEventListener("DOMContentLoaded", function () {
+                const currentLocation = location.href
+                console.log(currentLocation)
+                const menu = document.querySelectorAll('a.nav-link')
+                const length = menu.length
+
+                for (let i = 0; i < length; i++) {
+                    if (menu[i].href === currentLocation) {
+                        menu[i].classList.add("active")
+                        menu[i].setAttribute('aria-current', 'page')
+                    }
+                    else {
+                        menu[i].classList.remove("active")
+                        menu[i].removeAttribute('aria-current')
+                    }
                 }
-                else{
-                   menu[i].classList.remove("active")
-                   menu[i].removeAttribute('aria-current')
-                }
-            }
-        })
-        
+            })
+
             // New code: Check for 'login' query parameter and show modal if it's true
             var urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('login') === 'true') {
@@ -78,6 +169,10 @@
             }
         });
     </script>
-    
+
+    <script>
+        AOS.init();
+    </script>
 </body>
+
 </html>
