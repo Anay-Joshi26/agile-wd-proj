@@ -15,6 +15,7 @@
     <script defer src = "{{url_for('static', filename = 'js/login-validation.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/search.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/upvote.js')}}"></script>
+    <script defer src="{{ url_for('static', filename='js/trending-cards.js') }}"></script>
     <title>Challenges | Explore Other SnapCipher games </title>
     <style>
         .form-control.is-valid, .was-validated .form-control:valid {
@@ -34,7 +35,7 @@
 
     <!-- Trending Cards -->
     <div class="container mt-4 trending-posts">
-        <div class="row d-none d-md-flex">
+        <div id="trendingCards" class="row d-none d-md-flex">
             <div class="col-md-3">
                 <div class="card">
                     <img src="https://th.bing.com/th/id/OIG2.kAM76N3zv6KJ4sHKHNeX?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
@@ -74,7 +75,7 @@
         </div>
 
         <!-- Horizontal scroll for smaller screens -->
-        <div class="d-md-none d-flex flex-row flex-nowrap overflow-auto">
+        <div id="trendingCardsMobile" class="d-md-none d-flex flex-row flex-nowrap overflow-auto">
             <div class="card" style="min-width: 80%; margin-right: 20px;">
                 <img src="https://th.bing.com/th/id/OIG2.kAM76N3zv6KJ4sHKHNeX?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
                 <div class="card-img-overlay">
