@@ -3,7 +3,7 @@ import requests
 import os
 from process_game import UPLOAD_FOLDER
 import random
-from models import db, Game, User
+from models import db, Game, User, GamePerformance
 
 topics = [
     "Nature",
@@ -91,7 +91,7 @@ def generate_users(num_users):
         
 
 def generate_all_games():
-    users = generate_users(20)
+    users = generate_users(50)
 
     DUMMY_DATA = os.path.abspath(os.path.join(os.path.dirname(__file__), 'dummy_data_images.txt'))
 
@@ -101,6 +101,8 @@ def generate_all_games():
         data = f.read().split('\n')
 
     num_games = len(data)
+
+    all_games = []
 
     for i in range(0, num_games, 5):
 
@@ -121,9 +123,27 @@ def generate_all_games():
             number_of_upvotes = random.randint(-10, 100),
             date_created = fake.date_time_this_year(before_now=True, after_now=False)
         )
+
+        all_games.append(new_game)
         
         db.session.add(new_game)
         db.session.commit()
+
+    for game in all_games:
+        rg = random.randint(10, 30)
+        random.shuffle(users)
+        for user in users[:rg]:  
+            new_leaderboard = GamePerformance(
+                user=user,
+                game=game,
+                attempts=random.randint(0, 20)
+            )
+
+            db.session.add(new_leaderboard)
+            db.session.commit()
+
+
+    
 
 
 
