@@ -117,7 +117,9 @@ def generate_all_games():
             image2=data[i+2],
             image3=data[i+3],
             image4=data[i+4],
-            creator=random.choice(users)
+            creator=random.choice(users),
+            number_of_upvotes = random.randint(-10, 100),
+            date_created = fake.date_time_this_year(before_now=True, after_now=False)
         )
         
         db.session.add(new_game)
