@@ -87,22 +87,6 @@ def downvote(game_id):
     return jsonify({"success": True, "msg": "Upvoted successfully"})
 
 
-from datetime import datetime, timedelta
-@api.route('/api/trending', methods=['GET'])
-def get_trending_challenges():
-    recent_date = datetime.now() - timedelta(days=7)
-    trending_games = Game.query.filter(Game.date_created >= recent_date).order_by(Game.number_of_upvotes.desc()).limit(4).all()
-    return jsonify([{
-        'gameID':game.gameId,
-        'game_title':game.game_title,
-        'creator_username':game.creator.username,
-        'image1':game.image1,
-        'image2':game.image2,
-        'image3':game.image3,
-        'image4':game.image4,
-        'number_of_upvotes':game.number_of_upvotes
-    }for game in trending_games])
-
 
 
 

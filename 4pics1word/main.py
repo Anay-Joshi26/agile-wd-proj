@@ -15,6 +15,7 @@ from api import api
 from process_game import UPLOAD_FOLDER
 from generate_fake_data import generate_all_games
 from flask_migrate import Migrate
+from datetime import datetime, timedelta
 
 
 # Create instance of Database
@@ -152,7 +153,9 @@ def logout():
 @app.route("/challenges")
 def challenges_page():
     games = Game.query.all()
-    return render_template("challenge-board.html", current_user=current_user, games=games)
+    recent_date = datetime.now() - timedelta(days=7)
+    trending_games = Game.query.filter(Game.date_created >= recent_date).order_by(Game.number_of_upvotes.desc()).limit(4).all()
+    return render_template("challenge-board.html", current_user=current_user, games=games, trending_games=trending_games)
 
 def search_database(query):
     return Game.query.filter(Game.game_title.ilike(f'%{query}%')).all()
