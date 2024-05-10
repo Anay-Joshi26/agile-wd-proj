@@ -108,12 +108,13 @@
     <div class="container mt-4 col-md-10 challenge-board">
         <div class="container mt-4">
             {% for game in games %}
-                <a href = '/challenge/{{game.gameId}}' class="text-decoration-none">
                     <div class="col-md-12 mb-4 card">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3 class="card-title">{{ game.game_title }}</h3>
+                                    <a href = '/challenge/{{game.gameId}}' class="text-decoration-none card-title">
+                                        <h3 class="card-title text-decoration-none">{{ game.game_title }}</h3>
+                                    </a>
                                     <p class="card-text"><small class="text-muted">Posted by: {{ game.creator.username }}</small></p>
                                     <div class="row">
                                         <div class="col-md-3">
@@ -144,7 +145,6 @@
                             </div>
                         </div>
                     </div>
-                </a>
             {% endfor %}
         </div>
     </div>
