@@ -48,7 +48,7 @@ p {
 
 .table-container {
     flex: 1;
-    margin-left: 20px; /* Adjust as needed for spacing between grid and table */
+    /* margin-left: 20px; Adjust as needed for spacing between grid and table */
 }
 
 .table-container {
