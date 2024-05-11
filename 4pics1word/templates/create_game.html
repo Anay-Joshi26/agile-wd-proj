@@ -1,159 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4pics1word | Create Game</title>
+    <title>SnapCipher | Create Game</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{url_for('static', filename = 'css/nav-bar.css')}}">
     <script defer src="{{ url_for('static', filename='js/upload-game.js') }}"></script>
     <script defer src="{{ url_for('static', filename='js/create-game.js') }}"></script>
     <script defer src="{{ url_for('static', filename='js/particles.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/create_game.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 </head>
+
 <body>
 
     <div id="particles-js"></div>
 
-    <form enctype="multipart/form-data" class = 'images-content container' action = '/api/upload-game' novalidate>
-
-        <h1 class = 'text'>
-            Create your game
+    <!-- Title: Create Your Game!-->
+    <div class="col-12 mt-5 d-flex justify-content-center text-center ">
+        <h1 class='text' id="title">
+            Create Your Game!
         </h1>
-        <div>
-            <input class = 'form-control' style = 'width: 80%;' id = 'game-title-input' name = 'game-title' placeholder = 'Game title' required type="text" maxlength="75">
-            <div class = 'invalid-feedback errors'>Enter a valid game title</div>
-            <div id = 'game-title-error' class = 'errors' style = 'color: red; text-align: center; display: none;'></div>
+    </div>
+
+    <form enctype="multipart/form-data" class='images-content container col-10 mt-4 mb-5' action='/api/upload-game'
+        novalidate>
+
+        <!-- Enter game title here-->
+        <div class="col-12 mt-1 mb-3 d-flex justify-content-center ">
+            <div>
+                <input class='form-control' id='game-title-input' name='game-title' placeholder='Game title' required
+                    type="text" maxlength="75">
+                <div class='invalid-feedback errors'>Enter a valid game title</div>
+                <div id='game-title-error' class='errors' style='color: red; text-align: center; display: none;'></div>
+            </div>
+        </div>
+        <div id='images-error' class='errors' style='color: red; text-align: center; display: none;'></div>
+
+        <!-- Upload image cells -->
+
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-3 col-6 px-md-2">
+                    <div class="image-cell" id='img1'>
+                        <svg class='change-img-icon' id='img-change1' width=38px height=38px style="display: none;" version="1.1"
+                            viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <style type="text/css">
+                                .st0 {
+                                    fill: #E44061;
+                                }
+                            </style>
+                            <g>
+                                <path pointer-events="none" class="st0"
+                                    d="M562,396c0-141.4-114.6-256-256-256S50,254.6,50,396s114.6,256,256,256S562,537.4,562,396L562,396z M356.8,396   L475,514.2L424.2,565L306,446.8L187.8,565L137,514.2L255.2,396L137,277.8l50.8-50.8L306,345.2L424.2,227l50.8,50.8L356.8,396   L356.8,396z" />
+                            </g>
+                        </svg>
+                        <label for="image-input1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor"
+                                class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0m-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0" />
+                            </svg>
+                            <div>Upload Image</div>
+                        </label>
+                        <input required type="file" name='image1' class="upload-input form-control" id='image-input1'
+                            style='display: none;' accept="image/*">
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 px-md-2">
+                    <div class="image-cell" id='img2'>
+                        <svg class='change-img-icon' id='img-change2' width=38px height=38px style="display: none;" version="1.1"
+                            viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <style type="text/css">
+                                .st0 {
+                                    fill: #E44061;
+                                }
+                            </style>
+                            <g>
+                                <path pointer-events="none" class="st0"
+                                    d="M562,396c0-141.4-114.6-256-256-256S50,254.6,50,396s114.6,256,256,256S562,537.4,562,396L562,396z M356.8,396   L475,514.2L424.2,565L306,446.8L187.8,565L137,514.2L255.2,396L137,277.8l50.8-50.8L306,345.2L424.2,227l50.8,50.8L356.8,396   L356.8,396z" />
+                            </g>
+                        </svg>
+                        <label for="image-input2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor"
+                                class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0m-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0" />
+                            </svg>
+                            <div>Upload Image</div>
+                        </label>
+                        <input required type="file" name='image2' class="upload-input" id='image-input2' accept="image/*">
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3 px-md-2">
+                    <div class="image-cell" id='img3'>
+                        <svg class='change-img-icon' id='img-change3' width=38px height=38px style="display: none;" version="1.1"
+                            viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <style type="text/css">
+                                .st0 {
+                                    fill: #E44061;
+                                }
+                            </style>
+                            <g>
+                                <path pointer-events="none" class="st0"
+                                    d="M562,396c0-141.4-114.6-256-256-256S50,254.6,50,396s114.6,256,256,256S562,537.4,562,396L562,396z M356.8,396   L475,514.2L424.2,565L306,446.8L187.8,565L137,514.2L255.2,396L137,277.8l50.8-50.8L306,345.2L424.2,227l50.8,50.8L356.8,396   L356.8,396z" />
+                            </g>
+                        </svg>
+
+                        <label for="image-input3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor"
+                                class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0m-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0" />
+                            </svg>
+                            <div>Upload Image</div>
+                        </label>
+                        <input required type="file" name='image3' class="upload-input" id='image-input3' accept="image/*">
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3 px-md-2">
+                    <div class="image-cell" id='img4'>
+                        <svg class='change-img-icon' id='img-change4' width=38px height=38px style="display: none;" version="1.1"
+                            viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <style type="text/css">
+                                .st0 {
+                                    fill: #E44061;
+                                }
+                            </style>
+                            <g>
+                                <path pointer-events="none" class="st0"
+                                    d="M562,396c0-141.4-114.6-256-256-256S50,254.6,50,396s114.6,256,256,256S562,537.4,562,396L562,396z M356.8,396   L475,514.2L424.2,565L306,446.8L187.8,565L137,514.2L255.2,396L137,277.8l50.8-50.8L306,345.2L424.2,227l50.8,50.8L356.8,396   L356.8,396z" />
+                            </g>
+                        </svg>
+
+                        <label for="image-input4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor"
+                                class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0m-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0" />
+                            </svg>
+                            <div>Upload Image</div>
+                        </label>
+                        <input required type="file" name='image4' class="upload-input" id='image-input4' accept="image/*">
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id = 'images-error' class = 'errors' style = 'color: red; text-align: center; display: none;'></div>
-            
-        <div>
-            <div class="row">
-                <div class="col-6 image-cell" id = 'img1'>
-                <svg class = 'change-img-icon' id = 'img-change1' width=38px height=38px style="display: none;" version="1.1" viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">
-                    .st0{fill:#E44061;}
-                </style><g><path pointer-events="none" class="st0" d="M562,396c0-141.4-114.6-256-256-256S50,254.6,50,396s114.6,256,256,256S562,537.4,562,396L562,396z M356.8,396   L475,514.2L424.2,565L306,446.8L187.8,565L137,514.2L255.2,396L137,277.8l50.8-50.8L306,345.2L424.2,227l50.8,50.8L356.8,396   L356.8,396z"/></g></svg>
-                <label for="image-input1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0m-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0"/>
-                    </svg>
-                    <div>Upload Image</div>
-                </label>
-                <input required type="file" name = 'image1' class="upload-input form-control" id = 'image-input1' style = 'display: none;'accept="image/*">
-              </div>
-              <div class="col-6 image-cell" id = 'img2'>
-                <svg class = 'change-img-icon' id = 'img-change2' width=38px height=38px style="display: none;" version="1.1" viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">
-                    .st0{fill:#E44061;}
-                </style><g><path pointer-events="none" class="st0" d="M562,396c0-141.4-114.6-256-256-256S50,254.6,50,396s114.6,256,256,256S562,537.4,562,396L562,396z M356.8,396   L475,514.2L424.2,565L306,446.8L187.8,565L137,514.2L255.2,396L137,277.8l50.8-50.8L306,345.2L424.2,227l50.8,50.8L356.8,396   L356.8,396z"/></g></svg>
-                <label for="image-input2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0m-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0"/>
-                    </svg>
-                    <div>Upload Image</div>
-                </label>
-                <input required type="file" name = 'image2' class="upload-input" id = 'image-input2' accept="image/*">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 image-cell" id = 'img3'>
-                <svg class = 'change-img-icon' id = 'img-change3' width=38px height=38px style="display: none;" version="1.1" viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <style type="text/css">
-                        .st0{fill:#E44061;}
-                    </style>
-                    <g>
-                        <path pointer-events="none" class="st0" d="M562,396c0-141.4-114.6-256-256-256S50,254.6,50,396s114.6,256,256,256S562,537.4,562,396L562,396z M356.8,396   L475,514.2L424.2,565L306,446.8L187.8,565L137,514.2L255.2,396L137,277.8l50.8-50.8L306,345.2L424.2,227l50.8,50.8L356.8,396   L356.8,396z"/>
-                    </g>
-                </svg>
-                
-                <label for="image-input3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0m-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0"/>
-                    </svg>
-                    <div>Upload Image</div>
-                </label>
-                <input required type="file" name = 'image3' class="upload-input" id = 'image-input3' accept="image/*">
-              </div>
-              <div class="col-6 image-cell" id = 'img4'>
-                <svg class = 'change-img-icon' id = 'img-change4' width=38px height=38px style="display: none;" version="1.1" viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">
-                    .st0{fill:#E44061;}
-                </style><g><path pointer-events="none" class="st0" d="M562,396c0-141.4-114.6-256-256-256S50,254.6,50,396s114.6,256,256,256S562,537.4,562,396L562,396z M356.8,396   L475,514.2L424.2,565L306,446.8L187.8,565L137,514.2L255.2,396L137,277.8l50.8-50.8L306,345.2L424.2,227l50.8,50.8L356.8,396   L356.8,396z"/></g></svg>
-                
-                <label for="image-input4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0m-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0"/>
-                    </svg>
-                    <div>Upload Image</div>
-                </label>
-                <input required type="file" name = 'image4' class="upload-input" id = 'image-input4' accept="image/*">
-              </div>
-            </div>
-          </div>
+        <!-- Where the user enters the phrase-->
+        <div class="row col-12 mb-5">
+            <div class='word-enter-section'>
+                <div class='word-enter-title text' style='text-align: center;'>
+                    Enter a word or phrase which links the above images
+                </div>
+                <div id='answer-error' class='errors' style='color: red; text-align: center; display: none;'></div>
+                <div class="col-12 mt-2 d-flex justify-content-center">
+                    <input required name='answer' maxlength="24" id="word-input" placeholder='PHRASE' class='text' type="text">
+                </div>
+                <script defer>
+                    const isUpperCase = (string) => /^[A-Z]*$/.test(string)
+                    const isLowerCase = (string) => /^[a-z]*$/.test(string)
 
-        <div class = 'word-enter-section'>
-            <div class = 'word-enter-title text' style = 'text-align: center;'>
-                Enter a word or phrase which links the above images
-            </div>
-            <div id = 'answer-error' class = 'errors' style = 'color: red; text-align: center; display: none;'></div>
-            <input required name = 'answer' maxlength="24" id="word-input" placeholder = 'Word/Phrase' class = 'text' type="text" style = 'text-align: center; border: none; margin: 20px; outline: none; background-color: transparent;'>
-            <!-- <div id="underline-container"></div> -->
-            <script defer>
-                const isUpperCase = (string) => /^[A-Z]*$/.test(string)
-                const isLowerCase = (string) => /^[a-z]*$/.test(string)
+                    const inputField = document.getElementById("word-input");
 
-                const inputField = document.getElementById("word-input");
-                // inputField.focus();
-        
-                // inputField.addEventListener("blur", () => {
-                //     inputField.focus();
-                // });
-
-                function isValidPhrase(str) {
-                    // Reference: chatGPT generated regex => "write a regex that matches when contains only letters or numbers, 
-                    //                                        does not start with a space and is less or equal to 24 characters long. 
-                    //                                        It must also not allow double spaces"
-                    return /^(?!.*\s\s)(?!^\s)[a-zA-Z0-9\s]{1,24}$/.test(str);
-                }
-
-
-                function handleKeyPress(event) {
-                    kp = event.target.value[event.target.value.length - 1]
-
-                    if (!isValidPhrase(event.target.value)) {
-                        event.target.value = event.target.value.slice(0, -1)
+                    function isValidPhrase(str) {
+                        // Reference: chatGPT generated regex => "write a regex that matches when contains only letters or numbers, 
+                        //                                        does not start with a space and is less or equal to 24 characters long. 
+                        //                                        It must also not allow double spaces"
+                        return /^(?!.*\s\s)(?!^\s)[a-zA-Z0-9\s]{1,24}$/.test(str);
                     }
 
-                    if (isLowerCase(kp)) {
-                        event.target.value = event.target.value.toUpperCase();
+
+                    function handleKeyPress(event) {
+                        kp = event.target.value[event.target.value.length - 1]
+
+                        if (!isValidPhrase(event.target.value)) {
+                            event.target.value = event.target.value.slice(0, -1)
+                        }
+
+                        if (isLowerCase(kp)) {
+                            event.target.value = event.target.value.toUpperCase();
+                        }
+
                     }
 
-                }
+                    inputField.addEventListener("input", handleKeyPress);
 
-                inputField.addEventListener("input", handleKeyPress);
-
-            </script>
-
-        </div>
-
-        <div class = 'container'>
-            <div class = 'row text' >
-                Add a hint your players (you may choose to add none)
+                </script>
             </div>
-            <div id = 'hint-error' class = 'errors' style = 'color: red; text-align: center; display: none;'></div>
-            <input type="text" name = 'hint' style = 'width: 100%;' placeholder="Type hint here">
+        </div>
+
+        <!-- Where the user can select a hint -->
+        <div class='text ' onclick="toggleHintEntry()">
+            <span style="cursor:pointer; text-decoration:underline;">Click to add a hint</span>
+        </div>
+        <div id="hint-container" style="display: none;">
+            <div id='hint-error' class='errors' style='color: red; text-align: center; display: none;'></div>
+            <input type="text" name='hint' style='width: 100%;' placeholder="Type hint here">
         </div>
 
 
-        <div id = 'fill-in-error' class = 'errors' style = 'color: red; text-align: center; display: none;'>Fill in all required fields</div>
-        <button id = 'submit-upload-game' type = 'submit' class="btn btn-primary" id="submit-btn">Submit</button>
-        
+
+        <div id='fill-in-error' class='errors' style='color: red; text-align: center; display: none;'>Fill in all required fields</div>
+
+        <button id='submit-upload-game' type='submit' class="btn btn-primary" id="submit-btn">SUBMIT</button>
+
     </form>
-    
+
+    <script>
+        function toggleHintEntry() {
+            var hintContainer = document.getElementById('hint-container');
+            if (hintContainer.style.display === 'none' || hintContainer.style.display === '') {
+                hintContainer.style.display = 'block';
+                setTimeout(function() {
+                    hintContainer.classList.add('show');
+                }, 10);
+            } else {
+                hintContainer.classList.remove('show');
+                setTimeout(function() {
+                    hintContainer.style.display = 'none';
+                }, 500);
+            }
+        }
+    </script>
+
 </body>
+
 </html>
