@@ -153,6 +153,17 @@ def challenges_page():
     games = Game.query.all()
     return render_template("challenge-board.html", current_user=current_user, games=games)
 
+def search_database(query):
+    return Game.query.filter(Game.game_title.ilike(f'%{query}%')).all()
+
+@app.route('/api/search_suggestions')
+def search_suggestions():
+    query = request.args.get('q', '').strip()
+    if query:
+        results = search_database(query)
+        return jsonify([{'title': game.game_title, 'id': game.gameId} for game in results])
+    return jsonify([])
+
 @app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):
     game = Game.query.filter_by(gameId = challenge_id).first()

@@ -98,6 +98,22 @@ body {
     display: none; /* For Chrome, Safari, Opera */
 }
 
+.upvote-button:hover svg{
+    fill: rgb(19, 187, 19);
+}
+
+.downvote-button:hover svg{
+    fill: red;
+}
+
+.vote-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+
 @media (max-width: 768px) {
     .challenge-board .col-md-3 {
         flex: 0 0 50%;
