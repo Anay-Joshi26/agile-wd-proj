@@ -1,6 +1,16 @@
 body {
-    background: rgb(176,92,241);
-    background: radial-gradient(circle, rgba(176,92,241,1) 0%, rgba(114,26,250,1) 100%);
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    min-height: 100vh;
+}
+
+/* Set up for particles.js */
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 label svg {
@@ -38,7 +48,7 @@ input[type="file"] {
     height: 180px; */
     aspect-ratio: 1; /* Ensure the aspect ratio of each cell is 1:1 */
     min-width: 180px;
-    max-width: 200px;
+    max-width: 240px;
     padding: 8px;
 }
 
@@ -64,7 +74,7 @@ label {
 }
 
 .text {
-    color: white
+    color: white;
 }
 
 .image-cell img {
