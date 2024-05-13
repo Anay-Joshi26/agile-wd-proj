@@ -15,10 +15,32 @@ down_revision = None
 branch_labels = None
 depends_on = None
 
-
 def upgrade():
-    pass
+    op.create_table(
+        'user',
+        sa.Column('id', sa.Integer(), nullable=False),
+        sa.Column('username', sa.String(), nullable=False),
+        sa.Column('password', sa.String(), nullable=False),
+        sa.PrimaryKeyConstraint('id'),
+        sa.UniqueConstraint('username')
+    )
+
+    op.create_table(
+        'game',
+        sa.Column('gameId', sa.Integer(), nullable=False),
+        sa.Column('game_title', sa.String(), nullable=False),
+        sa.Column('answer', sa.String(), nullable=False),
+        sa.Column('hint', sa.String(), nullable=True),
+        sa.Column('image1', sa.String(), nullable=False),
+        sa.Column('image2', sa.String(), nullable=False),
+        sa.Column('image3', sa.String(), nullable=False),
+        sa.Column('image4', sa.String(), nullable=False),
+        sa.Column('creator_id', sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(['creator_id'], ['user.id'], ),
+        sa.PrimaryKeyConstraint('gameId')
+    )
 
 
 def downgrade():
-    pass
+    op.drop_table('game')
+    op.drop_table('user')

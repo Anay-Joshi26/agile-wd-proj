@@ -1,6 +1,8 @@
 from flask import render_template, jsonify, request, Blueprint, flash, redirect, url_for
 from process_game import processGame, isValidGameTitleOrHint, isValidAnswer, UPLOAD_FOLDER
 from flask import send_from_directory
+from flask_login import current_user
+from models import Game, db
 
 api = Blueprint("api", __name__)
 
@@ -53,6 +55,36 @@ def uploadGame():
             return jsonify({"success": False, "msg": "Failed to upload game"})
         
         return jsonify({"success": True, "msg": "Game uploaded successfully"})
+    
+@api.route("/api/upvote/<int:game_id>", methods=["POST", "GET"])
+def upvote(game_id):
+    if not current_user.is_authenticated:
+        print("User is not authenticated")
+        return jsonify({"success": False, "msg": "You need to be logged in to upvote"})
+    
+    game = Game.query.filter_by(gameId=game_id).first()
+    if game is None:
+        return jsonify({"success": False, "msg": "Game not found"})
+    
+    game.number_of_upvotes += 1
+    db.session.commit()
+    
+    return jsonify({"success": True, "msg": "Upvoted successfully"})
+
+@api.route("/api/downvote/<int:game_id>", methods=["POST", "GET"])
+def downvote(game_id):
+    if not current_user.is_authenticated:
+        print("User is not authenticated")
+        return jsonify({"success": False, "msg": "You need to be logged in to upvote"})
+    
+    game = Game.query.filter_by(gameId=game_id).first()
+    if game is None:
+        return jsonify({"success": False, "msg": "Game not found"})
+    
+    game.number_of_upvotes -= 1
+    db.session.commit()
+    
+    return jsonify({"success": True, "msg": "Upvoted successfully"})
 
 
 

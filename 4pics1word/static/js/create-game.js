@@ -52,22 +52,3 @@ function imageClear(imageId) {
     document.getElementById(`img-change${imageId}`).style.display = 'none';
 }
 
-
-const wordEnterForm = document.querySelector(".word-enter-form");
-let currentChar = 0; // Keeps track of the current character position (for blinking cursor)
-
-// Function to create blinking cursor effect
-function blinkCursor() {
-    const cursor = document.getElementById("cursor");
-    if (cursor.style.visibility === "visible") {
-        cursor.style.visibility = "hidden";
-    } else {
-        cursor.style.visibility = "visible";
-    }
-}
-
-
-
-// Add event listener for blinking cursor
-//setInterval(blinkCursor, 500); // Set blinking cursor interval (adjust speed as needed)
-

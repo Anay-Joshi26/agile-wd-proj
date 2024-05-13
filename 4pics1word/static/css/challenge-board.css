@@ -60,7 +60,7 @@ body {
     overflow: hidden;
     padding: 20px;
     margin-bottom: 20px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .challenge-board .card:hover {
@@ -97,6 +97,22 @@ body {
 .d-md-none.d-flex.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, Opera */
 }
+
+.upvote-button:hover svg{
+    fill: rgb(19, 187, 19);
+}
+
+.downvote-button:hover svg{
+    fill: red;
+}
+
+.vote-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
 
 @media (max-width: 768px) {
     .challenge-board .col-md-3 {
