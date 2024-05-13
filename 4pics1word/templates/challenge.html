@@ -93,13 +93,13 @@
 
   <div id="particles-js"></div>
 
-  <div class='images-content container'>
+  <div class='images-content container mt-4 mb-4'>
 
     <h2 class='text'>
       Attempt <span id="attempt-counter">1</span>
     </h2>
 
-    <div class="container content-container">
+    <div class="container content-container mt-3">
       <div class="row justify-content-center">
         <div class="col-md-3 col-6 image-cell" id='img1'>
           <img src="{{ game.image1 }}" alt="image1">
@@ -117,7 +117,7 @@
       </div>
       <div class="container">
         <div class='word-enter-title text' style='text-align: center;'>
-          Take a Guess
+          Guess the word or phrase!
         </div>
 
           {% set words = game.answer.split(" ") %}
@@ -125,7 +125,7 @@
           {% set counts.letters = 0 %}
 
           {% for word in words %}
-          <div class="word-container d-flex flex-nowrap justify-content-center mb-5">
+          <div class="word-container d-flex flex-wrap justify-content-center mb-3">
             {% for letter in word %}
             <input id="input{{ counts.letters }}" class="letter-input" type="text" maxlength="1"
               oninput="nextInput('input{{ counts.letters }}', 'input{{ counts.letters + 1 }}')"
@@ -137,7 +137,7 @@
           {% endfor %}
 
 
-        <div class="col-12 d-flex justify-content-center">
+        <div class="col-12 d-flex mb-4 justify-content-center">
           <button onclick="makeGuess()" class="btn btn-primary play-button" id="make-guess">Guess</button>
         </div>
       </div>

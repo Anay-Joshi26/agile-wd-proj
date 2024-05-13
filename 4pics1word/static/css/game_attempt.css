@@ -39,17 +39,19 @@ input[type="file"] {
     border-bottom: 3px solid black; /* Underline effect */
 }
 
-.images-content {
-    margin-top: 90px;
-}
-
 .image-cell {
-    /* width: 180px;
-    height: 180px; */
     aspect-ratio: 1; /* Ensure the aspect ratio of each cell is 1:1 */
     min-width: 180px;
     max-width: 240px;
     padding: 8px;
+}
+
+@media (max-width: 400px) {
+    .image-cell {
+        flex: 0 0 50%;
+        max-width: 50%; 
+        min-width: 50%; 
+    }
 }
 
 .change-img-icon {
@@ -74,12 +76,20 @@ input[type="file"] {
 
 .word-enter-title {
     color: black !important;
+    font-size: large;
 }
 
 .word-container input {
     color: black !important;
-    border-color: black !important;
+    border: 2px solid rgb(167, 167, 167);
     border-radius: 7px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.word-container input:focus {
+    border-color: rgb(169, 143, 255);
+    box-shadow: 0 0 5px rgb(169, 143, 255);
 }
 
 label {
