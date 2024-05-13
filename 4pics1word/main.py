@@ -168,8 +168,14 @@ def search_suggestions():
 @app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):
     game = Game.query.filter_by(gameId = challenge_id).first()
+    return render_template("detailed-challenge.html", game=game)
 
+@app.route("/challenge/play/<int:challenge_id>")
+@login_required
+def challenge_play(challenge_id):
+    game = Game.query.filter_by(gameId = challenge_id).first()
     if game == None:
+        print("WHATTTTTT")
         return redirect(url_for('challenges_page'))
     
     message = ""
