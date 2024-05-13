@@ -25,16 +25,7 @@ class Game(db.Model):
     number_of_upvotes = db.Column(db.Integer, nullable = False, default=0) # default value is 0 for when it is first created
     # the time will automatically be set to the current time when a game is created
     date_created = db.Column(db.DateTime, nullable = False, default=datetime.now)
-
-class GamePerformance(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    # the person who played the game
-    user = db.relationship('User')
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    # the game that was played
-    game = db.relationship('Game', backref='game_performances')
-    game_id = db.Column(db.Integer, db.ForeignKey('game.gameId'), nullable=False)
-    attempts = db.Column(db.Integer, nullable=False)
+    
 
 class Attempt(db.Model):
     attempt_id = db.Column(db.Integer, primary_key=True)
@@ -45,4 +36,14 @@ class Attempt(db.Model):
     player_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     game = db.relationship('Game', backref='played_games')
     player = db.relationship('User', backref='player')
+
+class GamePerformance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    # the person who played the game
+    user = db.relationship('User')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # the game that was played
+    game = db.relationship('Game', backref='game_performances')
+    game_id = db.Column(db.Integer, db.ForeignKey('game.gameId'), nullable=False)
+    attempts = db.Column(db.Integer, nullable=False)
 
