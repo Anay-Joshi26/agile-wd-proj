@@ -148,7 +148,6 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
 @app.route("/challenges")
 def challenges_page():
     games = Game.query.all()
@@ -167,8 +166,14 @@ def search_suggestions():
 
 @app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):
-    return f"Challenge {challenge_id}"
-# hello
+    game = Game.query.filter_by(gameId = challenge_id).first()
+    return render_template("detailed-challenge.html", game=game)
+
+@app.route("/challenge/play/<int:challenge_id>")
+@login_required
+def challenge_play(challenge_id):
+    game = Game.query.filter_by(gameId = challenge_id).first()
+    return render_template("challenge.html", game=game)
 
 if __name__ == '__main__':
     app.run(debug=True, port = PORT)
