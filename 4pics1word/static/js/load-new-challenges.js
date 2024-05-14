@@ -1,9 +1,12 @@
 $(document).ready(function() {
     const gamesContainer = $('#games-container');
     let page = 1;
+    finished_loading = false;
 
 
     function loadMoreGames() {
+        if (finished_loading) return;
+
         $.ajax({
             url: `/api/games?page=${page}`, 
             type: 'GET',
@@ -19,6 +22,7 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error('Error loading games:', error);
+                finished_loading = true;
             }
         });
     }
@@ -90,6 +94,8 @@ $(document).ready(function() {
     window.addEventListener('scroll', function() {
         if (timer_is_running) return;
 
+        // Reference: https://www.educative.io/answers/how-to-implement-infinite-scrolling-in-javascript
+        // ^ for the if statement as shown below
         if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - threshold) {
 
             timer_is_running = true;

@@ -3,6 +3,7 @@ from process_game import processGame, isValidGameTitleOrHint, isValidAnswer, UPL
 from flask import send_from_directory
 from flask_login import current_user
 from models import Game, db
+import math
 
 api = Blueprint("api", __name__)
 
@@ -90,6 +91,8 @@ def downvote(game_id):
 def get_games():
     page = request.args.get('page', default=1, type=int)
     limit = request.args.get('limit', default=6, type=int)
+        
+
     games = Game.query.paginate(page=page, per_page=limit)
 
     serialised_games = [ 
