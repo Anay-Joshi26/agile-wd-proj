@@ -91,7 +91,24 @@ def get_games():
     page = request.args.get('page', default=1, type=int)
     limit = request.args.get('limit', default=6, type=int)
     games = Game.query.paginate(page=page, per_page=limit)
-    return jsonify({"success": True, "games": [game for game in games]})
+
+    serialised_games = [ 
+        {
+            'gameId': game.gameId,
+            'game_title': game.game_title,
+            'creator_username': game.creator.username,
+            'number_of_upvotes': game.number_of_upvotes,
+            'image1': game.image1,
+            'image2': game.image2,
+            'image3': game.image3,
+            'image4': game.image4,
+            'date_created': game.date_created
+        }
+
+        for game in games.items
+    ]
+
+    return jsonify({"success": True, "games": serialised_games})
 
 
 

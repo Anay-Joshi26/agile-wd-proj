@@ -3,26 +3,26 @@ $(document).ready(function() {
     let page = 1;
 
     function loadMoreGames() {
-        loading = true;
         $.ajax({
-            url: `/api/games?page=${page}&limit=6`, 
+            url: `/api/games?page=${page}`, 
             type: 'GET',
             success: function(data) {
-                if (data.games.length > 0) {
-                    for (game of data.games) {
-                        game_div = createGameDiv(game);
+                if (data.games.length > 0 && data.success === true) {
+                    // for (game of data.games) {
+                    //     game_div = createGameDiv(game);
                         
-                    }
+                    // }
+                    console.log(data.games);
 
                 }
-                loading = false;
             },
             error: function(xhr, status, error) {
                 console.error('Error loading games:', error);
-                loading = false;
             }
         });
     }
+
+    loadMoreGames();
 
     
 });
