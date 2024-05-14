@@ -1,7 +1,6 @@
-
 p {
     color: black;
-    font-size: larger;
+    font-size: large;
 }
 
 .images-leaderboard-container {
@@ -35,7 +34,7 @@ p {
 }
 
 .play-button {
-    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104, 199, 255, 1) 0%, rgba(181, 126, 255, 1) 90%);
     background-size: 0% 100%;
     background-position: left center;
     transition: background-size 0.3s ease-out, color 0.3s ease;
@@ -82,7 +81,7 @@ table {
 }
 
 thead tr {
-    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104, 199, 255, 1) 0%, rgba(181, 126, 255, 1) 90%);
     color: #FFF;
     border-radius: 8px;
 }
@@ -98,7 +97,7 @@ thead tr th:last-child {
 }
 
 tbody tr {
-    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104, 199, 255, 1) 0%, rgba(181, 126, 255, 1) 90%);
     background-size: 0% 100%;
     background-position: left center;
     transition: background-size 0.3s ease-out, color 0.3s ease;
@@ -110,7 +109,8 @@ tbody tr:hover {
     color: #FFF;
 }
 
-th, td {
+th,
+td {
     padding: 12px 15px;
 }
 
@@ -125,7 +125,10 @@ tbody tr td:last-child {
 }
 
 @media (max-width: 480px) {
-    th, td {
-        padding: 12px 0px; /* Reducing horizontal padding */
+
+    th,
+    td {
+        padding: 12px 0px;
+        /* Reducing horizontal padding */
     }
 }
