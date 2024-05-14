@@ -86,6 +86,15 @@ def downvote(game_id):
     
     return jsonify({"success": True, "msg": "Upvoted successfully"})
 
+@api.route('/api/games', methods=["POST", "GET"])
+def get_games():
+    page = request.args.get('page', default=1, type=int)
+    limit = request.args.get('limit', default=6, type=int)
+    games = Game.query.paginate(page=page, per_page=limit)
+    return jsonify({"success": True, "games": [game for game in games]})
+
+
+
 
 
 
