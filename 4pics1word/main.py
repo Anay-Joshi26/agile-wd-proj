@@ -173,8 +173,13 @@ def search_suggestions():
         return jsonify([{'title': game.game_title, 'id': game.gameId} for game in results])
     return jsonify([])
 
-@app.route("/challenge/play/<int:challenge_id>")
+@app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):
+    game = Game.query.filter_by(gameId = challenge_id).first()
+    return render_template("detailed-challenge.html", game=game)
+
+@app.route("/challenge/play/<int:challenge_id>")
+def challenge_play(challenge_id):
     loginform = LoginForm()
     registerform = RegisterForm()
     game = Game.query.filter_by(gameId = challenge_id).first()
