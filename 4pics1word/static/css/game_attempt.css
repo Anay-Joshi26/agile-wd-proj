@@ -27,18 +27,27 @@ body {
     text-align: center;
 }
 
-.letter-input {
+.letter-box {
     text-align: center;
-    border: 3px solid white;
-    width: 65px;
-    height: 75px;
-    padding: 10px;
-    margin: 5px;
+    width: 100%;
+    max-width:65px;
+    margin: 2px;
     outline: none;
     background-color: transparent;
-    font-size: 30px;
-    color: white;
+    color: black !important;
+    border: 2px solid rgb(167, 167, 167);
+    border-radius: 7px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    aspect-ratio: 1 / 1;
+    font-size: 3.5vw;
 }
+
+.letter-box:focus {
+    border-color: rgb(169, 143, 255);
+    box-shadow: 0 0 5px rgb(169, 143, 255);
+}
+
 
 .spacer {
     width: 30px;
@@ -139,19 +148,6 @@ input[type="file"] {
     font-size: large;
 }
 
-.word-container input {
-    color: black !important;
-    border: 2px solid rgb(167, 167, 167);
-    border-radius: 7px;
-    outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.word-container input:focus {
-    border-color: rgb(169, 143, 255);
-    box-shadow: 0 0 5px rgb(169, 143, 255);
-}
-
 label {
     display: flex;
     flex-direction: column;
@@ -179,11 +175,12 @@ label {
     background-repeat: no-repeat;
     color: rgb(169, 143, 255);
     height: 70px;
-    line-height: 50px;
+    line-height: 65px;
     font-weight: 700;
     border-radius: 20px;
     border: 2px solid rgb(169, 143, 255);
-
+    overflow: hidden;
+    padding: 0 !important;
 }
 
 .play-button:hover {

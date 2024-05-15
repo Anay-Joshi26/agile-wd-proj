@@ -65,9 +65,9 @@
           {% set counts.letters = 0 %}
 
           {% for word in words %}
-          <div class="word-container d-flex flex-wrap justify-content-center mb-3">
+          <div class="word-container d-flex justify-content-center mb-3 flex-nowrap">
             {% for letter in word %}
-            <input id="input{{ counts.letters }}" class="letter-input" type="text" maxlength="1"
+            <input id="input{{ counts.letters }}" class="letter-input letter-box d-flex flex-nowrap" type="text" maxlength="1"
               oninput="nextInput('input{{ counts.letters }}', 'input{{ counts.letters + 1 }}')"
               onkeydown="previousInput(event, 'input{{ counts.letters }}', 'input{{ counts.letters - 1 }}')">
             {% set counts.letters = counts.letters + 1 %}
@@ -78,7 +78,7 @@
 
 
         <div class="col-12 d-flex mb-4 justify-content-center">
-          <button onclick="makeGuess()" class="btn btn-primary play-button" id="make-guess">Guess</button>
+          <button onclick="makeGuess()" class="btn btn-primary col-4 play-button" id="make-guess">Guess</button>
         </div>
       </div>
     </div>
