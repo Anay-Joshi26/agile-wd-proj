@@ -12,11 +12,13 @@ const toggleButton = document.getElementById('hintButton');
 const hiddenText = document.getElementById('hintText');
 
 toggleButton.addEventListener('click', () => {
-if (hiddenText.style.display === 'none') {
-    hiddenText.style.display = 'block';
-} else {
-    hiddenText.style.display = 'none';
-}
+    if (hiddenText.classList.contains('showHint')) {
+        hiddenText.classList.remove('showHint');
+        toggleButton.textContent = 'Hint';
+    } else {
+        hiddenText.classList.add('showHint');
+        toggleButton.textContent = 'Hide';
+    }
 });
 
 function isValidPhrase(str) {
