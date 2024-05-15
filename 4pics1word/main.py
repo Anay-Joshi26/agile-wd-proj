@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from wtforms.validators import ValidationError
 from flask_bcrypt import Bcrypt
-from auth import register_new_user, login_new_user, validate_username, isValidUsername, isValidPassword, LoginForm, RegisterForm
+from auth import register_new_user, login_new_user, validate_username, isValidUsername, isValidPassword, LoginForm, RegisterForm, CustomCSRF
 from api import api
 from process_game import UPLOAD_FOLDER
 from game_attempt import record_attempt
@@ -67,7 +67,7 @@ def index():
     login_modal = request.args.get('login')
     loginform = LoginForm()
     registerform = RegisterForm()
-    return render_template("index.html", login_modal = login_modal, is_index = True, loginform = loginform, registerform = registerform)
+    return render_template("index.html", login_modal = login_modal, is_index = True, loginform = loginform, registerform = registerform, login_token = CustomCSRF, register_token = CustomCSRF)
 
 
 @app.route("/challenges/create-game", methods=['POST', 'GET'])
@@ -160,7 +160,7 @@ def challenges_page():
     games = Game.query.all()
     loginform = LoginForm()
     registerform = RegisterForm()
-    return render_template("challenge-board.html", current_user=current_user, games=games, loginform = loginform, registerform = registerform)
+    return render_template("challenge-board.html", current_user=current_user, games=games, loginform = loginform, registerform = registerform, login_token = CustomCSRF, register_token = CustomCSRF)
 
 def search_database(query):
     return Game.query.filter(Game.game_title.ilike(f'%{query}%')).all()
@@ -205,7 +205,7 @@ def challenge_play(challenge_id):
                 attempt_count = 0
     
 
-    return render_template("challenge.html", hint = game.hint, attempt_count = (attempt_count + 1), answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4, challenge_id = challenge_id, message = message, loginform = loginform, registerform = registerform)
+    return render_template("challenge.html", hint = game.hint, attempt_count = (attempt_count + 1), answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4, challenge_id = challenge_id, message = message, loginform = loginform, registerform = registerform, login_token = CustomCSRF, register_token = CustomCSRF)
 # hello
 
 @app.route("/guess", methods=["GET", "POST"])
