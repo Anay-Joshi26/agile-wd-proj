@@ -108,7 +108,7 @@ def generate_all_games():
 
         answer = data[i]
 
-        print(answer)
+        #print(answer)
 
         game_title = generate_lorem_title(7)
     

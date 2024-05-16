@@ -3,8 +3,7 @@ from process_game import processGame, isValidGameTitleOrHint, isValidAnswer, UPL
 from flask import send_from_directory
 from flask_login import current_user
 from models import Game, db
-
-api = Blueprint("api", __name__)
+from blueprints import api
 
 @api.route('/uploads/<path:filename>')
 def uploaded_file(filename):
@@ -58,8 +57,9 @@ def uploadGame():
     
 @api.route("/api/upvote/<int:game_id>", methods=["POST", "GET"])
 def upvote(game_id):
+
     if not current_user.is_authenticated:
-        print("User is not authenticated")
+        #print("User is not authenticated")
         return jsonify({"success": False, "msg": "You need to be logged in to upvote"})
     
     game = Game.query.filter_by(gameId=game_id).first()
@@ -74,7 +74,7 @@ def upvote(game_id):
 @api.route("/api/downvote/<int:game_id>", methods=["POST", "GET"])
 def downvote(game_id):
     if not current_user.is_authenticated:
-        print("User is not authenticated")
+        #print("User is not authenticated")
         return jsonify({"success": False, "msg": "You need to be logged in to upvote"})
     
     game = Game.query.filter_by(gameId=game_id).first()

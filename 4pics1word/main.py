@@ -15,35 +15,22 @@ from api import api
 from process_game import UPLOAD_FOLDER
 from generate_fake_data import generate_all_games
 from flask_migrate import Migrate
+from config import Config
+from blueprints import main
 
 
 # Create instance of Database
 from models import db, User, Game
-app = Flask(__name__)
+from __init__ import create_app
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = 'your_secret_key_here'
-
-migrate = Migrate(app, db)
-
-# db.init_app(app)
-
-# with app.app_context():
-#     db.create_all()
+app = create_app(Config)
 
 bcrypt = Bcrypt(app)
-
-app.register_blueprint(api)
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-print(app.config['UPLOAD_FOLDER'])
+migrate = Migrate(app, db)
 
 PORT = 5000
 
 FAKE_DATA = True
-
-db.init_app(app)
 
 with app.app_context():
     db.create_all()
@@ -52,13 +39,14 @@ with app.app_context():
 
     
 # Logging in
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "index"
+login_manager = app.login_manager
+# login_manager = LoginManager()
+# login_manager.init_app(app)
+# login_manager.login_view = "index"
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User.query.get(int(user_id))
 
 # Web page routing
 @app.route("/")
@@ -175,5 +163,8 @@ def challenge_play(challenge_id):
     game = Game.query.filter_by(gameId = challenge_id).first()
     return render_template("challenge.html", game=game)
 
-if __name__ == '__main__':
-    app.run(debug=True, port = PORT)
+
+
+# if __name__ == '__main__':
+#     print("RUNNING APP...")
+#     app.run(debug=True, port = PORT)
