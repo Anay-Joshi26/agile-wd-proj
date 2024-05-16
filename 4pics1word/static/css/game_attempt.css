@@ -72,6 +72,7 @@ body {
 
 .image-cell img{
     border-radius: 20px!important;
+    cursor: pointer!important;
 }
 
 .incorrect-input {
