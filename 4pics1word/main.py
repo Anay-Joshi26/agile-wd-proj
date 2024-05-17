@@ -181,6 +181,8 @@ def challenge_page(challenge_id):
 @app.route("/challenge/play/<int:challenge_id>")
 @login_required
 def challenge_play(challenge_id):
+    loginform = LoginForm()
+    registerform = RegisterForm()
     game = Game.query.filter_by(gameId = challenge_id).first()
     if game == None:
         print("WHATTTTTT")
