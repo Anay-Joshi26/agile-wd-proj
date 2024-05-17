@@ -12,11 +12,28 @@ const toggleButton = document.getElementById('hintButton');
 const hiddenText = document.getElementById('hintText');
 
 toggleButton.addEventListener('click', () => {
-if (hiddenText.style.display === 'none') {
-    hiddenText.style.display = 'block';
-} else {
-    hiddenText.style.display = 'none';
-}
+    if (hiddenText.classList.contains('showHint')) {
+        hiddenText.classList.remove('showHint');
+        toggleButton.textContent = 'Hint';
+    } else {
+        hiddenText.classList.add('showHint');
+        toggleButton.textContent = 'Hide';
+    }
+});
+
+// Make sure the image zoom is centered between bottom of navbar and bottom of viewport
+document.addEventListener("DOMContentLoaded", function() {
+    const navbar = document.querySelector('.navbar');
+    const zoomHeight = document.documentElement;
+
+    function updateNavbarHeight() {
+      const navbarHeight = navbar.offsetHeight;
+      zoomHeight.style.setProperty('--navbar-height', `${navbarHeight}px`);
+    }
+
+    // Set height and update on resize
+    updateNavbarHeight();
+    window.addEventListener('resize', updateNavbarHeight);
 });
 
 function isValidPhrase(str) {

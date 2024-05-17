@@ -19,7 +19,7 @@ from flask_migrate import Migrate
 
 
 # Create instance of Database
-from models import db, User, Game, Attempt
+from models import db, User, Game, Attempt, GamePerformance
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -176,7 +176,8 @@ def search_suggestions():
 @app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):
     game = Game.query.filter_by(gameId = challenge_id).first()
-    return render_template("detailed-challenge.html", game=game)
+    leaderboard = GamePerformance.query.filter_by(game_id = challenge_id).order_by(GamePerformance.attempts).limit(10).all()
+    return render_template("detailed-challenge.html", game=game, leaderboard=leaderboard)
 
 @app.route("/challenge/play/<int:challenge_id>")
 @login_required
