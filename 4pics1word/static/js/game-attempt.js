@@ -21,6 +21,21 @@ toggleButton.addEventListener('click', () => {
     }
 });
 
+// Make sure the image zoom is centered between bottom of navbar and bottom of viewport
+document.addEventListener("DOMContentLoaded", function() {
+    const navbar = document.querySelector('.navbar');
+    const zoomHeight = document.documentElement;
+
+    function updateNavbarHeight() {
+      const navbarHeight = navbar.offsetHeight;
+      zoomHeight.style.setProperty('--navbar-height', `${navbarHeight}px`);
+    }
+
+    // Set height and update on resize
+    updateNavbarHeight();
+    window.addEventListener('resize', updateNavbarHeight);
+});
+
 function isValidPhrase(str) {
     // Reference: chatGPT generated regex => "write a regex that matches when contains only letters or numbers, 
     //                                        does not start with a space and is less than 18 characters long. 
