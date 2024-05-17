@@ -6,3 +6,5 @@ flask_bcrypt
 Faker
 requests
 flask_migrate
+selenium
+webdriver-manager
