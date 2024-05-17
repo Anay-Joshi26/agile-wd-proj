@@ -114,7 +114,7 @@ def generate_all_games():
     
         new_game = Game(
             game_title=game_title,
-            answer=answer,
+            answer=answer.upper(),
             image1=data[i+1],
             image2=data[i+2],
             image3=data[i+3],
