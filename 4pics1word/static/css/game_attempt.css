@@ -56,30 +56,37 @@ body {
     text-align: center;
 }
 
+.zoom {
+    position: fixed;
+    top: calc(50% + var(--navbar-height) / 2);
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    max-height: 80vh; 
+    max-width: 80vw; 
+    object-fit: contain; 
+    z-index: 1000;
+    border-radius: 20px!important;
+    height: auto;
+    width: auto;
+}
+
+.image-cell img{
+    border-radius: 20px!important;
+    cursor: pointer!important;
+}
+
 .incorrect-input {
     text-align: center;
-    border: 3px solid red;
-    width: 65px;
-    height: 75px;
-    padding: 10px;
-    margin: 5px;
+    border: 2px solid red;
     outline: none;
     background-color: transparent;
-    font-size: 30px;
-    color: white;
 }
 
 .correct-input {
     text-align: center;
-    border: 4px solid lawngreen;
-    width: 65px;
-    height: 75px;
-    padding: 10px;
-    margin: 5px;
+    border: 2px solid rgb(0, 208, 42);
     outline: none;
     background-color: transparent;
-    font-size: 30px;
-    color: white;
 }
 
 label svg {
