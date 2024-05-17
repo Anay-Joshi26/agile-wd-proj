@@ -1,4 +1,23 @@
-let attempt = 1;
+$(document).ready(function() {
+    if(message === ""){
+        $('#alert').hide();
+    }
+})
+
+var attemptDisplay = document.getElementById('attempt-counter')
+
+attemptDisplay.textContent = attempt;
+
+const toggleButton = document.getElementById('hintButton');
+const hiddenText = document.getElementById('hintText');
+
+toggleButton.addEventListener('click', () => {
+if (hiddenText.style.display === 'none') {
+    hiddenText.style.display = 'block';
+} else {
+    hiddenText.style.display = 'none';
+}
+});
 
 function isValidPhrase(str) {
     // Reference: chatGPT generated regex => "write a regex that matches when contains only letters or numbers, 
@@ -33,7 +52,6 @@ function previousInput(event, current, previous) {
     restore_inputs();
 }
 
-// CONTINUE ON VALIDATING GUESSES
 function makeGuess() {
     const word_divs = document.querySelectorAll('.word-container');
 
@@ -53,7 +71,7 @@ function makeGuess() {
 
     words.forEach(word => {
         guess += word;
-        if (word_count != words.length){
+        if (word_count != words.length - 1){
             guess += ' '; 
         }
         word_count ++;
@@ -62,41 +80,42 @@ function makeGuess() {
     console.log('Input values:', words);
     console.log('Guess:', guess);
 
-    // fetch('/api/data')
-    // .then(response => response.json())
-    // .then(data => {
-    //     const answer = data.message;
-    //     let match = (answer.trim() == guess.trim());
-    //     console.log(match);
-    //     console.log(guess.toString().valueOf());
-    //     console.log(answer.toString().valueOf());
-    //     if (match){
-    //         console.log(match);
-    //         notify_correct();
-    //     }
-    //     else if(answer.trim().length == guess.trim().length){
-    //         notify_incorrect();
-    //         incrementCounter();
-    //         setTimeout(() =>{
-    //             restore_inputs();
-    //         }, 2000);
-    //     }
-    // })
-
-    let match = (answer.trim() == guess.trim());
+    let match = (answer == guess)
 
     if (match){
         console.log(match);
         notify_correct();
+        if (message === ""){
+            sendData(guess, attempt, match, challenge_id)
+        }
     }
-    else if(answer.trim().length == guess.trim().length){
+    else if(answer.length == guess.length){
+        console.log("WE HERE");
         notify_incorrect();
+        if (message === ""){
+            sendData(guess, attempt, match, challenge_id)
+        }
         incrementCounter();
         setTimeout(() =>{
             restore_inputs();
-        }, 2000);
-
+        }, 1500);
     }
+}
+
+function sendData(guess, attempt, match, challenge_id){
+    var dataToSend = { 'guess' : guess, 'attempts' : attempt, 'correct' : match, 'challenge_id' : challenge_id };
+            fetch('/guess', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataToSend)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); 
+            })
+            .catch(error => console.error('Error:', error));
 }
 
 function notify_incorrect(){
