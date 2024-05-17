@@ -76,56 +76,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>User123</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>TestUser</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>RandomUser</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>AnotherUser</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>YetAnotherUser</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>OneMoreUser</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>ExtraUser</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>MoreUsers</td>
-                            <td>8</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>EndUser</td>
-                            <td>9</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>LastUser</td>
-                            <td>10</td>
-                        </tr>
+                        {% for pos in range(leaderboard|length) %}  
+                            <tr>
+                                <td>{{pos + 1}}</td>
+                                <td>{{leaderboard[pos].user.username}}</td>
+                                <td>{{leaderboard[pos].attempts}}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
