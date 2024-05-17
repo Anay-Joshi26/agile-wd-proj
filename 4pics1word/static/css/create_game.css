@@ -128,7 +128,7 @@ label {
     border: 1px solid;
     border-color: rgb(172, 172, 172);
     border-radius: 30px;
-    padding: 5px 5px;
+    padding: 10px 25px;
     margin-top: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -144,7 +144,6 @@ label {
 }
 
 #hint-container input[type="text"] {
-    padding-left: 10px;
     border: none;
     outline: none;
     text-align: center;

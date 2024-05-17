@@ -42,7 +42,7 @@
 
         <!-- Enter game title here-->
         <div class="col-12 mt-1 mb-3 d-flex justify-content-center ">
-            <div>
+            <div class="col-md-8">
                 <input class='form-control' id='game-title-input' name='game-title' placeholder='Game title' required
                     type="text" maxlength="75">
                 <div class='invalid-feedback errors'>Enter a valid game title</div>
@@ -212,7 +212,7 @@
         <div class='text ' onclick="toggleHintEntry()">
             <span style="cursor:pointer; text-decoration:underline;">Click to add a hint</span>
         </div>
-        <div id="hint-container" style="display: none;">
+        <div class="col-md-6" id="hint-container" style="display: none;">
             <div id='hint-error' class='errors' style='color: red; text-align: center; display: none;'></div>
             <input type="text" name='hint' style='width: 100%;' placeholder="Type hint here">
         </div>
