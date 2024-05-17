@@ -19,7 +19,7 @@ from flask_migrate import Migrate
 
 
 # Create instance of Database
-from models import db, User, Game, Attempt
+from models import db, User, Game, Attempt, GamePerformance
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -73,18 +73,14 @@ def index():
 @app.route("/challenges/create-game", methods=['POST', 'GET'])
 @login_required
 def create_game():
-    return render_template("create_game.html")
+    loginform = LoginForm()
+    registerform = RegisterForm()
+    return render_template("create_game.html", loginform = loginform, registerform = registerform)
 
 @login_manager.unauthorized_handler
 def unauthorized_callback():
     flash('You need to be logged in to access this page.')
     return redirect('/?login=true')
-
-@app.route('/dashboard', methods=['GET', 'POST'])
-@login_required
-def dashboard():
-    return render_template("dashboard.html")
-
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
@@ -113,7 +109,6 @@ def login():
             return jsonify({'success': True})  
         
         return jsonify({'success': False, 'incorrect-password': True ,'msg': 'Incorrect password for username'})
-
 
 
 @app.route("/register", methods=['POST', 'GET'])
@@ -175,16 +170,20 @@ def search_suggestions():
 
 @app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):
+    loginform = LoginForm()
+    registerform = RegisterForm()
     game = Game.query.filter_by(gameId = challenge_id).first()
-    return render_template("detailed-challenge.html", game=game)
+    leaderboard = GamePerformance.query.filter_by(game_id = challenge_id).order_by(GamePerformance.attempts).limit(10).all()
+    return render_template("detailed-challenge.html", game=game, leaderboard=leaderboard, loginform = loginform, registerform = registerform)
 
 @app.route("/challenge/play/<int:challenge_id>")
+@login_required
 def challenge_play(challenge_id):
     loginform = LoginForm()
     registerform = RegisterForm()
     game = Game.query.filter_by(gameId = challenge_id).first()
-
     if game == None:
+        print("WHATTTTTT")
         return redirect(url_for('challenges_page'))
     
     message = ""

@@ -136,7 +136,7 @@ def generate_all_games():
             new_leaderboard = GamePerformance(
                 user=user,
                 game=game,
-                attempts=random.randint(0, 20)
+                attempts=random.randint(1, 20)
             )
 
             db.session.add(new_leaderboard)

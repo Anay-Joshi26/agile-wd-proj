@@ -1,7 +1,92 @@
 body {
-    background-image: radial-gradient( circle farthest-corner at 14.2% 27.5%,  rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90% );
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    min-height: 100vh;
+    height: 100%;
+}
+
+/* Set up for particles.js */
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    z-index: -1;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.letter-box {
+    text-align: center;
+    width: 100%;
+    max-width:65px;
+    margin: 2px;
+    outline: none;
+    background-color: transparent;
+    color: black !important;
+    border: 2px solid rgb(167, 167, 167);
+    border-radius: 7px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    aspect-ratio: 1 / 1;
+    font-size: 3.5vw;
+}
+
+.letter-box:focus {
+    border-color: rgb(169, 143, 255);
+    box-shadow: 0 0 5px rgb(169, 143, 255);
+}
+
+.spacer {
+    width: 30px;
+    height: 20px;
+    display: block;
+    text-align: center;
+}
+
+.zoom {
+    position: fixed;
+    top: calc(50% + var(--navbar-height) / 2);
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    max-height: 80vh; 
+    max-width: 80vw; 
+    object-fit: contain; 
+    z-index: 1000;
+    border-radius: 20px!important;
+    height: auto;
+    width: auto;
+}
+
+.image-cell img{
+    border-radius: 20px!important;
+    cursor: pointer!important;
+}
+
+.incorrect-input {
+    text-align: center;
+    border: 2px solid red;
+    outline: none;
+    background-color: transparent;
+}
+
+.correct-input {
+    text-align: center;
+    border: 2px solid rgb(0, 208, 42);
+    outline: none;
+    background-color: transparent;
 }
 
 label svg {
@@ -30,44 +115,20 @@ input[type="file"] {
     border-bottom: 3px solid black; /* Underline effect */
 }
 
-.game-container {
-    display: flex;
-    /* flex-direction: row; */
-    position: relative;
-}
-
-.hint {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: flex-start;
-    max-height: 40vh; /* Set min-height to 100vh for full viewport height */
-    padding-left: 10vw; /* Left padding for positioning */
-  }
-
-.images-content {
-    margin-top: 90px;
-    justify-content: center;
-    align-items: center;
-    width: 250vh;
-    /* position: relative; */
-}
-
-.image-cell img {
-    aspect-ratio: 1; 
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 6px;
-}
-
 .image-cell {
+    aspect-ratio: 1;
     min-width: 180px;
-    max-width: 200px;
+    max-width: 240px;
     padding: 8px;
 }
 
-
+@media (max-width: 400px) {
+    .image-cell {
+        flex: 0 0 50%;
+        max-width: 50%; 
+        min-width: 50%; 
+    }
+}
 
 .change-img-icon {
     position: absolute;
@@ -83,6 +144,17 @@ input[type="file"] {
     align-items: center;
 }
 
+.content-container {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+}
+
+.word-enter-title {
+    color: black !important;
+    font-size: large;
+}
+
 label {
     display: flex;
     flex-direction: column;
@@ -91,65 +163,70 @@ label {
 }
 
 .text {
-    color: white
-}
-
-.flex-container{
-    display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 40vw;
-}
-
-.input-container {
-  position: relative;
-  width: 100%;
-  text-align: center;
-}
-
-.letter-input {
-    text-align: center; 
-    border: 3px solid white; 
-    width: 65px; 
-    height: 75px; 
-    padding: 10px; 
-    margin: 5px; 
-    outline: none; 
-    background-color: transparent;
-    font-size: 30px;
     color: white;
 }
 
-.spacer {
-    width: 30px; 
-    height: 20px; 
-    display: block; 
+.image-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.play-button {
+    background-color: transparent !important;
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    background-size: 0% 100%;
+    background-position: left center;
+    transition: background-size 0.3s ease-out, color 0.3s ease;
+    background-repeat: no-repeat;
+    color: rgb(169, 143, 255);
+    height: 70px;
+    line-height: 65px;
+    font-weight: 700;
+    border-radius: 20px;
+    border: 2px solid rgb(169, 143, 255);
+    overflow: hidden;
+    padding: 0 !important;
+    z-index: 2;
+}
+
+.play-button:hover {
+    background-color: transparent;
+    background-size: 100% 100%;
+    color: #FFF !important;
+    border: 2px solid rgb(169, 143, 255);
+}
+
+.btn-primary:focus {
+    color: rgb(169, 143, 255);
+    background-color: transparent;
+    border-color: rgb(169, 143, 255);
+    box-shadow: none;
+}
+
+.btn:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+#hintText {
+    position: fixed;
+    top:20%;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
     text-align: center;
+    transition: opacity 0.5s ease;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow:rgba(0, 0, 0, 0.4);
+    border: 1px solid rgb(169, 143, 255);
 }
 
-.incorrect-input {
-    text-align: center; 
-    border: 3px solid red; 
-    width: 65px; 
-    height: 75px; 
-    padding: 10px; 
-    margin: 5px; 
-    outline: none; 
-    background-color: transparent;
-    font-size: 30px;
-    color: white;
-}
-
-.correct-input {
-    text-align: center; 
-    border: 4px solid lawngreen; 
-    width: 65px; 
-    height: 75px; 
-    padding: 10px; 
-    margin: 5px; 
-    outline: none; 
-    background-color: transparent;
-    font-size: 30px;
-    color: white;
+#hintText.showHint {
+    opacity: 1;
+    max-height: 100px;
+    z-index: 3;
+    padding:10px;
 }
