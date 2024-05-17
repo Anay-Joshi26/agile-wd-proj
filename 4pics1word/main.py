@@ -73,7 +73,9 @@ def index():
 @app.route("/challenges/create-game", methods=['POST', 'GET'])
 @login_required
 def create_game():
-    return render_template("create_game.html")
+    loginform = LoginForm()
+    registerform = RegisterForm()
+    return render_template("create_game.html", loginform = loginform, registerform = registerform)
 
 @login_manager.unauthorized_handler
 def unauthorized_callback():
