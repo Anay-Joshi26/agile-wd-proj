@@ -4,7 +4,7 @@ $('#submit-upload-game').click(function(e) {
     $('.errors').css('display', 'none')
     e.preventDefault();
 
-    let form = $('form');
+    let form = $('form').eq(3);
 
     if (!form[0].checkValidity()) {
 
@@ -19,7 +19,7 @@ $('#submit-upload-game').click(function(e) {
 
     console.log(url)
 
-    let form_data = new FormData($('form')[0]);
+    let form_data = new FormData(form[0]);
     
     $.ajax({
         type: 'POST',
