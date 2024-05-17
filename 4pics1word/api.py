@@ -2,7 +2,7 @@ from flask import render_template, jsonify, request, Blueprint, flash, redirect,
 from process_game import processGame, isValidGameTitleOrHint, isValidAnswer, UPLOAD_FOLDER
 from flask import send_from_directory
 from flask_login import current_user
-from models import Game, db
+from models import Game, db, User
 
 api = Blueprint("api", __name__)
 
@@ -85,8 +85,6 @@ def downvote(game_id):
     db.session.commit()
     
     return jsonify({"success": True, "msg": "Upvoted successfully"})
-
-
 
 
 
