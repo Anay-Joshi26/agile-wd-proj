@@ -64,7 +64,7 @@ for (let form of forms) {
         if (data['success'] == true) {
             console.log("success!!")
 
-            if (is_login) window.location.href = '/dashboard';
+            if (is_login) window.location.href = '/challenges';
             else {
                 $('#registerModal').on('hidden.bs.modal', function () {
                     $(this).find('form').trigger('reset');

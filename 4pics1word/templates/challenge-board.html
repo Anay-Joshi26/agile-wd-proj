@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -16,6 +17,7 @@
     <script defer src = "{{url_for('static', filename = 'js/search.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/upvote.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/load-new-challenges.js')}}"></script>
+
     <title>Challenges | Explore Other SnapCipher games </title>
     <style>
         .form-control.is-valid, .was-validated .form-control:valid {
@@ -28,81 +30,96 @@
 </head>
 
 <body>
-    <!--  -->
     {% include "/html_components/navbar.html" %}
 
     {% include "/html_components/auth_modal.html" %}
 
     <!-- Trending Cards -->
     <div class="container mt-4 trending-posts">
-        <div class="row d-none d-md-flex">
+        <div id="trendingCards" class="row d-none d-md-flex">
             <div class="col-md-3">
-                <div class="card">
-                    <img src="https://th.bing.com/th/id/OIG2.kAM76N3zv6KJ4sHKHNeX?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Can you guess this X word challenge?</h5>
-                        <p class="card-poster">Posted by User</p>
+                <a href="{{ url_for('challenge_page', challenge_id=trending_games[0].gameId) }}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img src={{trending_games[0].image1}} class="card-img-top" alt="Image">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">{{trending_games[0].game_title}}</h5>
+                            <p class="card-poster">{{trending_games[0].creator.username}}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <img src="https://th.bing.com/th/id/OIG4..bmL9kK4Y8Eia8wscYkm?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Can you guess this X word challenge?</h5>
-                        <p class="card-poster">Posted by User</p>
+                <a href="{{ url_for('challenge_page', challenge_id=trending_games[1].gameId) }}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img src={{trending_games[1].image1}} class="card-img-top" alt="Image">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">{{trending_games[1].game_title}}</h5>
+                            <p class="card-poster">{{trending_games[1].creator.username}}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <img src="https://th.bing.com/th/id/OIG2.JlguCKuxIwpAyn85zNU5?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Can you guess this X word challenge?</h5>
-                        <p class="card-poster">Posted by User</p>
+                <a href="{{ url_for('challenge_page', challenge_id=trending_games[2].gameId) }}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img src={{trending_games[2].image1}} class="card-img-top" alt="Image">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">{{trending_games[2].game_title}}</h5>
+                            <p class="card-poster">{{trending_games[2].creator.username}}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <img src="https://th.bing.com/th/id/OIG3.Qki63p2XR0ADHBtUrUp4?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Can you guess this X word challenge?</h5>
-                        <p class="card-poster">Posted by User</p>
+                <a href="{{ url_for('challenge_page', challenge_id=trending_games[3].gameId) }}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img src={{trending_games[3].image1}} class="card-img-top" alt="Image">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">{{trending_games[3].game_title}}</h5>
+                            <p class="card-poster">{{trending_games[3].creator.username}}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 
         <!-- Horizontal scroll for smaller screens -->
-        <div class="d-md-none d-flex flex-row flex-nowrap overflow-auto">
+        <div id="trendingCardsMobile" class="d-md-none d-flex flex-row flex-nowrap overflow-auto">
             <div class="card" style="min-width: 80%; margin-right: 20px;">
-                <img src="https://th.bing.com/th/id/OIG2.kAM76N3zv6KJ4sHKHNeX?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Can you guess this X word challenge?</h5>
-                    <p class="card-poster">Posted by User</p>
-                </div>
+                <a href="{{ url_for('challenge_page', challenge_id=trending_games[0].gameId) }}" style="text-decoration: none; color: inherit;">
+                    <img src={{ trending_games[0].image1 }} class="card-img-top" alt="Image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">{{ trending_games[0].game_title }}</h5>
+                        <p class="card-poster">{{ trending_games[0].creator.username }}</p>
+                    </div>
+                </a>
             </div>
             <div class="card" style="min-width: 80%; margin-right: 20px;">
-                <img src="https://th.bing.com/th/id/OIG4..bmL9kK4Y8Eia8wscYkm?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Can you guess this X word challenge?</h5>
-                    <p class="card-poster">Posted by User</p>
-                </div>
+                <a href="{{ url_for('challenge_page', challenge_id=trending_games[1].gameId) }}" style="text-decoration: none; color: inherit;">
+                    <img src={{ trending_games[1].image1 }} class="card-img-top" alt="Image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">{{ trending_games[1].game_title }}</h5>
+                        <p class="card-poster">{{ trending_games[1].creator.username }}</p>
+                    </div>
+                </a>
             </div>
             <div class="card" style="min-width: 80%; margin-right: 20px;">
-                <img src="https://th.bing.com/th/id/OIG2.JlguCKuxIwpAyn85zNU5?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Can you guess this X word challenge?</h5>
-                    <p class="card-poster">Posted by User</p>
-                </div>
+                <a href="{{ url_for('challenge_page', challenge_id=trending_games[2].gameId) }}" style="text-decoration: none; color: inherit;">
+                    <img src={{ trending_games[2].image1 }} class="card-img-top" alt="Image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">{{ trending_games[2].game_title }}</h5>
+                        <p class="card-poster">{{ trending_games[2].creator.username }}</p>
+                    </div>
+                </a>
             </div>
             <div class="card" style="min-width: 80%; margin-right: 20px;">
-                <img src="https://th.bing.com/th/id/OIG3.Qki63p2XR0ADHBtUrUp4?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn" class="card-img-top" alt="Image">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Can you guess this X word challenge?</h5>
-                    <p class="card-poster">Posted by User</p>
-                </div>
+                <a href="{{ url_for('challenge_page', challenge_id=trending_games[3].gameId) }}" style="text-decoration: none; color: inherit;">
+                    <img src={{ trending_games[3].image1 }} class="card-img-top" alt="Image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">{{ trending_games[3].game_title }}</h5>
+                        <p class="card-poster">{{ trending_games[3].creator.username }}</p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
