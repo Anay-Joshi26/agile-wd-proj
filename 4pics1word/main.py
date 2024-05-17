@@ -175,9 +175,11 @@ def search_suggestions():
 
 @app.route("/challenge/<int:challenge_id>")
 def challenge_page(challenge_id):
+    loginform = LoginForm()
+    registerform = RegisterForm()
     game = Game.query.filter_by(gameId = challenge_id).first()
     leaderboard = GamePerformance.query.filter_by(game_id = challenge_id).order_by(GamePerformance.attempts).limit(10).all()
-    return render_template("detailed-challenge.html", game=game, leaderboard=leaderboard)
+    return render_template("detailed-challenge.html", game=game, leaderboard=leaderboard, loginform = loginform, registerform = registerform)
 
 @app.route("/challenge/play/<int:challenge_id>")
 @login_required
