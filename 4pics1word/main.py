@@ -80,12 +80,6 @@ def unauthorized_callback():
     flash('You need to be logged in to access this page.')
     return redirect('/?login=true')
 
-@app.route('/dashboard', methods=['GET', 'POST'])
-@login_required
-def dashboard():
-    return render_template("dashboard.html")
-
-
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     form = LoginForm()
@@ -113,7 +107,6 @@ def login():
             return jsonify({'success': True})  
         
         return jsonify({'success': False, 'incorrect-password': True ,'msg': 'Incorrect password for username'})
-
 
 
 @app.route("/register", methods=['POST', 'GET'])
