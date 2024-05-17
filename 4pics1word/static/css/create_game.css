@@ -1,7 +1,27 @@
 body {
-    background-color: #F8F8F8;
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    min-height: 100vh;
+}
+
+/* Set up for particles.js */
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    z-index: -1;
+}
+
+#title {
+    color: white;
+    font-size: 3.5em;
+    font-weight: bold;
+}
+
+.text {
+    color: black;
+    max-width: 100%;
 }
 
 label svg {
@@ -13,12 +33,39 @@ input[type="file"] {
     display: none;
 }
 
+#game-title-input {
+    font-weight: 700;
+    font-size: larger;
+    color: black;
+    text-align: center;
+    border-color: rgb(172, 172, 172);
+    border-radius: 30px;
+    padding: 15px 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    background-color: white;
+}
+
+.images-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
 
 #word-input{   
     font-family: monospace;
     font-size: 36px;
     letter-spacing: 13px;
-    display: inline-block;
+    text-align: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    border-bottom: 3px solid rgb(201, 201, 201);
 }
 
 #word-input::after {
@@ -31,13 +78,8 @@ input[type="file"] {
     border-bottom: 3px solid black; /* Underline effect */
 }
 
-.images-content {
-    margin-top: 90px;
-}
-
 .image-cell {
-    width: 180px;
-    height: 180px;
+    height: 200px;
     background-color: #333;
     padding: 0;
     border-radius: 10px;
@@ -46,8 +88,9 @@ input[type="file"] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 8px;
+    margin: 8px auto;
     position: relative;
+    overflow: hidden;
 }
 
 .change-img-icon {
@@ -57,13 +100,6 @@ input[type="file"] {
     cursor: pointer;
 }
 
-.images-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 label {
     display: flex;
     flex-direction: column;
@@ -71,6 +107,48 @@ label {
     justify-content: center;
 }
 
-.text {
-    color: black
+#submit-upload-game {
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: black;
+    text-align: center;
+    border-color: rgb(172, 172, 172);
+    border-radius: 30px;
+    padding: 15px 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    background-color: white;
+    margin-top: 20px;
+}
+
+#hint-container {
+    font-weight: 700;
+    color: black;
+    text-align: center;
+    border: 1px solid;
+    border-color: rgb(172, 172, 172);
+    border-radius: 30px;
+    padding: 10px 25px;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    background-color: white;
+    transition: opacity 0.5s ease;
+    display: none;
+    opacity: 0;
+}
+
+#hint-container.show {
+    display: block;
+    opacity: 1;
+}
+
+#hint-container input[type="text"] {
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+.hello-world {
+    background-color: rgba(0, 0, 0, 0.294);
 }
