@@ -1,6 +1,7 @@
 body {
-    background: rgb(176,92,241);
-    background: radial-gradient(circle, rgba(176,92,241,1) 0%, rgba(114,26,250,1) 100%);
+    background-image: radial-gradient( circle farthest-corner at 14.2% 27.5%,  rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90% );
+    width: 100%;
+    height: 100%;
 }
 
 label svg {
@@ -29,18 +30,44 @@ input[type="file"] {
     border-bottom: 3px solid black; /* Underline effect */
 }
 
+.game-container {
+    display: flex;
+    /* flex-direction: row; */
+    position: relative;
+}
+
+.hint {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 40vh; /* Set min-height to 100vh for full viewport height */
+    padding-left: 10vw; /* Left padding for positioning */
+  }
+
 .images-content {
     margin-top: 90px;
+    justify-content: center;
+    align-items: center;
+    width: 250vh;
+    /* position: relative; */
+}
+
+.image-cell img {
+    aspect-ratio: 1; 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
 }
 
 .image-cell {
-    /* width: 180px;
-    height: 180px; */
-    aspect-ratio: 1; /* Ensure the aspect ratio of each cell is 1:1 */
     min-width: 180px;
     max-width: 200px;
     padding: 8px;
 }
+
+
 
 .change-img-icon {
     position: absolute;
@@ -67,9 +94,62 @@ label {
     color: white
 }
 
-.image-cell img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 6px;
+.flex-container{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.letter-input {
+    text-align: center; 
+    border: 3px solid white; 
+    width: 65px; 
+    height: 75px; 
+    padding: 10px; 
+    margin: 5px; 
+    outline: none; 
+    background-color: transparent;
+    font-size: 30px;
+    color: white;
+}
+
+.spacer {
+    width: 30px; 
+    height: 20px; 
+    display: block; 
+    text-align: center;
+}
+
+.incorrect-input {
+    text-align: center; 
+    border: 3px solid red; 
+    width: 65px; 
+    height: 75px; 
+    padding: 10px; 
+    margin: 5px; 
+    outline: none; 
+    background-color: transparent;
+    font-size: 30px;
+    color: white;
+}
+
+.correct-input {
+    text-align: center; 
+    border: 4px solid lawngreen; 
+    width: 65px; 
+    height: 75px; 
+    padding: 10px; 
+    margin: 5px; 
+    outline: none; 
+    background-color: transparent;
+    font-size: 30px;
+    color: white;
 }

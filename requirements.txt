@@ -6,3 +6,4 @@ flask_bcrypt
 Faker
 requests
 flask_migrate
+flask_wtf
