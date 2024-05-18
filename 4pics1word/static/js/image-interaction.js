@@ -1,4 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    // Make sure the image zoom is centered between bottom of navbar and bottom of viewport
+    
+    const navbar = document.querySelector('.navbar');
+    const zoomHeight = document.documentElement;
+
+    function updateNavbarHeight() {
+      const navbarHeight = navbar.offsetHeight;
+      zoomHeight.style.setProperty('--navbar-height', `${navbarHeight}px`);
+    }
+
+    // Set height and update on resize
+    updateNavbarHeight();
+    window.addEventListener('resize', updateNavbarHeight);
+
+
     const imageCells = document.querySelectorAll('.image-cell img')
     const overlay = document.getElementById('overlay')
     let zoomedImage = null
