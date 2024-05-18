@@ -1,6 +1,27 @@
 body {
-    background-image: radial-gradient( circle farthest-corner at 14.2% 27.5%,  rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90% );
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    height: 100%;
+    width: 100%;
+}
 
+/* Set up for particles.js */
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.sub-headings {
+    color: white;
+    text-shadow: 1px 1px 5px #0000003a;
+}
+
+.sub-headings h1 {
+    font-size: 55px;
+    font-weight: 600;
 }
 
 /* Styling for trending/popular cards */

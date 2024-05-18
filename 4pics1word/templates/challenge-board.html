@@ -17,6 +17,8 @@
     <script defer src = "{{url_for('static', filename = 'js/search.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/upvote.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/load-new-challenges.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="{{ url_for('static', filename='js/particles.js') }}"></script>
 
     <title>Challenges | Explore Other SnapCipher games </title>
     <style>
@@ -34,8 +36,13 @@
 
     {% include "/html_components/auth_modal.html" %}
 
+    <div id="particles-js"></div>
+
     <!-- Trending Cards -->
-    <div class="container mt-4 trending-posts">
+    <div class="container mt-5 trending-posts">
+        <div class="sub-headings mb-4" id="trending-header">
+            <h1>Trending Challenges</h1>
+        </div>
         <div id="trendingCards" class="row d-none d-md-flex">
             <div class="col-md-3">
                 <a href="{{ url_for('challenge_page', challenge_id=trending_games[0].gameId) }}" style="text-decoration: none; color: inherit;">
@@ -125,7 +132,10 @@
     </div>
 
     <!-- Challenge Board -->
-    <div class="container mt-4 col-md-10 challenge-board">
+    <div class="container col-md-10 mt-5 sub-headings" id="challenges-header">
+        <h1>Challenges</h1>
+    </div>
+    <div class="container mt-4 mb-4 col-md-10 challenge-board">
         <div class="container mt-4" id = 'games-container'>
             
         </div>

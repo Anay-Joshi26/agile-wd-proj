@@ -28,6 +28,7 @@ $(document).ready(function() {
     }
 
     function createGameDiv(game) {
+        let format_date_created = formatDate(game.date_created);
         return `
         <div class="col-md-12 mb-4 card">
             <div class="card-body">
@@ -35,6 +36,7 @@ $(document).ready(function() {
                     <div class="col-md-12">
                         <a href="/challenge/${game.gameId}" class="text-decoration-none card-title">
                             <h3 class="card-title text-decoration-none">${game.game_title}</h3>
+                            <p class="card-text" id="challenge-date"><small class="text-muted">${format_date_created}</p>
                         </a>
                         <p class="card-text"><small class="text-muted">Posted by: ${game.creator_username}</small></p>
                         <div class="row">
@@ -79,6 +81,23 @@ $(document).ready(function() {
             </div>
         </div>
     `;
+    }
+
+    // ChatGPT generated date format
+    function formatDate(date_created) {
+        const date = new Date(date_created);
+
+        const options = {
+            weekday: 'short', 
+            day: '2-digit', 
+            month: 'short', 
+            year: 'numeric', 
+            timeZone: 'UTC'
+        };
+
+        const format_date_created = date.toLocaleString('en-GB', options);
+
+        return format_date_created;
     }
 
 
