@@ -244,52 +244,198 @@ app_link = "http://127.0.0.1:5000"
 class TestWebApp(unittest.TestCase):
         
     def setUp(self):
-        self.testApp = create_app(TestConfig)
-        self.app_context = self.testApp.app_context()
+        testApp = create_app(Config)
+        self.app_context = testApp.app_context()
         self.app_context.push()
-        db.create_all()
-        generate_all_games()
+
+        with self.app_context:        
+            db.create_all()
+            generate_all_games()
 
         options = Options()
         options.add_experimental_option("detach", True)
 
         self.driver = webdriver.Chrome(options=options)
         self.driver.get(app_link)
-        print("created driver")
 
     def tearDown(self):
         # self.driver.close()
-        db.session.remove()
-        db.drop_all()
+        with self.app_context:
+            db.session.remove()
+            db.drop_all()
+            
         self.app_context.pop()
 
-    def test_login(self):
-        login = self.driver.find_element(By.XPATH, '/html/body/nav/div/ul/li[3]/a')
-        # login = self.driver.find_element(By.XPATH, '/html/body/nav/div/ul/li[4]/a')
-        
+    def test_1_register(self):
+        self.driver.implicitly_wait(5)
+        register = self.driver.find_element(By.XPATH, '/html/body/nav/div/ul/li[4]/a')
+        register.click()
 
-        if login.is_displayed():
-            print("WEB DRIVER CAN SEE THE LOGIN BUTTON")
-        else:
-            print("THIS IS SO FUCKED")
-            return
+        username_field = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'username-register'))
+        )
 
-        login.click()
-        # ActionChains(self.driver).move_to_element(login).click(login).perform()
+        password_field = self.driver.find_element(By.ID, 'password-register')
+        password_confirm_field = self.driver.find_element(By.ID, 'password-confirm-register')
+        self.driver.implicitly_wait(5)
 
-        username_field = self.driver.find_element(By.ID, 'username-login')
+        username_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_confirm_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(10)
+
+        # password_confirm_field.send_keys(Keys.RETURN)
+        register_button = self.driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div/div/form/button')
+        register_button.click()
+
+        username_field = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'username-login'))
+        )
+
+        new_user = User.query.filter_by(username="seltestrun").first()
+        # self.assertEqual(len(new_user), 1)
+        self.assertEqual(new_user.username, 'seltestrun')
+
+        self.driver.close()
+
+    def test_2_login(self):
+        register = self.driver.find_element(By.XPATH, '/html/body/nav/div/ul/li[4]/a')
+        register.click()
+
+        username_field = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'username-register'))
+        )
+
+        password_field = self.driver.find_element(By.ID, 'password-register')
+        password_confirm_field = self.driver.find_element(By.ID, 'password-confirm-register')
+        self.driver.implicitly_wait(5)
+
+        username_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_confirm_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(10)
+
+        # password_confirm_field.send_keys(Keys.RETURN)
+        register_button = self.driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div/div/form/button')
+        register_button.click()
+
+        # login = self.driver.find_element(By.XPATH, '/html/body/nav/div/ul/li[3]/a')
+        # login.click()
+
+        # username_field = self.driver.find_element(By.ID, 'username-login')
+
+        username_field = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'username-login'))
+        )
+
         password_field = self.driver.find_element(By.ID, 'password-login')
         self.driver.implicitly_wait(5)
 
-        username_field.send_keys("TEST")
-        password_field.send_keys("TEST")
+        username_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_field.send_keys("seltestrun")
         self.driver.implicitly_wait(10)
 
-        password_field.send_keys(Keys.RETURN)
+        login_button = self.driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/form/button')
+        login_button.click()
 
-        # /html/body/div[1]/div/div/div/div/form/button
+        first_image = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, 'card-img-top'))
+        )
 
-        # self.driver.
+        self.assertEqual(self.driver.current_url, app_link+"/challenges")
+        self.driver.close()
+
+
+    def test_3_create_game(self):
+        self.driver.implicitly_wait(5)
+        register = self.driver.find_element(By.XPATH, '/html/body/nav/div/ul/li[4]/a')
+        register.click()
+
+        username_field = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'username-register'))
+        )
+
+        password_field = self.driver.find_element(By.ID, 'password-register')
+        password_confirm_field = self.driver.find_element(By.ID, 'password-confirm-register')
+        self.driver.implicitly_wait(5)
+
+        username_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_confirm_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(10)
+
+        register_button = self.driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div/div/form/button')
+        register_button.click()
+
+        username_field = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'username-login'))
+        )
+
+        password_field = self.driver.find_element(By.ID, 'password-login')
+        self.driver.implicitly_wait(5)
+
+        username_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(10)
+
+        login_button = self.driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/form/button')
+        login_button.click()
+
+        first_image = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, 'card-img-top'))
+        )
+
+        create_game = self.driver.find_element(By.XPATH, '/html/body/nav/div/ul/li[1]/a')
+        create_game.click()
+
+        game_title = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'game-title-input'))
+        )
+
+        image1 = self.driver.find_element(By.XPATH, '/html/body/form/div[3]/div/div[1]/div/input')
+        image2 = self.driver.find_element(By.XPATH, '/html/body/form/div[3]/div/div[2]/div/input')
+        image3 = self.driver.find_element(By.XPATH, '/html/body/form/div[3]/div/div[3]/div/input')
+        image4 = self.driver.find_element(By.XPATH, '/html/body/form/div[3]/div/div[4]/div/input')
+
+        phrase = self.driver.find_element(By.ID, 'word-input')
+
+        make_hint_available = self.driver.find_element(By.XPATH, '/html/body/form/div[5]/span')
+        make_hint_available.click()
+
+        hint = self.driver.find_element(By.XPATH, '/html/body/form/div[6]/input')
+
+        image1.send_keys(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static', 'assets', 'nature-1.jpg')))
+        image2.send_keys(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static', 'assets', 'nature-2.jpg')))
+        image3.send_keys(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static', 'assets', 'nature-3.jpg')))
+        image4.send_keys(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static', 'assets', 'nature-4.jpg')))
+
+        game_title.send_keys('TEST')
+        phrase.send_keys('TEST')
+        hint.send_keys('TEST')
+
+        submit_game_button = self.driver.find_element(By.ID, 'submit-upload-game')
+        submit_game_button.click()
+
+        first_image = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, 'card-img-top'))
+        )
+
+        newly_made_game = Game.query.order_by(Game.date_created.desc()).first()
+
+        self.assertEqual(self.driver.current_url, app_link+"/challenges")
+        self.assertEqual(newly_made_game.game_title, 'TEST')
+        self.assertEqual(newly_made_game.answer, 'TEST')
+        self.assertEqual(newly_made_game.hint, 'TEST')
+
+
 
     # def setUp(self):
         # self.app = create_app(TestConfig)

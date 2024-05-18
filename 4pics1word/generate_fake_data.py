@@ -79,17 +79,9 @@ def generate_game(topic, id):
 
 def generate_users(num_users):
     users = []
-
-
-    new_user = User(username = "TEST", password = "TEST")
-    db.session.add(new_user)
-    db.session.commit()
-    # users.append(new_user)
-    print("I MADE THEM")
     for i in range(1, num_users+1):
         username, password = generate_user()
         new_user = User(username = username, password = password)
-        
         db.session.add(new_user)
         db.session.commit()
         users.append(new_user)
