@@ -103,7 +103,21 @@ function makeGuess() {
         console.log(match);
         notify_correct();
         if (message === ""){
-            sendData(guess, attempt, match, challenge_id)
+            sendData(guess, attempt, match, challenge_id).then(data => {
+                console.log("HH", data)
+                if (data){
+                    document.getElementById('guess-count').textContent = data.num_attempts;
+                    document.getElementById('leaderboard-position').textContent = data.position;
+
+                    // Show the popup (hidden by default - now itll become visible)
+                    document.getElementById('will-count-popup').style.display = 'flex';
+                }
+
+
+            });
+        }
+        else {
+            document.getElementById('will-not-count-popup').style.display = 'flex';
         }
     }
     else if(answer.length == guess.length){
@@ -119,21 +133,33 @@ function makeGuess() {
     }
 }
 
-function sendData(guess, attempt, match, challenge_id){
-    var dataToSend = { 'guess' : guess, 'attempts' : attempt, 'correct' : match, 'challenge_id' : challenge_id };
-            fetch('/guess', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dataToSend)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data); 
-            })
-            .catch(error => console.error('Error:', error));
+async function sendData(guess, attempt, match, challenge_id) {
+    let dataToSend = { 'guess': guess, 'attempts': attempt, 'correct': match, 'challenge_id': challenge_id };
+
+    try {
+        let response = await fetch('/guess', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSend)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        let data = await response.json();
+        console.log(data);
+        return { num_attempts: data.num_attempts, position: data.position };
+
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
 }
+
+
 
 function notify_incorrect(){
     inputs = document.querySelectorAll('input');
