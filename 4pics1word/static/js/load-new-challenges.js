@@ -11,7 +11,9 @@ $(document).ready(function() {
             url: `/api/games?page=${page}`, 
             type: 'GET',
             success: function(data) {
+                console.log(data)
                 if (data.games.length > 0 && data.success === true) {
+
                     for (game of data.games) {
                         game_div = createGameDiv(game);
                         gamesContainer.append(game_div);
@@ -28,6 +30,18 @@ $(document).ready(function() {
     }
 
     function createGameDiv(game) {
+
+        let upvoteClass = ''
+        let downvoteClass = ''
+
+        if (game.user_vote === 1) {
+            upvoteClass = 'active-upvote';
+        }
+        else if (game.user_vote === -1) {
+            downvoteClass = 'active-downvote';
+        }
+
+
         return `
         <div class="col-md-12 mb-4 card">
             <div class="card-body">

@@ -98,6 +98,14 @@ body {
     display: none; /* For Chrome, Safari, Opera */
 }
 
+.upvote-button.active-upvote svg{
+    fill: rgb(19, 187, 19);
+}
+
+.downvote-button.active-downvote svg{
+    fill: red;
+}
+
 .upvote-button:hover svg{
     fill: rgb(19, 187, 19);
 }

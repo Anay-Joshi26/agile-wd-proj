@@ -54,3 +54,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 200)
     })
 })
+
+$('.search-box input').focus(function() {
+    $(this).parent().parent().css('width', '40vw');
+});
+
+$('.search-box input').blur(function() {
+    $(this).parent().parent().css('width', '36vw');  
+});
+
