@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $('.vote-button').click(function() {
+    $(document).on('click', '.vote-button', function() {
 
         let button = $(this);
         let span_tag = $(this).parent().find('span')
