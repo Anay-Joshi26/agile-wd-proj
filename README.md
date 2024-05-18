@@ -1,5 +1,21 @@
 # Agile Web Development CITS3403 Project
 
+## Contributers
+
+| UWA ID      | Name          | GitHub Username |
+|-------------|---------------|-----------------|
+| 23364506    | Anay Bhargav Joshi      | Anay-Joshi26         |
+| 23443143    | Connor Fernie    | CJFernie       |
+| 23351863    | Aaryan Haresh Sachdevani   | AaryanSachdevani2003      |
+| 23352583    | Ashkaan Gaurav Singh   | ashcansingh      |
+
+*Note: Most members had their local and global `user.email` variable in `git config` not linked to their GitHub account hence many commits do **not** show directly from the 'Contributers'. This also resulted in separate accounts under the same person making commits*
+
+This was changed eventually by running:
+`git config --global user.email <actual-email-linked-to-github>`
+
+## About the Website
+
 SnapCipher is a game where you can upload images and other guess the the word or phrase which relates those images. 
 
 If you've ever played 4pics1word you'll know exactly where we got our inspiration from.
