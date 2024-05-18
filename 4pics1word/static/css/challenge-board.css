@@ -120,7 +120,17 @@ to be transparent or have no display, how do I do that and ensure the changes is
     display: none; /* For Chrome, Safari, Opera */
 }
 
+
 /* Upvote styling */
+
+.upvote-button.active-upvote svg{
+    fill: rgb(19, 187, 19);
+}
+
+.downvote-button.active-downvote svg{
+    fill: red;
+}
+
 .upvote-button:hover svg{
     fill: rgb(19, 187, 19);
 }

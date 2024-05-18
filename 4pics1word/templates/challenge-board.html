@@ -16,9 +16,11 @@
     <script defer src = "{{url_for('static', filename = 'js/login-validation.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/search.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/upvote.js')}}"></script>
+    <script defer src = "{{url_for('static', filename = 'js/active-navlink.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/load-new-challenges.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script defer src="{{ url_for('static', filename='js/particles.js') }}"></script>
+
 
     <title>Challenges | Explore Other SnapCipher games </title>
     <style>
@@ -150,25 +152,6 @@
         </div>
     </div>
     
-    <script>
-  
-        $('.search-box input').focus(function() {
-          $(this).parent().parent().css('width', '40vw');
-      });
-      
-      $('.search-box input').blur(function() {
-          $(this).parent().parent().css('width', '36vw');  
-      });
-
-        document.querySelectorAll('.nav-link').forEach(
-            link=>{
-                if(link.href == window.location.href){
-                    link.setAttribute('aria-current','page')
-                }
-            }
-        )
-      
-      </script>
     </body>
 
 </html>
