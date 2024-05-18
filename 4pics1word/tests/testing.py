@@ -7,7 +7,7 @@ sys.path.append(file_dir)
 import unittest
 from config import TestConfig, Config
 from flask import Flask
-from models import db, User, Game
+from models import db, User, Game, Attempt, GamePerformance
 from flask_bcrypt import Bcrypt
 from __init__ import create_app
 from generate_fake_data import generate_all_games
@@ -28,7 +28,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-import multiprocessing
+import time
 
 
 # class TestApp(unittest.TestCase):
@@ -435,6 +435,74 @@ class TestWebApp(unittest.TestCase):
         self.assertEqual(newly_made_game.answer, 'TEST')
         self.assertEqual(newly_made_game.hint, 'TEST')
 
+        self.driver.close()
+
+    def test_4_play_game(self):
+        self.driver.implicitly_wait(5)
+        register = self.driver.find_element(By.XPATH, '/html/body/nav/div/ul/li[4]/a')
+        register.click()
+
+        username_field = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'username-register'))
+        )
+
+        password_field = self.driver.find_element(By.ID, 'password-register')
+        password_confirm_field = self.driver.find_element(By.ID, 'password-confirm-register')
+        self.driver.implicitly_wait(5)
+
+        username_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_confirm_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(10)
+
+        register_button = self.driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div/div/form/button')
+        register_button.click()
+
+        username_field = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'username-login'))
+        )
+
+        password_field = self.driver.find_element(By.ID, 'password-login')
+        self.driver.implicitly_wait(5)
+
+        username_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(5)
+        password_field.send_keys("seltestrun")
+        self.driver.implicitly_wait(10)
+
+        login_button = self.driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/form/button')
+        login_button.click()
+
+        first_image = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, 'card-img-top'))
+        )
+
+        first_game = self.driver.find_element(By.XPATH, '/html/body/div[4]/div/div[1]/div/div/div/a/h3')
+        first_game.click()
+
+        play_game = self.driver.find_element(By.XPATH, '/html/body/div[5]/div/div[1]/div[2]/a')
+        play_game.click()
+
+        guess = ['h','e','a','l','t','h']
+        for id,letter in  enumerate(guess):
+            letter_input = self.driver.find_element(By.ID, f'input{id}')
+            letter_input.send_keys(letter)
+
+        make_guess = self.driver.find_element(By.ID, 'make-guess')
+        make_guess.click()
+
+        go_back = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, '/html/body/div[6]/div/a'))
+        )
+
+        attempt = Attempt.query.order_by(Attempt.attempt_id.desc()).first()
+        performance = GamePerformance.query.order_by(GamePerformance.id.desc()).first()
+        
+        self.assertEqual(attempt.attempts, 1)
+        self.assertEqual(attempt.guess, "HEALTH")
+        self.assertEqual(attempt.player.username, performance.user.username)
 
 
     # def setUp(self):
