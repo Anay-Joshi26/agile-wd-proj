@@ -3,24 +3,48 @@ $(document).ready(function() {
     $(document).on('click', '.vote-button', function() {
 
         let button = $(this);
-        let span_tag = $(this).parent().find('span')
+        let spanTag = button.parent().find('span');
 
-        val = span_tag.text().trim();
+        let val = spanTag.text().trim();
         console.log(val);
 
         const fetchUrl = button.attr('data-fetch-url');
         let new_upvote = null;
 
+        let gameContainer = button.closest('.vote-container');
+        let upvoteButton = gameContainer.find('.upvote-button');
+        let downvoteButton = gameContainer.find('.downvote-button');
+
+        // Check if the button has active-upvote or active-downvote classes
+        let isUpvoted = upvoteButton.hasClass('active-upvote');
+        let isDownvoted = downvoteButton.hasClass('active-downvote');
+
         if (fetchUrl.includes("upvote")) {
             new_upvote = changeUpvotes(val, 'upvote');
+            if (!isUpvoted) {
+                if (isDownvoted) {
+                    downvoteButton.removeClass('active-downvote'); // Remove active-downvote class
+                }
+                else {
+                    upvoteButton.addClass('active-upvote');
+                }
+            }
         }
         else {
-            new_upvote = changeUpvotes(val, 'downvote');
+            new_upvote = changeUpvotes(val, 'downovte');
+            if (!isDownvoted) {
+                if (isUpvoted) {
+                    upvoteButton.removeClass('active-upvote');
+                }
+                else {
+                    downvoteButton.addClass('active-downvote');
+                }
+            } 
         }
 
         console.log(new_upvote);
 
-        span_tag.text(new_upvote);
+        spanTag.text(new_upvote);
 
         $.ajax({
             type: 'POST',
@@ -30,21 +54,22 @@ $(document).ready(function() {
                     console.log("Error incrementing upvotes");
                     console.log(data)
                     setTimeout(function() {
-                        span_tag.text(val); // revert text after 1 second
-                    }, 1000);
+                        spanTag.text(val); // revert text after 0.6 second
+                    }, 600);
                 }
             },
             error: function() {
                 console.log("Error actual incrementing upvotes");
                 setTimeout(function() {
-                    span_tag.text(val); // revert text after 1 second
-                }, 1000);
+                    spanTag.text(val); // revert text after 0.6 second
+                }, 600);
             }
         });
 
     });
 
 });
+
 
 function changeUpvotes(str, action) {
     // ChatGPT generated

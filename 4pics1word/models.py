@@ -54,6 +54,7 @@ class Upvote(db.Model):
     game = db.relationship('Game')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     game_id = db.Column(db.Integer, db.ForeignKey('game.gameId'), nullable=False)
+    vote = db.Column(db.Integer, nullable=False, default=0)
 
     # reference https://stackoverflow.com/questions/10059345/sqlalchemy-unique-across-multiple-columns
     # this should essentilly ensure that a user can only upvote a game once

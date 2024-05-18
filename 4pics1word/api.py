@@ -68,12 +68,18 @@ def upvote(game_id):
     if game is None:
         return jsonify({"success": False, "msg": "Game not found"})
 
-    if Upvote.query.filter_by(user=current_user, game=game).first() is not None:
-        return jsonify({"success": False, "msg": "You have already upvoted this game"})
-    
-    upvote = Upvote(user=current_user, game=game)
-    game.number_of_upvotes += 1
-    db.session.add(upvote)
+    existing_vote = Upvote.query.filter_by(user=current_user, game=game).first()
+    if existing_vote is not None:
+        if existing_vote.vote == 1:  # If already downvoted
+            return jsonify({"success": False, "msg": "You have already upvoted this game"})
+        else:  # If upvoted
+            existing_vote.vote += 1
+            game.number_of_upvotes += 1 
+    else:
+        downvote = Upvote(user=current_user, game=game, vote=1)
+        game.number_of_upvotes += 1
+        db.session.add(downvote)
+
     db.session.commit()
     
     return jsonify({"success": True, "msg": "Upvoted successfully"})
@@ -87,13 +93,19 @@ def downvote(game_id):
     game = Game.query.filter_by(gameId=game_id).first()
     if game is None:
         return jsonify({"success": False, "msg": "Game not found"})
-
-    if Upvote.query.filter_by(user=current_user, game=game).first() is not None:
-        return jsonify({"success": False, "msg": "You have already downnvoted this game"})
     
-    downvote = Upvote(user=current_user, game=game)
-    game.number_of_upvotes -= 1
-    db.session.add(downvote)
+    existing_vote = Upvote.query.filter_by(user=current_user, game=game).first()
+    if existing_vote is not None:
+        if existing_vote.vote == -1:  # If already downvoted
+            return jsonify({"success": False, "msg": "You have already downvoted this game"})
+        else:  # If upvoted
+            existing_vote.vote -= 1
+            game.number_of_upvotes -= 1 
+    else:
+        downvote = Upvote(user=current_user, game=game, vote=-1)
+        game.number_of_upvotes -= 1
+        db.session.add(downvote)
+
     db.session.commit()
     
     return jsonify({"success": True, "msg": "downvoted successfully"})
@@ -106,6 +118,11 @@ def get_games():
 
     games = Game.query.paginate(page=page, per_page=limit)
 
+    user_votes = {}
+    if current_user.is_authenticated:
+        user_votes_query = db.session.query(Upvote.game_id, Upvote.vote).filter_by(user_id=current_user.id).all()
+        user_votes = {game_id: vote for game_id, vote in user_votes_query}
+
     serialised_games = [ 
         {
             'gameId': game.gameId,
@@ -116,9 +133,9 @@ def get_games():
             'image2': game.image2,
             'image3': game.image3,
             'image4': game.image4,
-            'date_created': game.date_created
+            'date_created': game.date_created,
+            'user_vote': user_votes.get(game.gameId, 0)  # If no vote found, default to 0
         }
-
         for game in games.items
     ]
 
