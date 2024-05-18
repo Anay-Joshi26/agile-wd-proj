@@ -14,6 +14,7 @@ body {
     z-index: 0;
 }
 
+/* Page subheading styling */
 .sub-headings {
     color: white;
     text-shadow: 1px 1px 5px #0000003a;
@@ -25,7 +26,6 @@ body {
 }
 
 /* Styling for trending/popular cards */
-
 .trending-posts .card {
     margin-bottom: 20px;
     border: none;
@@ -64,7 +64,6 @@ body {
 
 
 /* Style for the challenge board */
-
 .challenge-board {
     background-color: rgba(240, 248, 255, 0.5);
     border-radius: 20px;
@@ -109,16 +108,19 @@ body {
     object-position: center;
 }
 
-.d-md-none.d-flex.flex-row.flex-nowrap.overflow-auto {
+/* ChatGPT generation reference -> I'm trying to make a horizontal scroll-bar for a div #trending-card-mobile 
+to be transparent or have no display, how do I do that and ensure the changes is reflected on all browsers? */
+#trending-card-mobile {
     overflow: auto;
     scrollbar-width: none; /* For Firefox */
     -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
 
-.d-md-none.d-flex.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar {
+#trending-card-mobile::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, Opera */
 }
 
+/* Upvote styling */
 .upvote-button:hover svg{
     fill: rgb(19, 187, 19);
 }
@@ -134,7 +136,7 @@ body {
     gap: 6px;
 }
 
-
+/* Resizes apply with max-width 768px to ensure responsiveness*/
 @media (max-width: 768px) {
     .challenge-board .col-md-3 {
         flex: 0 0 50%;
