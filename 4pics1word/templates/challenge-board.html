@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/styles.css')}}">
     <script defer src = "{{url_for('static', filename = 'js/login-validation.js')}}"></script>
     <script defer src = "{{url_for('static', filename = 'js/search.js')}}"></script>
@@ -42,7 +41,7 @@
             <div class="col-md-3">
                 <a href="{{ url_for('challenge_page', challenge_id=trending_games[0].gameId) }}" style="text-decoration: none; color: inherit;">
                     <div class="card">
-                        <img src={{trending_games[0].image1}} class="card-img-top" alt="Image">
+                        <img src="{{trending_games[0].image1}}" class="card-img-top" alt="Image">
                         <div class="card-img-overlay">
                             <h5 class="card-title">{{trending_games[0].game_title}}</h5>
                             <p class="card-poster">{{trending_games[0].creator.username}}</p>
@@ -53,7 +52,7 @@
             <div class="col-md-3">
                 <a href="{{ url_for('challenge_page', challenge_id=trending_games[1].gameId) }}" style="text-decoration: none; color: inherit;">
                     <div class="card">
-                        <img src={{trending_games[1].image1}} class="card-img-top" alt="Image">
+                        <img src="{{trending_games[1].image1}}" class="card-img-top" alt="Image">
                         <div class="card-img-overlay">
                             <h5 class="card-title">{{trending_games[1].game_title}}</h5>
                             <p class="card-poster">{{trending_games[1].creator.username}}</p>
@@ -64,7 +63,7 @@
             <div class="col-md-3">
                 <a href="{{ url_for('challenge_page', challenge_id=trending_games[2].gameId) }}" style="text-decoration: none; color: inherit;">
                     <div class="card">
-                        <img src={{trending_games[2].image1}} class="card-img-top" alt="Image">
+                        <img src="{{trending_games[2].image1}}" class="card-img-top" alt="Image">
                         <div class="card-img-overlay">
                             <h5 class="card-title">{{trending_games[2].game_title}}</h5>
                             <p class="card-poster">{{trending_games[2].creator.username}}</p>
@@ -75,7 +74,7 @@
             <div class="col-md-3">
                 <a href="{{ url_for('challenge_page', challenge_id=trending_games[3].gameId) }}" style="text-decoration: none; color: inherit;">
                     <div class="card">
-                        <img src={{trending_games[3].image1}} class="card-img-top" alt="Image">
+                        <img src="{{trending_games[3].image1}}" class="card-img-top" alt="Image">
                         <div class="card-img-overlay">
                             <h5 class="card-title">{{trending_games[3].game_title}}</h5>
                             <p class="card-poster">{{trending_games[3].creator.username}}</p>
@@ -89,7 +88,7 @@
         <div id="trendingCardsMobile" class="d-md-none d-flex flex-row flex-nowrap overflow-auto">
             <div class="card" style="min-width: 80%; margin-right: 20px;">
                 <a href="{{ url_for('challenge_page', challenge_id=trending_games[0].gameId) }}" style="text-decoration: none; color: inherit;">
-                    <img src={{ trending_games[0].image1 }} class="card-img-top" alt="Image">
+                    <img src="{{ trending_games[0].image1 }}" class="card-img-top" alt="Image">
                     <div class="card-img-overlay">
                         <h5 class="card-title">{{ trending_games[0].game_title }}</h5>
                         <p class="card-poster">{{ trending_games[0].creator.username }}</p>
@@ -98,7 +97,7 @@
             </div>
             <div class="card" style="min-width: 80%; margin-right: 20px;">
                 <a href="{{ url_for('challenge_page', challenge_id=trending_games[1].gameId) }}" style="text-decoration: none; color: inherit;">
-                    <img src={{ trending_games[1].image1 }} class="card-img-top" alt="Image">
+                    <img src="{{ trending_games[1].image1 }}" class="card-img-top" alt="Image">
                     <div class="card-img-overlay">
                         <h5 class="card-title">{{ trending_games[1].game_title }}</h5>
                         <p class="card-poster">{{ trending_games[1].creator.username }}</p>
@@ -107,7 +106,7 @@
             </div>
             <div class="card" style="min-width: 80%; margin-right: 20px;">
                 <a href="{{ url_for('challenge_page', challenge_id=trending_games[2].gameId) }}" style="text-decoration: none; color: inherit;">
-                    <img src={{ trending_games[2].image1 }} class="card-img-top" alt="Image">
+                    <img src="{{ trending_games[2].image1 }}" class="card-img-top" alt="Image">
                     <div class="card-img-overlay">
                         <h5 class="card-title">{{ trending_games[2].game_title }}</h5>
                         <p class="card-poster">{{ trending_games[2].creator.username }}</p>
@@ -116,7 +115,7 @@
             </div>
             <div class="card" style="min-width: 80%; margin-right: 20px;">
                 <a href="{{ url_for('challenge_page', challenge_id=trending_games[3].gameId) }}" style="text-decoration: none; color: inherit;">
-                    <img src={{ trending_games[3].image1 }} class="card-img-top" alt="Image">
+                    <img src="{{ trending_games[3].image1 }}" class="card-img-top" alt="Image">
                     <div class="card-img-overlay">
                         <h5 class="card-title">{{ trending_games[3].game_title }}</h5>
                         <p class="card-poster">{{ trending_games[3].creator.username }}</p>
