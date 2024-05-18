@@ -48,3 +48,14 @@ class GamePerformance(db.Model):
     game_id = db.Column(db.Integer, db.ForeignKey('game.gameId'), nullable=False)
     attempts = db.Column(db.Integer, nullable=False)
 
+class Upvote(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.relationship('User')
+    game = db.relationship('Game')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('game.gameId'), nullable=False)
+
+    # reference https://stackoverflow.com/questions/10059345/sqlalchemy-unique-across-multiple-columns
+    # this should essentilly ensure that a user can only upvote a game once
+    __table_args__ = (db.UniqueConstraint('user_id', 'game_id'),)
+

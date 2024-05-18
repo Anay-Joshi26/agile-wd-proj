@@ -28,10 +28,17 @@ $(document).ready(function() {
             success: function(data) {
                 if (!data.success) {
                     console.log("Error incrementing upvotes");
+                    console.log(data)
                     setTimeout(function() {
                         span_tag.text(val); // revert text after 1 second
                     }, 1000);
                 }
+            },
+            error: function() {
+                console.log("Error actual incrementing upvotes");
+                setTimeout(function() {
+                    span_tag.text(val); // revert text after 1 second
+                }, 1000);
             }
         });
 

@@ -3,7 +3,7 @@ from process_game import processGame, isValidGameTitleOrHint, isValidAnswer, UPL
 from flask import send_from_directory
 from flask_login import current_user
 import math
-from models import Game, db, User
+from models import Game, db, User, Upvote
 
 
 api = Blueprint("api", __name__)
@@ -67,8 +67,13 @@ def upvote(game_id):
     game = Game.query.filter_by(gameId=game_id).first()
     if game is None:
         return jsonify({"success": False, "msg": "Game not found"})
+
+    if Upvote.query.filter_by(user=current_user, game=game).first() is not None:
+        return jsonify({"success": False, "msg": "You have already upvoted this game"})
     
+    upvote = Upvote(user=current_user, game=game)
     game.number_of_upvotes += 1
+    db.session.add(upvote)
     db.session.commit()
     
     return jsonify({"success": True, "msg": "Upvoted successfully"})
@@ -77,16 +82,21 @@ def upvote(game_id):
 def downvote(game_id):
     if not current_user.is_authenticated:
         print("User is not authenticated")
-        return jsonify({"success": False, "msg": "You need to be logged in to upvote"})
+        return jsonify({"success": False, "msg": "You need to be logged in to downvote"})
     
     game = Game.query.filter_by(gameId=game_id).first()
     if game is None:
         return jsonify({"success": False, "msg": "Game not found"})
+
+    if Upvote.query.filter_by(user=current_user, game=game).first() is not None:
+        return jsonify({"success": False, "msg": "You have already downnvoted this game"})
     
+    downvote = Upvote(user=current_user, game=game)
     game.number_of_upvotes -= 1
+    db.session.add(downvote)
     db.session.commit()
     
-    return jsonify({"success": True, "msg": "Upvoted successfully"})
+    return jsonify({"success": True, "msg": "downvoted successfully"})
 
 @api.route('/api/games', methods=["POST", "GET"])
 def get_games():
