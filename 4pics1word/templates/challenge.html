@@ -47,6 +47,32 @@
     </button>
   </div>
 
+  <div class="correct-answer-popup" id = 'will-count-popup'>
+    <div class="correct-popup-content">
+      <div>
+        <h2 class = 'mb-4'>Correct!</h2>
+        <p>It took you</p>
+        <h3 id = 'guess-count'></h3>
+        <p>guesses to get the correct answer</p>
+        <p class = 'mt-4'>That places you at position</p>
+        <h3 id = 'leaderboard-position'></h3>
+        <p>on the leaderboard!</p>
+      </div>
+      <a type = button class="p-3 mt-4 redirect-button go-to-challenge-button text-decoration-none" href = "/challenge/{{ challenge_id }}" >Go to Challenge Page</a>
+    </div>
+  </div>
+
+  <div class="correct-answer-popup" id = 'will-not-count-popup'>
+    <div class="correct-popup-content">
+      
+        <h2 class = 'mb-4'>This game wont count</h2>
+        <p>Either this is your game or you have already previously played this game before</p> 
+        <p>So any guesses you make will not count towards the leaderboard or be recorded</p>
+      
+      <a class="p-3 mt-4 redirect-button go-to-challenge-button text-decoration-none" href = "/challenge/{{ challenge_id }}">Go to Challenge Page</a>
+    </div>
+  </div>
+
   <div class='col-md-6 images-content container mt-4 mb-4'>
     <p id="hintText" class="col-6" style="display: block;">{{ hint }}</p>
 

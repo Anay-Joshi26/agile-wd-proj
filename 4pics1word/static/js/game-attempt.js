@@ -105,6 +105,9 @@ function makeGuess() {
         if (message === ""){
             sendData(guess, attempt, match, challenge_id)
         }
+        else {
+            document.getElementById('will-not-count-popup').style.display = 'flex';
+        }
     }
     else if(answer.length == guess.length){
         console.log("WE HERE");
@@ -120,7 +123,7 @@ function makeGuess() {
 }
 
 function sendData(guess, attempt, match, challenge_id){
-    var dataToSend = { 'guess' : guess, 'attempts' : attempt, 'correct' : match, 'challenge_id' : challenge_id };
+    let dataToSend = { 'guess' : guess, 'attempts' : attempt, 'correct' : match, 'challenge_id' : challenge_id };
             fetch('/guess', {
                 method: 'POST',
                 headers: {
@@ -131,8 +134,15 @@ function sendData(guess, attempt, match, challenge_id){
             .then(response => response.json())
             .then(data => {
                 console.log(data); 
+                document.getElementById('guess-count').textContent = data.num_attempts;
+                document.getElementById('leaderboard-position').textContent = data.position;
+
+                // Show the popup (hidden by default - now itll become visible)
+                document.getElementById('will-count-popup').style.display = 'flex';
+                //return data;
             })
             .catch(error => console.error('Error:', error));
+    return null;
 }
 
 function notify_incorrect(){
