@@ -14,15 +14,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/game_attempt.css') }}">
     <script defer src = "{{url_for('static', filename = 'js/search.js')}}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    
+    <script defer src = "{{url_for('static', filename = 'js/active-navlink.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script defer src="{{ url_for('static', filename='js/particles.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/image-interaction.js') }}"></script>
 
 
     <style>
     </style>
 </head>
 <body>
+    <div id="overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:999;"></div>
 
     {% include "/html_components/navbar.html" %}
 
@@ -51,7 +53,7 @@
                             <img src="{{ game.image3 }}" alt="image3">
                         </div>
                         <div class="col-6 image-cell" id="img4">
-                            <img src="{{ game.image4 }}" alt="image4">
+                            <img  src="{{ game.image4 }}" alt="image4">
                         </div>
                     </div>
                 </div>

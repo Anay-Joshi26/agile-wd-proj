@@ -12,6 +12,16 @@
     
 }
 
+@media (max-width:495px){
+    .navbar-toggler{
+        margin-left: 0!important;
+        margin-right: 10px!important;
+    }
+    .search-box{
+        margin-left: 0!important;
+    }
+}
+
 .nav-link:hover {
     text-decoration: underline;
     text-underline-offset: 7px;
@@ -177,11 +187,11 @@ i{
 }
 
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .search-box {
         width: auto;
     }
-}
+} */
 
 @media (min-width:992px){
     .index-page{

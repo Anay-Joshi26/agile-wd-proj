@@ -211,6 +211,17 @@ def challenge_play(challenge_id):
     return render_template("challenge.html", hint = game.hint, attempt_count = (attempt_count + 1), answer = game.answer, image1 = game.image1, image2 = game.image2, image3 = game.image3, image4 = game.image4, challenge_id = challenge_id, message = message, loginform = loginform, registerform = registerform, login_token = CustomCSRF, register_token = CustomCSRF)
 # hello
 
+def calculate_leaderboard_position(game_id, user):
+    leaderboard = GamePerformance.query.filter_by(game_id=game_id).order_by(GamePerformance.attempts).all()
+    
+    # find the position of the current user
+    position = 1
+    for performance in leaderboard:
+        if performance.user_id == user.id:
+            break
+        position += 1
+    return position
+
 @app.route("/guess", methods=["GET", "POST"])
 @login_required
 def make_guess():
@@ -221,7 +232,10 @@ def make_guess():
 
     if data.get('correct'):
         print(data)
-    return jsonify("WOOOO")
+        
+    pos = calculate_leaderboard_position(data.get('challenge_id'), current_user)
+
+    return jsonify({'num_attempts': data.get('attempts'), 'position': pos})
 
 if __name__ == '__main__':
     app.run(debug=True, port = PORT)
