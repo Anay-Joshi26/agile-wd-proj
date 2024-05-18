@@ -9,3 +9,4 @@ flask_migrate
 selenium
 webdriver-manager
 python-dotenv
+flask_wtf

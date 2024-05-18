@@ -103,15 +103,22 @@ def generate_all_games():
     num_games = len(data)
 
     all_games = []
+    recent_games_needed = 4  
 
     for i in range(0, num_games, 5):
-
         answer = data[i]
 
         #print(answer)
 
         game_title = generate_lorem_title(7)
-    
+
+        # Determine the creation date for the game
+        if recent_games_needed > 0:
+            date_created = fake.date_time_between(start_date='-1d', end_date='now')
+            recent_games_needed -= 1
+        else:
+            date_created = fake.date_time_this_year(before_now=True, after_now=False)
+
         new_game = Game(
             game_title=game_title,
             answer=answer.upper(),
@@ -120,8 +127,8 @@ def generate_all_games():
             image3=data[i+3],
             image4=data[i+4],
             creator=random.choice(users),
-            number_of_upvotes = random.randint(-10, 100),
-            date_created = fake.date_time_this_year(before_now=True, after_now=False)
+            number_of_upvotes=random.randint(-10, 100),
+            date_created=date_created
         )
 
         all_games.append(new_game)
@@ -136,12 +143,11 @@ def generate_all_games():
             new_leaderboard = GamePerformance(
                 user=user,
                 game=game,
-                attempts=random.randint(0, 20)
+                attempts=random.randint(1, 20)
             )
 
             db.session.add(new_leaderboard)
             db.session.commit()
-
 
     
 

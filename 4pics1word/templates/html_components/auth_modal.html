@@ -10,15 +10,16 @@
                   </svg>
             </button>
             <div class="wrapper">
-                <form id = 'login-form' novalidate class = 'needs-validation'>
+                <form id = 'login-form' method = 'POST' action = "{{ url_for('login') }}" novalidate class = 'needs-validation'>
+                    {{ loginform.csrf_token(id = "loginform_csrf_token") }}
                     <h1>Login</h1>
                     <div class="username-container input-box">
-                        <input type="text" id = 'username-login' placeholder="Username" class = 'form-control' name="username" required>
+                        {{ loginform.username(class="form-control", placeholder="Username", id="username-login") }}
                         <i class="bi bi-person-fill"></i>
                         <div id = 'login-username-error' class = 'invalid-feedback'>Required field</div>
                     </div>
                     <div class="password-container input-box">
-                        <input type="password" id = 'password-login' placeholder="Password" class = 'form-control' name="password" required>
+                        {{ loginform.password(class="form-control", placeholder="Password", id="password-login") }}
                         <i class="bi bi-key-fill"></i>
                         <div id = 'login-password-error' class = 'invalid-feedback'>Required field</div>
                     </div>
@@ -48,22 +49,21 @@
                   </svg>
             </button>
             <div class="wrapper">
-                <form id = 'register-form' novalidate class = 'needs-validation'>
+                <form id = 'register-form' method = 'POST' action = "{{ url_for('register') }}" novalidate class = 'needs-validation'>
+                    {{ registerform.csrf_token(id = "register_token") }}
                     <h1>Register</h1>
                     <div class="input-box">
-                        <input type="text" id = 'username-register' class = 'form-control' placeholder="Username" name="username"
-                        required>
+                        {{ registerform.username(class="form-control", placeholder="Username", id="username-register") }}
                         <i class="bi bi-person-fill"></i>
                         <div id = 'register-username-error' class = 'invalid-feedback'>Required field</div>
                     </div>
-                    <div class="input-box">
-                        <input type="password" id = 'password-register' class = 'form-control' placeholder="Password" name="password" required>
-
+                    <div class="input-box">                        
+                        {{ registerform.password(class="form-control", placeholder="Password", id="password-register") }}
                         <i class="bi bi-key-fill"></i>
                         <div id = 'register-password-error' class = 'invalid-feedback'>Required field</div>
                     </div>
-                    <div class="input-box">
-                        <input type="password" id = 'password-confirm-register' class = 'form-control' placeholder="Confirm Password" name="confirmPassword" required>
+                    <div class="input-box">                        
+                        {{ registerform.confirm_password(class="form-control", placeholder="Confirm Password", id="password-confirm-register") }}
                         <i class="bi bi-key-fill"></i>
                         <div id = 'register-password-confirm-error' class = 'invalid-feedback'>Required field</div>
                     </div>
