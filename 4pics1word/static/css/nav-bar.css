@@ -142,10 +142,9 @@ i{
     margin-left: 2vw !important;
 }
 
-.form-control:focus{
+#srch:focus{
     box-shadow: none!important;
     border: 1px solid #ccc!important;
-
 }
 
 
