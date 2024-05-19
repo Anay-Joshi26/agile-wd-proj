@@ -53,7 +53,7 @@ $(document).ready(function() {
                     <div class="col-md-12">
                         <a href="/challenge/${game.gameId}" class="text-decoration-none card-title">
                             <h3 class="card-title text-decoration-none">${game.game_title}</h3>
-                            <p class="card-text" id="challenge-date"><small class="text-muted">${format_date_created}</p>
+                            <p class="card-text"><small class="text-muted">${format_date_created}</small></p>
                         </a>
                         <p class="card-text"><small class="text-muted">Posted by: ${game.creator_username}</small></p>
                         <div class="row">
