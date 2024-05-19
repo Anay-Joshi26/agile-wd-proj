@@ -210,7 +210,7 @@
         </div>
 
         <!-- Where the user can select a hint -->
-        <div class='text ' onclick="toggleHintEntry()">
+        <div class='text ' id="hint-field-toggle">
             <span style="cursor:pointer; text-decoration:underline;">Click to add a hint</span>
         </div>
         <div class="col-md-6" id="hint-container" style="display: none;">
@@ -225,23 +225,6 @@
         <button id='submit-upload-game' type='submit' class="btn btn-primary">SUBMIT</button>
 
     </form>
-
-    <script>
-        function toggleHintEntry() {
-            var hintContainer = document.getElementById('hint-container');
-            if (hintContainer.style.display === 'none' || hintContainer.style.display === '') {
-                hintContainer.style.display = 'block';
-                setTimeout(function() {
-                    hintContainer.classList.add('show');
-                }, 10);
-            } else {
-                hintContainer.classList.remove('show');
-                setTimeout(function() {
-                    hintContainer.style.display = 'none';
-                }, 500);
-            }
-        }
-    </script>
 
 </body>
 
