@@ -10,7 +10,7 @@ import re
 
 from models import db, User
 
-
+# generation of unique csrf tokens, and flask_wtf forms for login and register
 class CustomCSRF(SessionCSRF):
     def generate_csrf_token(self, csrf_token_field):
         # Generate a unique token based on form's ID or name
@@ -31,15 +31,22 @@ class RegisterForm(FlaskForm):
     class Meta:
         csrf = CustomCSRF
 
+# check if a user exists
 def validate_username(username):
     return User.query.filter_by(username=username).first()
 
+# register a new user by hashing the password
+# and adding the user to the database
 def register_new_user(username, password, bcrypt):
     hashed_password = bcrypt.generate_password_hash(password)
     new_user = User(username = username, password = hashed_password)
     db.session.add(new_user)
     db.session.commit()
 
+
+# login a new user by checking if the password
+# matches the hashed password in the database
+# and logging the user in
 def login_new_user(username, password, bcrypt):
     user = validate_username(username) 
     if user:
@@ -49,6 +56,9 @@ def login_new_user(username, password, bcrypt):
             return True
     return False
     
+
+# check if a username and password is valid
+# using server side regex
 def isValidUsername(username):
     return re.match(r'^[a-zA-Z0-9_]+$', username)
 

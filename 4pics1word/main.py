@@ -25,6 +25,7 @@ from datetime import datetime, timedelta
 from models import db, User, Game, Attempt, GamePerformance
 from __init__ import create_app
 
+# create app with normal config
 app = create_app(Config)
 
 bcrypt = Bcrypt(app)

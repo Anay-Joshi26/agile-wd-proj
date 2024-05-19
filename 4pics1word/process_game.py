@@ -9,6 +9,7 @@ UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), 'uploads
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
+# Validity checks
 def isValidGameTitleOrHint(game_title):
     return len(game_title) <= 75 and len(game_title) > 0
 
@@ -18,7 +19,8 @@ def isValidAnswer(answer):
 def buildPath(game_id, filename):
     return f"/uploads/game-{game_id}/{filename}"
 
-
+# Process the game, save the images and the game to the database
+# Returns True if the game was successfully processed, False otherwise
 def processGame(game_title, files, answer, hint):
     file_names = []
 
@@ -26,6 +28,7 @@ def processGame(game_title, files, answer, hint):
 
         all_file_objects = []
 
+        # create each game based on the images, saving the images in the UPLOADS folder
         for i in range(1, 5):
             file_key = 'image' + str(i)
             file = files[file_key]
@@ -52,6 +55,7 @@ def processGame(game_title, files, answer, hint):
             all_file_objects[i].seek(0)
             all_file_objects[i].save(path)
 
+        # build the paths for the images
         new_game.image1 = buildPath(new_game.gameId, file_names[0])
         new_game.image2 = buildPath(new_game.gameId, file_names[1])
         new_game.image3 = buildPath(new_game.gameId, file_names[2])
