@@ -7,11 +7,13 @@ from models import Game, db, User, Upvote
 
 from blueprints import api
 
+# enable the api to serve static files
+# to reach/render the game images
 @api.route('/uploads/<path:filename>')
 def uploaded_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
 
-
+# endpoint to upload a game
 @api.route("/api/upload-game", methods=["POST", "GET"])
 def uploadGame():
     if request.method == "POST":
@@ -21,6 +23,7 @@ def uploadGame():
         answer = request.form.get("answer").strip()
         hint = request.form.get("hint").strip()
 
+        # Validate the inputs, for title, hint, answer etc
         if not isValidGameTitleOrHint(game_title):
             return jsonify({"success": False, "game-title-error":True, "msg": "Enter a valid game title"})
         
@@ -38,6 +41,8 @@ def uploadGame():
             flash("Please upload 4 images")
             return jsonify({"success": False, "msg": "Please upload 4 images"})
 
+        # do validation checks on the images
+        # such as duplicate images
         filenames = []
         for i in range(1, 5):
             file_key = 'image' + str(i)
@@ -50,6 +55,7 @@ def uploadGame():
         if len(set(filenames)) != len(filenames):
             return jsonify({"success": False, "image-error": True, "msg": "Duplicate filenames detected, ensure that all filenames are unique"}) 
         
+        # Process the game
         outcome = processGame(game_title, request.files, answer, hint)
 
         if not outcome:
@@ -57,6 +63,8 @@ def uploadGame():
         
         return jsonify({"success": True, "msg": "Game uploaded successfully"})
     
+
+# endpoint to upvote a game
 @api.route("/api/upvote/<int:game_id>", methods=["POST", "GET"])
 def upvote(game_id):
 
@@ -70,9 +78,9 @@ def upvote(game_id):
 
     existing_vote = Upvote.query.filter_by(user=current_user, game=game).first()
     if existing_vote is not None:
-        if existing_vote.vote == 1:  # If already downvoted
+        if existing_vote.vote == 1:  # If already upvoted
             return jsonify({"success": False, "msg": "You have already upvoted this game"})
-        else:  # If upvoted
+        else:  # If downvoted
             existing_vote.vote += 1
             game.number_of_upvotes += 1 
     else:
@@ -84,6 +92,8 @@ def upvote(game_id):
     
     return jsonify({"success": True, "msg": "Upvoted successfully"})
 
+
+# endpoint to downvote a game
 @api.route("/api/downvote/<int:game_id>", methods=["POST", "GET"])
 def downvote(game_id):
     if not current_user.is_authenticated:
@@ -110,6 +120,8 @@ def downvote(game_id):
     
     return jsonify({"success": True, "msg": "downvoted successfully"})
 
+# endpoint to get all the games in a paginated manner
+# so the client side js can load/request more games based on api calls
 @api.route('/api/games', methods=["POST", "GET"])
 def get_games():
     page = request.args.get('page', default=1, type=int)
@@ -118,6 +130,7 @@ def get_games():
 
     games = Game.query.paginate(page=page, per_page=limit)
 
+    # Get the user's votes, whether they have upvoted or downvoted a game (or nothihg)
     user_votes = {}
     if current_user.is_authenticated:
         user_votes_query = db.session.query(Upvote.game_id, Upvote.vote).filter_by(user_id=current_user.id).all()
