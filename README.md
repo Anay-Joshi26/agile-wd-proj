@@ -16,16 +16,39 @@ This was changed eventually by running (towards the end):
 
 ## About the Website
 
-SnapCipher is a game where you can upload images and other guess the the word or phrase which relates those images. 
+SnapCipher is an interactive game, inspired by 4pics1word where you can upload images and players will try guess the the word or phrase which relates those images. SnapCipher's colourful design is sure to engage users and get them to put their thinking caps on!
 
-If you've ever played 4pics1word you'll know exactly where we got our inspiration from.
+**Users can create challenges for others, play other people's challenge, top leaderboards, upvote/downvote posts and more!**
+
+### Homepage
+- Brief overview of SnapCipher, how to find games and how to create challenges
+- Users can navigate to the other pages and login/register
+
+### Create Challenge
+- Allows users to create their own challenges when they're logged in
+- Users can upload images and enter the text for the secret word/phrase, title and hint
+
+### Challenges
+- Trending posts displayed at the top of the page ranked by highest upvotes in the last 7 days
+- All challenges found here, users click a post to view more detail about the challenge
+- **Community:** Users can upvote or downvote challenges here if they're logged in and your challenge can get featured if it is popular
+
+### Detailed Challenge View
+- After a user clicks on a game they're shown more detail about the challenge including a leaderboard of people who have attempted the challenge based on their attempts
+- User can choose to play the game here
+
+### Play Game
+- Users are shown the 4 images for the challenge and can guess the word or phrase that relates them
+- Guesses/attempts are tracked and the top 10 players are shown on the leaderboard based on the number of guesses in ascending order
 
 ## How to Play
 
-1. Create an account and login
-2. Explore challenges created by others **OR** Make your own game
-3. Click on a challenge you'd like to play and check out the leaderboard
-4. Play the challenge and check what score you got!
+1. Create an account and login, you can find this in the top right on the page, or we will prompt you to login if we need you too
+2. Start on the homepage for a quick introduction to the site or navigate straight to the challenges page
+3. On the challenges page you can see trending games, explore challenges created by others
+4. Click on a challenge you'd like to play and check out the leaderboard
+5. Play the challenge and check what score you got! After this you can give the game an upvote if you liked it (or a downvote)!
+6. **OR** Make your own game by navigating to Create Game, here you can select a title of your challenge, upload 4 photos and select the word/phrase that relates them
 
 
 To run the app, you must be within the `agile-wd-proj` directory, but first you will need to `git clone` the repo.
