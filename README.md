@@ -11,7 +11,7 @@
 
 *Note: Most members had their local and global `user.email` variable in `git config` not linked to their GitHub account hence many commits do **not** show directly from the 'Contributers'. This also resulted in separate accounts under the same person making commits*
 
-This was changed eventually by running:
+This was changed eventually by running (towards the end):
 `git config --global user.email <actual-email-linked-to-github>`
 
 ## About the Website
@@ -48,13 +48,19 @@ Then to activate the virtual environment run:
 source myenv/bin/activate
 ```
 
+Then to install the dependencies run,
+
+```bash
+pip install -r requirements.txt
+```
+
 To run the website execuete the following:
 
 ```bash
 python3 4pics1word\main.py
 ```
 
-to run the app via flask, execute the following:
+To run the app via flask, execute the following:
 
 ```bash
 flask --app 4pics1word\main.py run
@@ -62,7 +68,7 @@ flask --app 4pics1word\main.py run
 
 To run `flask` commands such as `shell, run` etc the `--app 4pics1word/main.py` must be given so flask can locate our main app.
 
-To deactivate the virtual environment runL
+To deactivate the virtual environment run:
 
 ```bash
 deactivate
@@ -101,6 +107,12 @@ Then to activate the virtual environment run the following:
 myenv\Scripts\activate
 ```
 
+Then to install the dependencies run,
+
+```powershell
+pip install -r requirements.txt
+```
+
 To run the app, execute the following
 ```powershell
 py .\4pics1word\main.py
@@ -125,3 +137,11 @@ deactivate
 ```
 
 *Note: The main directory is named `4pics1word` as we initially began with that as the name, as the project evolved the name SnapCiper was chosen, but the directory name remains as 4pics1word as an easter egg*
+
+## Testing
+
+### MacOS/Linux
+
+The tests were developed on a MacOS operating system, and **will not work** when running on WSL (applies to the Selenium tests)
+
+
