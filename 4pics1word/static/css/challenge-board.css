@@ -1,10 +1,32 @@
 body {
-    background-image: radial-gradient( circle farthest-corner at 14.2% 27.5%,  rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90% );
+    background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
+    height: 100%;
+    width: 100%;
+}
 
+/* Set up for particles.js */
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Page subheading styling */
+.sub-headings {
+    color: white;
+    text-shadow: 1px 1px 5px #0000003a;
+}
+
+.sub-headings h1 {
+    font-size: clamp(34px, 5vw, 42px);
+    /* font-size: 49px; */
+    font-weight: 600;
 }
 
 /* Styling for trending/popular cards */
-
 .trending-posts .card {
     margin-bottom: 20px;
     border: none;
@@ -43,7 +65,6 @@ body {
 
 
 /* Style for the challenge board */
-
 .challenge-board {
     background-color: rgba(240, 248, 255, 0.5);
     border-radius: 20px;
@@ -88,15 +109,20 @@ body {
     object-position: center;
 }
 
-.d-md-none.d-flex.flex-row.flex-nowrap.overflow-auto {
+/* ChatGPT generation reference -> I'm trying to make a horizontal scroll-bar for a div #trending-card-mobile 
+to be transparent or have no display, how do I do that and ensure the changes is reflected on all browsers? */
+#trending-card-mobile {
     overflow: auto;
     scrollbar-width: none; /* For Firefox */
     -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
 
-.d-md-none.d-flex.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar {
+#trending-card-mobile::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, Opera */
 }
+
+
+/* Upvote styling */
 
 .upvote-button.active-upvote svg{
     fill: rgb(19, 187, 19);
@@ -121,7 +147,7 @@ body {
     gap: 6px;
 }
 
-
+/* Resizes apply with max-width 768px to ensure responsiveness*/
 @media (max-width: 768px) {
     .challenge-board .col-md-3 {
         flex: 0 0 50%;
