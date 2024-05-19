@@ -18,13 +18,28 @@ This was changed eventually by running (towards the end):
 
 SnapCipher is an interactive game, inspired by 4pics1word where you can upload images and players will try guess the the word or phrase which relates those images. SnapCipher's colourful design is sure to engage users and get them to put their thinking caps on!
 
-**Create Challenges:** You get to upload 4 images, a title, hint and the secret word or phrase which is related to the 4 images you chose.
+**Users can create challenges for others, play other people's challenge, top leaderboards, upvote/downvote posts and more!**
 
-**Solve Challenges:** Other players can then try to guess the secret word or phrase based on the 4 images you chose. 
+### Homepage
+- Brief overview of SnapCipher, how to find games and how to create challenges
+- Users can navigate to the other pages and login/register
 
-**Top The Leaderboards:** When you play someone's game we count your guesses and you get ranked against every other player for that game.
+### Create Challenge
+- Allows users to create their own challenges when they're logged in
+- Users can upload images and enter the text for the secret word/phrase, title and hint
 
-**Community:** Players who liked your challenge can upvote your post, these upvotes are used to select trending games which get featured at the top of the challenges!
+### Challenges
+- Trending posts displayed at the top of the page ranked by highest upvotes in the last 7 days
+- All challenges found here, users click a post to view more detail about the challenge
+- **Community:** Users can upvote or downvote challenges here if they're logged in and your challenge can get featured if it is popular
+
+### Detailed Challenge View
+- After a user clicks on a game they're shown more detail about the challenge including a leaderboard of people who have attempted the challenge based on their attempts
+- User can choose to play the game here
+
+### Play Game
+- Users are shown the 4 images for the challenge and can guess the word or phrase that relates them
+- Guesses/attempts are tracked and the top 10 players are shown on the leaderboard based on the number of guesses in ascending order
 
 ## How to Play
 
