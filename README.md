@@ -55,6 +55,15 @@ To run the app, you must be within the `agile-wd-proj` directory, but first you 
 
 ## Running the app
 
+When running the app, if a database isn't present it will generate a database with fake data, where the titles of all games are just random words (they have no meaning).
+The images and answers **are** infact related and so the images can be used to play the game.
+
+Before running the app, in the `agile-wd-proj` directory create a `.env` file, and type a secret key of your choosing:
+
+```bash
+SECRET_KEY_APP = 'your_secret_key'
+```
+
 ### Linux/MacOS/WSL
 
 Set up virtual environment (`myenv`)
@@ -77,7 +86,7 @@ Then to install the dependencies run,
 pip install -r requirements.txt
 ```
 
-You must ensure the python interpreter is **from within the virtual environment**
+You must ensure the python interpreter is **from within the virtual environment**.
 
 To run the website execuete the following:
 
