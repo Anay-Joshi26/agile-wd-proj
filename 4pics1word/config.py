@@ -6,7 +6,6 @@ load_dotenv()
 # Config class for the app
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY_APP')
-    print(SECRET_KEY)
     SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
     UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), 'uploads'))
 
