@@ -41,10 +41,13 @@
 </head>
 
 <body>
+
+    <!-- Navbar html templates -->
     {% include "/html_components/navbar.html" %}
 
     {% include "/html_components/auth_modal.html" %}
 
+    <!-- Main viewport landing display -->
     <div class="container-fluid full-page-intro text-center">
         <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
         <div class="row justify-content-center align-items-center" style="height: 100%;">
@@ -55,6 +58,7 @@
         </div>
     </div>
 
+    <!-- Overview section -->
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 mb-5 text-center">
         <div class="container guess-phrase-section">
             <div class="row justify-content-center align-items-center">
@@ -72,6 +76,7 @@
         </div>
     </div>
 
+    <!-- How to play section -->
     <div class="col-md-10 offset-md-1 how-to-play overflow-hidden p-5 text-center">
         <div class="container">
             <div class="row justify-content-center align-items-center">
@@ -107,6 +112,7 @@
         </div>
     </div>
 
+    <!-- Challenges decription and video section -->
     <div class="position-relative explore-challenges-section overflow-hidden p-3 p-md-5 m-md-3 mb-5 text-center">
         <div class="container">
             <div class="row justify-content-center align-items-center">
@@ -173,6 +179,7 @@
         });
     </script>
 
+    <!-- Script for AOS to allow moving content -->
     <script>
         AOS.init();
     </script>

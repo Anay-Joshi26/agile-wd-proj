@@ -121,6 +121,7 @@ label {
     margin-top: 20px;
 }
 
+/* Hint option at first hidden but revealed using event listener to set display */
 #hint-container {
     font-weight: 700;
     color: black;
@@ -147,8 +148,4 @@ label {
     border: none;
     outline: none;
     text-align: center;
-}
-
-.hello-world {
-    background-color: rgba(0, 0, 0, 0.294);
 }

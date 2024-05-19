@@ -28,6 +28,7 @@ body {
     text-align: center;
 }
 
+/* Styling for the boxes which contain the letters users enter to guess */
 .letter-box {
     text-align: center;
     width: 100%;
@@ -56,6 +57,7 @@ body {
     text-align: center;
 }
 
+/* Image interaction functioanlity */
 .zoom {
     position: fixed;
     top: calc(50% + var(--navbar-height) / 2);
@@ -115,6 +117,7 @@ input[type="file"] {
     border-bottom: 3px solid black; /* Underline effect */
 }
 
+/* Image styling and responsiveness */
 .image-cell {
     aspect-ratio: 1;
     min-width: 180px;
@@ -173,6 +176,7 @@ label {
     border-radius: 6px;
 }
 
+/* Styling for the buttons */
 .play-button {
     background-color: transparent !important;
     background-image: radial-gradient(circle farthest-corner at 14.2% 27.5%, rgba(104,199,255,1) 0%, rgba(181,126,255,1) 90%);
@@ -210,6 +214,7 @@ label {
     box-shadow: none;
 }
 
+/* Styling for the hint text that is at first hidden */
 #hintText {
     position: fixed;
     top:20%;

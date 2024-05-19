@@ -29,12 +29,15 @@
 <body>
     <div id="overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:999;"></div>
 
+    <!-- Navbar html templates -->
     {% include "/html_components/navbar.html" %}
 
     {% include "/html_components/auth_modal.html" %}
 
+    <!-- Particles js setup -->
     <div id="particles-js"></div>
 
+    <!-- Contains challenge details and leaderboard filled using jinja -->
     <div class='col-10 offset-1 mb-4 title-images-leaderboard'>
         <h1 class="text text-center mt-4 mb-4">{{game.game_title}}</h1>
         <div class="container-wrapper text-center">
@@ -68,6 +71,8 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Leaderboard -->    
             <div class="col-md-6 col-12 table-container">
                 <h2>
                     Leaderboard

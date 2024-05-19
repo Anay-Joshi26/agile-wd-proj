@@ -8,6 +8,8 @@ var attemptDisplay = document.getElementById('attempt-counter')
 
 attemptDisplay.textContent = attempt;
 
+
+// Used to toggle the hint display on the game play page
 const toggleButton = document.getElementById('hintButton');
 const hiddenText = document.getElementById('hintText');
 
