@@ -61,6 +61,7 @@ for (let form of forms) {
 
         console.log("hahaha")
 
+        // Check if the response is successful
         if (data['success'] == true) {
             console.log("success!!")
 
@@ -78,6 +79,9 @@ for (let form of forms) {
         }
         else {
             console.log('AHAHAH')
+
+            // determine the error message and display the error message
+            // in the appropriate field (by turning it red etc)
 
             if (data.hasOwnProperty('regex-error')){
                 msg = data['msg']

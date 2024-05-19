@@ -8,7 +8,8 @@ document.querySelectorAll('.upload-input').forEach(function (input) {
         const file = event.target.files[0];
         const reader = new FileReader();
 
-        reader.onload = function (e) {
+        // When the file is read, set it as the background image of the image preview
+        reader.onload = function(e) {
             const imgSrc = e.target.result;
             const imageId = event.target.id.replace('image-input', '');
             imageUpload(imgSrc, imageId);
@@ -27,6 +28,7 @@ document.querySelectorAll('.change-img-icon').forEach(function (icon) {
 
 });
 
+// toggle the hint showing and not showing based on the user's click
 document.getElementById("hint-field-toggle").addEventListener("click", function (event) {
     var hintContainer = document.getElementById('hint-container');
     if (hintContainer.style.display === 'none' || hintContainer.style.display === '') {
@@ -42,6 +44,9 @@ document.getElementById("hint-field-toggle").addEventListener("click", function 
     }
 });
 
+
+// Function to upload image to the image preview
+// the user can see the image they uploaded, and what it looks like on a game
 function imageUpload(imgSrc, imageId) {
     const imgPrev = document.getElementById(`img${imageId}`);
     imgPrev.style.backgroundImage = `url(${imgSrc})`;
@@ -53,6 +58,8 @@ function imageUpload(imgSrc, imageId) {
     document.getElementById(`img-change${imageId}`).style.display = '';
 }
 
+// Function to clear the image preview, by removing the background image
+// and resetting the input value so no file is uploaded
 function imageClear(imageId) {
     input = document.getElementById(`image-input${imageId}`);
     input.value = '';

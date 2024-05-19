@@ -16,36 +16,24 @@ from process_game import UPLOAD_FOLDER
 from game_attempt import record_attempt
 from generate_fake_data import generate_all_games
 from flask_migrate import Migrate
+from config import Config
+from blueprints import main
 from datetime import datetime, timedelta
 
 
 # Create instance of Database
 from models import db, User, Game, Attempt, GamePerformance
-app = Flask(__name__)
+from __init__ import create_app
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = 'your_secret_key_here'
-
-migrate = Migrate(app, db)
-
-# db.init_app(app)
-
-# with app.app_context():
-#     db.create_all()
+# create app with normal config
+app = create_app(Config)
 
 bcrypt = Bcrypt(app)
-
-app.register_blueprint(api)
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-print(app.config['UPLOAD_FOLDER'])
+migrate = Migrate(app, db)
 
 PORT = 5000
 
 FAKE_DATA = True
-
-db.init_app(app)
 
 with app.app_context():
     db.create_all()
@@ -54,13 +42,14 @@ with app.app_context():
 
     
 # Logging in
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "index"
+login_manager = app.login_manager
+# login_manager = LoginManager()
+# login_manager.init_app(app)
+# login_manager.login_view = "index"
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User.query.get(int(user_id))
 
 # Web page routing
 @app.route("/")
@@ -158,6 +147,7 @@ def challenges_page():
     trending_games = Game.query.filter(Game.date_created >= recent_date).order_by(Game.number_of_upvotes.desc()).limit(4).all()
     loginform = LoginForm()
     registerform = RegisterForm()
+    print(trending_games[0].game_title)
     return render_template("challenge-board.html", current_user=current_user, games=games, loginform = loginform, registerform = registerform, login_token = CustomCSRF, register_token = CustomCSRF,trending_games=trending_games)
 
 
@@ -238,4 +228,5 @@ def make_guess():
     return jsonify({'num_attempts': data.get('attempts'), 'position': pos})
 
 if __name__ == '__main__':
+    print("RUNNING APP...")
     app.run(debug=True, port = PORT)

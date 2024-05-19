@@ -30,16 +30,19 @@ topics = [
 
 fake = Faker()
 
+# generate a title of random words
 def generate_lorem_title(num_words):
     title_words = [fake.word() for _ in range(num_words)]
     return " ".join(title_words)
 
-
+# generae a random username and password
+# and return them as a tuple
 def generate_user():
     username = fake.user_name()
     password = fake.password(length=10)
     return username, password
 
+# unused function/may need to be used later
 def download_image(image_url, file_dir):
     response = requests.get(image_url)
 
@@ -77,19 +80,21 @@ def generate_game(topic, id):
     images = generate_four_images(topic, id)
     return game_title, answer, images
 
+# generate a number of random users using the prevously defined
+# helper func
 def generate_users(num_users):
     users = []
     for i in range(1, num_users+1):
         username, password = generate_user()
         new_user = User(username = username, password = password)
-        
         db.session.add(new_user)
         db.session.commit()
         users.append(new_user)
     return users
 
         
-
+# main function to generate all the games
+# and the users
 def generate_all_games():
     users = generate_users(50)
 
@@ -97,6 +102,8 @@ def generate_all_games():
 
     data = None
 
+    # read the text file with the dummy data
+    # each game has a Topic (answer) and 4 API images
     with open(DUMMY_DATA, 'r') as f:
         data = f.read().split('\n')
 
@@ -107,17 +114,21 @@ def generate_all_games():
 
     for i in range(0, num_games, 5):
         answer = data[i]
+
         #print(answer)
 
         game_title = generate_lorem_title(7)
 
-        # Determine the creation date for the game
+        # Determine the creation date for the game, we need 4 games
+        # to be recent for the trending cards
         if recent_games_needed > 0:
             date_created = fake.date_time_between(start_date='-1d', end_date='now')
             recent_games_needed -= 1
         else:
             date_created = fake.date_time_this_year(before_now=True, after_now=False)
 
+        # generate a game with the topic and the images
+        # and with random upvotes, from any user
         new_game = Game(
             game_title=game_title,
             answer=answer.upper(),
@@ -135,6 +146,7 @@ def generate_all_games():
         db.session.add(new_game)
         db.session.commit()
 
+    # generate a random leaderboard for each game
     for game in all_games:
         rg = random.randint(10, 30)
         random.shuffle(users)

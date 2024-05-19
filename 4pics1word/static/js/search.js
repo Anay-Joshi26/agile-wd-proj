@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 })
 
+// search bar expansion when a user clicks it (when its focused)
 $('.search-box input').focus(function() {
     $(this).parent().parent().css('width', '40vw');
 });
