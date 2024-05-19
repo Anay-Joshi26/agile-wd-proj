@@ -2,13 +2,13 @@
 
 let images_uploaded = [false, false, false, false];
 
-document.querySelectorAll('.upload-input').forEach(function(input) {
-    input.addEventListener('change', function(event) {
+document.querySelectorAll('.upload-input').forEach(function (input) {
+    input.addEventListener('change', function (event) {
 
         const file = event.target.files[0];
         const reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             const imgSrc = e.target.result;
             const imageId = event.target.id.replace('image-input', '');
             imageUpload(imgSrc, imageId);
@@ -19,12 +19,27 @@ document.querySelectorAll('.upload-input').forEach(function(input) {
     });
 });
 
-document.querySelectorAll('.change-img-icon').forEach(function(icon) {
-    icon.addEventListener('click', function(event) {
+document.querySelectorAll('.change-img-icon').forEach(function (icon) {
+    icon.addEventListener('click', function (event) {
         const imageId = event.target.id.replace('img-change', '');
         imageClear(imageId);
     });
 
+});
+
+document.getElementById("hint-field-toggle").addEventListener("click", function (event) {
+    var hintContainer = document.getElementById('hint-container');
+    if (hintContainer.style.display === 'none' || hintContainer.style.display === '') {
+        hintContainer.style.display = 'block';
+        setTimeout(function () {
+            hintContainer.classList.add('show');
+        }, 10);
+    } else {
+        hintContainer.classList.remove('show');
+        setTimeout(function () {
+            hintContainer.style.display = 'none';
+        }, 500);
+    }
 });
 
 function imageUpload(imgSrc, imageId) {
