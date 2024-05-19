@@ -16,16 +16,24 @@ This was changed eventually by running (towards the end):
 
 ## About the Website
 
-SnapCipher is a game where you can upload images and other guess the the word or phrase which relates those images. 
+SnapCipher is an interactive game, inspired by 4pics1word where you can upload images and players will try guess the the word or phrase which relates those images. SnapCipher's colourful design is sure to engage users and get them to put their thinking caps on!
 
-If you've ever played 4pics1word you'll know exactly where we got our inspiration from.
+**Create Challenges:** You get to upload 4 images, a title, hint and the secret word or phrase which is related to the 4 images you chose.
+
+**Solve Challenges:** Other players can then try to guess the secret word or phrase based on the 4 images you chose. 
+
+**Top The Leaderboards:** When you play someone's game we count your guesses and you get ranked against every other player for that game.
+
+**Community:** Players who liked your challenge can upvote your post, these upvotes are used to select trending games which get featured at the top of the challenges!
 
 ## How to Play
 
-1. Create an account and login
-2. Explore challenges created by others **OR** Make your own game
-3. Click on a challenge you'd like to play and check out the leaderboard
-4. Play the challenge and check what score you got!
+1. Create an account and login, you can find this in the top right on the page, or we will prompt you to login if we need you too
+2. Start on the homepage for a quick introduction to the site or navigate straight to the challenges page
+3. On the challenges page you can see trending games, explore challenges created by others
+4. Click on a challenge you'd like to play and check out the leaderboard
+5. Play the challenge and check what score you got! After this you can give the game an upvote if you liked it (or a downvote)!
+6. **OR** Make your own game by navigating to Create Game, here you can select a title of your challenge, upload 4 photos and select the word/phrase that relates them
 
 
 To run the app, you must be within the `agile-wd-proj` directory, but first you will need to `git clone` the repo.
