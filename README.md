@@ -54,6 +54,8 @@ Then to install the dependencies run,
 pip install -r requirements.txt
 ```
 
+You must ensure the python interpreter is **from within the virtual environment**
+
 To run the website execuete the following:
 
 ```bash
@@ -113,6 +115,8 @@ Then to install the dependencies run,
 pip install -r requirements.txt
 ```
 
+You must ensure the python interpreter is **from within the virtual environment**
+
 To run the app, execute the following
 ```powershell
 py .\4pics1word\main.py
@@ -140,8 +144,30 @@ deactivate
 
 ## Testing
 
-### MacOS/Linux
+The tests were developed on a MacOS operating system, and **will not work** when running on WSL (applies to the Selenium tests).
 
-The tests were developed on a MacOS operating system, and **will not work** when running on WSL (applies to the Selenium tests)
+When running tests, the tests will automatically teardown and repopulate the database with fake data. **Before running tests delete `/4pics1word/instance`**. Running the app will automatically make the database, otherwise issues not related to tests will spawn.
+
+If you are in the `agile-wd-proj` directory, you may run the following commands:
+
+To run the unit tests:
+```bash
+python3 -m unittest 4pics1word/tests/unit-tests.py
+```
+
+To run the web driver tests:
+*First you must set `debug=False` in the `4pics1word/main.py` init function at the bottom (as we do not want the app to reload)*
+Then open a new terminal and run the web app as shown before (with the above `debug = False` param). While the app is running, in a new clean terminal run:
+```bash
+python3 -m unittest 4pics1word/tests/web-driver-tests.py
+```
+
+When running on Windows changes to the python interpreter may require `python3` to be changed to `python` or `py`
+
+## References/Assets used
+
+Tab Favicon Icon:
+https://www.flaticon.com/free-icon/puzzle_1371320
+From: Puzzle icons created by Freepik - Flaticon
 
 
